@@ -15,11 +15,12 @@ public class InterestCalculator {
         //declare vars
         int years;
         float startingPrinciple;
-        float interestRate;
+        float intRate;
         
         int yearCounter;
         float interestAccrued = 0;
-        float endPrinciple;
+        float endPrinciple = 0; //initialization in the compiler error in this case
+        //referred to the fact that didn't have a value in 41--this is particular to floats
         
         float currentBalance;
         
@@ -28,10 +29,11 @@ public class InterestCalculator {
         //ask for input or assign directly
         years = 20;
         startingPrinciple = 500;
-        interestRate = .10;
+        intRate = .10f; //need to explicitly tell the compiler that it's a float with this f
+        // .10 is normally a double, so if i'm changing the game need  to declare
         
         //for loop to cover number of years the money is compounding and print each year's results
-        for (yearCounter=0; i<years; yearCounter++){
+        for (yearCounter=0; yearCounter<years; yearCounter++){
             
         System.out.println("The year number is: " + yearCounter);
         System.out.println("The principal at the beginning of the year is: " + startingPrinciple);
