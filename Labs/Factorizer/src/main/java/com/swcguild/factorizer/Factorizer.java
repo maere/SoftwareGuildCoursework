@@ -8,8 +8,8 @@ package com.swcguild.factorizer;
 import java.util.Scanner;
 
 /**
- *
- * @author apprentice
+ * This code is pair programming by Mary, Dan, and Fairen on w 6/3/15
+ * 
  */
 public class Factorizer {
     public static void main(String[] args) {
