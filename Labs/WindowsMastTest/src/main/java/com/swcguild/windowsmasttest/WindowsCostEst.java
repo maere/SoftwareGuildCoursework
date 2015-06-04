@@ -48,7 +48,7 @@ public class WindowsCostEst {
         float cost = (glassCost*area) + (trimCost*perimeter);//float variable for cost (calculated from area, perimeter, and costs)
 
         System.out.println("Your total area is:" + area); //print area
-         System.out.println("Your total perimenter is:" + perimeter); //print perimeter
+         System.out.println("Your total perimeter is:" + perimeter); //print perimeter
           System.out.println("Your total glass cost is:" + (glassCost*area)); //print glass cost
            System.out.println("Your total frame cost is:" + (trimCost*perimeter)); //print area
         
