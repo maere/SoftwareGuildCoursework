@@ -29,16 +29,14 @@ public class WindowsMasterValidator {
      
    
     System.out.println("Enter window height");
-            height2 = sc.nextLine();
+    height2 = sc.nextLine();
+   height =Float.parseFloat(height2);
        
-        System.out.println("Enter window width");
-            width2 = sc.nextLine();
-   
+    System.out.println("Enter window width");
+    width2 = sc.nextLine();
+    width = Float.parseFloat(width2);
            
-            height =Float.parseFloat(height2);
-            width = Float.parseFloat(width2);
-           
-            area = height * width;
+   area = height * width;
            
  
     

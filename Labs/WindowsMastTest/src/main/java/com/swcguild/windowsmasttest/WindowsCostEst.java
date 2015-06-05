@@ -21,11 +21,16 @@ public class WindowsCostEst {
               String strGlassCost = "";//add materials cost
               String strTrimCost = "";
               
-              System.out.println("Enter the height of the window:");
-                strHeight = custInput.nextLine();
+              /*System.out.println("Enter the height of the window:");
+                strHeight = custInput.nextLine();*/
         
-              System.out.println("Enter the width of the window:");
-                strWidth = custInput.nextLine();
+                //we will also do with width...
+              //System.out.println("Enter the width of the window:");
+                //strWidth = custInput.nextLine();
+               
+                //we replaced 3 lines of code of Ilya's window master with the function at end
+              height = readUserInputFloat("Please enter window height.")
+              width = readUserInputFloat("Please enter window width.")
                 
               System.out.println("Enter the cost of the glass you want:");
                 strGlassCost = custInput.nextLine();
@@ -54,5 +59,18 @@ public class WindowsCostEst {
         
         System.out.println("Your total cost is:" + cost); //println prints our cost
         }
-    
-}
+        
+        // class notes on creating methods -- start outside of the main
+        //we are creating a method to take user input for window height 
+        //will include a request for input scanner, scan the token, and then parse the string
+        public static float readUserInputFloat(String prompt) //indciate type and parameter name
+        {
+            Scanner sc = new Scanner(System.in);
+            System.out.println(prompt);
+            String stringInput  = sc.nextLine(); //we can't reuse our height var, so we have to declare an agnostic one
+            //float result = Float.parseFloat(StringInput);
+            //return result;
+            return Float.parseFloat(stringInput); //condensed the two lines above
+        }
+}//it doesn't matter if the method is above or below the method call, as long is it's the same class it can find
+//we can also call in methods from other classes (import them)
