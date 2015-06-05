@@ -1,0 +1,41 @@
+//What is a a method signatue?
+From stack overflow:
+In Java, the two compoonents of a method signature are the method name and the parameter types.  For example, in: 
+public int methodName(int params)
+the signature is comprised of methodName(int params)
+
+
+//What is scope? How can it affect your code?
+From Java made easy:
+There are 3-4 levels of scope in java. Generally, the curly braces "{ }" define a variables scope.  If it's inside the curly braces defined by the code.  The levels are scope are class level, main, method level, and inside a loop.  
+
+Class level variables are accessible from anything related to the class. Method level variables (i.e. instantiated within the method) are only accessible within the method. You won't be able to access a variable if it was defined within a particular scope that is nested within your larger global scope.  For example, a variable *delcared* within a loop is not accessible once the loop ends.
+
+So you need to be aware of what is defined at what level to be able to access your variables later.
+
+//What are the parts of a method definition, and how is this different from a method signature?
+
+These are the parts of a method definition:
+
+modifier       return type  method name   list of parameters  code block
+public static  int 			funcName	  (int a, int b)      {}aka method body 
+
+A method may, or may not return a value.  If it does not return a value it has a void keyword instead of a return type.
+
+The method signature is only composed of the method name and the parameter list.
+
+
+//How do you declare parameters for a method?
+
+You put them in between the parenthese immediately following the methodName.  You must declare a type as well as parameter name for each parameter listed.
+
+
+//How many parameters can a method have?
+
+There are varying schools of thought on this.  According to StackOverflow, there is no limit to Java to the number of parameters (or a standard), but in practice some people say you should limit it to between 3 and 7.  
+
+From a machine/technical stand point, there is a limit in the byte code, preventing 256 or more parameters: "255 parameters in static methods and 254 in non-static("this" would add up in this case)."
+
+In Java you are allowed to "overload" a method with multiple parameter types by declaring methods of the same name with different parameter types. For example, you could have accept both integer parameters and String parameters by overloading the method. 
+
+
