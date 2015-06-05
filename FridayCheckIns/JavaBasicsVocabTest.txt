@@ -1,0 +1,67 @@
+Java Basics Vocabulary Check
+
+Please create a new text file called JavaBasicsVocabCheck and answer the following questions.  When done, please upload the file to Moodle.
+
+	What is a variable?
+A variable is used to store a value.
+
+	What is a variable declaration?
+A variable declaration is used to type a variable and declare that you will be using it in the program.
+
+    What is a variable assignment?
+A variable assignment is when you assign a value to the variable that has been declared.
+
+    Can I declare and assign a variable on the same line?
+Yes (e.g. int a = 2;)
+
+    Can a method return more than one value?
+No.
+
+    What return type must be declared for methods that do not return a value?
+Void.
+
+    How are code blocks marked in Java?
+{}
+
+    What makes up a method's signature?
+the method name and parameter list (e.g. myMethod(int a))
+
+    What is a method parameter?
+a method parameter is something that requires an argument be passed to it when the method is called. It is a value the particular method will need to function appropriately.
+
+    How many parameters can a method have?
+256, according to the space afforded on the machine, but in practice 3-7 is the upper limit of what is useful for most purposes.
+
+    Do all of the parameters for a method have to be of the same type?
+No.
+
+    What does the import keyword do?
+It makes the main() aware of the package from which you are pulling methods that are used in your program (e.g. Scanner, or PrintWriter)
+
+    What is the naming convention for Java classes?
+CapitalCamelCase
+
+    What is the naming convention for Java variables?
+lowerUpperCamelCase
+
+    What is the naming convention for Java methods?
+lowerUpperCamelCase
+
+    What is a method body?
+It is the part between the curly braces where the code executes.
+
+    What is an array?
+An array is a data structure that stores elements according to a numbered index.
+
+    When is it better to use a for loop over a while loop?
+When you know how many times you will need to iterate.
+
+    What is the difference between a while loop and a do/while loop?
+A do/while loop executes at least once.  A while loop may never execute if its condition evaluates to false.
+
+    What is a switch statement?
+A  switch statement allows you to test very specific cases and execute a code block according to the match. It also allows you to set a default.
+
+    What is scope?
+Scope is the extent to which a variable is recognized by the code.  Class level scope is global and can be understood in any part of the code nested within it.  A local scope (an integer declared within the for loop) will not be available after the code block is finished executing.
+
