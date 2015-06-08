@@ -15,11 +15,14 @@ public class InterestCalculator {
     public static void main(String[] args) {
         
         Scanner scObj = new Scanner(System.in);
+        
 //declare vars and ask for input
         System.out.println("How many years will you invest?");
         int years = scObj.nextInt();
+        
         System.out.println("How much money will you be investing?");
         float currentBalance = scObj.nextFloat();
+        
         System.out.println("What is your annual interest rate?");
         float intRate = scObj.nextFloat();
         

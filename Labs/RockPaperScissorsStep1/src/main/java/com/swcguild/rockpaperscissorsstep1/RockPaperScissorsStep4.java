@@ -12,9 +12,17 @@ import java.util.Scanner;
  *
  * @author apprentice
  */
-public class RockPaperScissorsStep2 {
+public class RockPaperScissorsStep4 {
+    private static Object response;
+    
     public static void main(String[] args) {
         
+        Scanner sc = new Scanner(System.in);
+        String response;
+        
+        do {
+            
+            
             //Each player (person/computer) chooses Rock, Paper or Scissors. 
     //Declare some variables we will need
 
@@ -24,17 +32,28 @@ public class RockPaperScissorsStep2 {
               int paper = 2;
               int scissors = 3;
               int n;
+              
+              // variables for tracking rounds
+        int playerWins = 0;
+        int computerWins = 0;
+        int ties = 0;
 
-    Scanner sc = new Scanner(System.in);
+
 
     //Maximum number of rounds = 10, minimum number of round = 1. If the user asks
        //for something outside this range the program **prints and error message and quits.**
     System.out.println("How many times to do you want to play?  You must choose a number between 1 & 10.");
     int numPlays = sc.nextInt();
+            
+        
 
     //If the number of round is in range, the program plays that number of rounds.  
     //Each round is played according to the requirements in Step 1
     if (numPlays >=1 && numPlays<=10){
+        
+        
+        
+        
         //play as before, but in a for loop according to the number of plays
         for (int i=1; i<=numPlays; i++){
 
@@ -53,6 +72,7 @@ public class RockPaperScissorsStep2 {
               {
 
                   System.out.println("Player wins.");
+                  playerWins++;
               }
 
 
@@ -60,6 +80,7 @@ public class RockPaperScissorsStep2 {
                       computerPlay==3)||(playerChoice==3 && computerPlay==1)) {
 
                   System.out.println("Computer wins.");
+                  computerWins++;
 
               }
 
@@ -68,6 +89,7 @@ public class RockPaperScissorsStep2 {
               else {
 
                 System.out.println("The result is a tie.");
+                ties++;
               }
 
 
@@ -77,49 +99,49 @@ public class RockPaperScissorsStep2 {
     else{
         System.out.println(numPlays + " is not within the range requested. Game over");
     }
+        System.out.println("------------------");
+    // print out and evaluation of wins, losses, ties and winner declaration
+        System.out.println("Player wins " + playerWins + " games.");
+        System.out.println("Computer wins " + computerWins + " games.");
+        System.out.println("There are " + ties +" ties." );
+        System.out.println("------------------");
+        if (playerWins == computerWins)
+        {
+            System.out.println("Tied games.");
+        }
+        else if(playerWins > computerWins)
+        {
+            System.out.println("Player wins the round.");
+        }
+        else{
+            System.out.println("Computer wins the round.");
+        }
+        
+        
+        
+            response = sc.nextLine();
+            System.out.println("Do you want to play again? (y for yes)");
+            
+           
+        }
+        while (response.equals("y"));
+        
+        System.out.println("Thanks for playing! Goodbye.");
+        
+        //
+        
         
     }
-}    
-//--------------------- ends here -------------
-
-//Here is the method call for main- I think this is step 4
-//int nTimes = getInputInRange("Welcome to the Rock, Paper, Scissors game.\n "+
-  //      "How many times do you want to play? \nPick a number between ", 1, 10);
     
-  /* This method is for repeating prompting, not the actual assignment in step 2
-    
-    public static int getInputInRange(String prompt, int min, int max){
-        int n =0;
-        Scanner scInput = new Scanner(System.in);
+}
+/*
+In this Step, you will add code that does the following:
 
-            do{  
-            System.out.println(prompt + min + " and " + max);
-            n = scInput.nextInt();
-            
-            }while(n < min || n > max); // while the result is bad, keep prompting
-            
-            return n;
-    }
+//Asks the user if he/she wants to play again after all rounds have been completed.
+
+//If user says No , the program prints out a message saying Thanks for playing! and the exits
+// If user says Yes and then exits, the program starts over, asking the user how many
+rounds he/she would like to play
+
+
 */
-    
-
-//Maximum number of rounds = 10, minimum number of round = 1. If the user asks
-//for something outside this range the program prints and error message and quits.
-
-//If the number of round is in range, the program plays that number of rounds.
-//Each round is played according to the requirements in Step 1
-          
- // HINT   1 = Rock, 2 = Paper, 3 = Scissors
-          
-    /*test
-          System.out.println("player" + playerChoice);
-          System.out.println("computer" + computerPlay);
-           //System.out.println("Paper beats rock.");
-           //System.out.println("Rock beats scissors.");
-           ///System.out.println("Scissors beats paper");
-                //Scissors cuts paper to win
-                //Rock breaks Scissors to win
-                  //Paper wraps Rock to win
-          
-          
-    */
