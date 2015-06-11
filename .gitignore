@@ -27,3 +27,9 @@ hs_err_pid*
 /classroom/ObjectsExamples/target/
 /Labs/ClassModeling/target/
 /classroom/ObjectExperiments/target/
+/classroom/UnitTests/target/
+/classroom/CollectionExample/target/
+/classroom/MapExample/target/
+/classroom/FunctionOverloadExample/target/
+/Labs/StateCapitals/target/
+/PBD/PBD_Arrays/target/
