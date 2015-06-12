@@ -34,7 +34,8 @@ public class Student {
     //getters and setters
     
     //methods
-    
-    
+        //add a course
+        //calculate GPA
+        //delete a course
     
 }

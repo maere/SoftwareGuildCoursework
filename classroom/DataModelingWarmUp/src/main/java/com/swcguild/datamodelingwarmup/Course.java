@@ -41,10 +41,17 @@ public class Course {
     //getters and setters
     
     //methods
+     
      //create an HashMap of students in the course with 
      HashMap<String, String> semesterCourse = new HashMap<>();
      semesterCourse.put("studentName", "email"); 
     
-    
+    //course contains students
+     
+     //add student
+     
+     //remove student
+     
+     //calculate grade
     
 }

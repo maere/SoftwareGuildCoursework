@@ -16,7 +16,9 @@ import java.util.Scanner;
  * @author apprentice
  */
 public class FileIOSample {
-    public static void main(String[] args) throws Exception {  //we are getting an error in the PrintWriter line so we need to add an exception 
+    public static void main(String[] args) throws Exception {  
+        
+//we are getting an error in the PrintWriter line so we need to add an exception 
         PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
            
         out.println("First line");

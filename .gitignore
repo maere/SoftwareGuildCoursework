@@ -33,3 +33,6 @@ hs_err_pid*
 /classroom/FunctionOverloadExample/target/
 /Labs/StateCapitals/target/
 /PBD/PBD_Arrays/target/
+/Labs/RefactorIntoObjects/target/
+/Labs/SimpleCalculatorLab/target/
+/PBD/PBD_ArrayLists/target/
