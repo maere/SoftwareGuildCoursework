@@ -14,8 +14,9 @@ import java.util.HashMap;
 public class MapExamples {
     public static void main(String[] args) {
         //HashMap is the primary type of map we'll use
-//we add Types for the key, value    
-        HashMap<String, Integer> populations = new HashMap<>();  //made a specific object to do stuff to
+        
+//we also need to add Types for the <key, value> parameters    
+        HashMap<String, Integer> populations = new HashMap<>();  //made a specific object to call methods on
         
         // to put items into our HashMap
         populations.put("USA", 313000000); 

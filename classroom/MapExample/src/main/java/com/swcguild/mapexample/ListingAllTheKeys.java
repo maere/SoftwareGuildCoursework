@@ -28,9 +28,10 @@ public class ListingAllTheKeys {
         populations.put("Japan", 127000000);
         
         System.out.println("Map size is: " + populations.size());
-        //keys come back to you as a set  - a set collection - each key has to be a unique value (one and only on)
+  
         
-//we have to import "Set" if we use, and have to declare a type
+        //we have to import "Set" if we use, and have to declare a type
+              //keys come back to you as a set  - a set collection - each key has to be a unique value (one and only one)
         Set<String> keys = populations.keySet();
         
         

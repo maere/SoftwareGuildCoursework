@@ -26,7 +26,7 @@ public class ReplaceKeyValueExample {
         System.out.println("Map size is: " +  populations.size());
         
         //replace
-          populations.put("USA", 200000000);  //new value
+          populations.put("USA", 200000000);  //new value --overwrites value
           //this just replaces the value
           
           System.out.println(populations.get("USA"));  // will print value

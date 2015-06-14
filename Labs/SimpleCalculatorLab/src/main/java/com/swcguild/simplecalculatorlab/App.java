@@ -12,7 +12,16 @@ package com.swcguild.simplecalculatorlab;
 public class App {
     public static void main(String[] args) {
         //instantiate object
-        SimpleCalculator myCalc = new SimpleCalculator();
-        //run method on oject
+        // instantiate UI class here, but NOT the calculator--calculator gets instantiated in the UI class
+        CalcUI myCalcUI = new CalcUI();
+        
+        //now we run methods on our instantiated object
+        myCalcUI.requestInput();
+        int op = myCalcUI.userCalcRequest();
+        myCalcUI.getCalcFunctions(op);
+       
+        
+        
+        
     }
 }

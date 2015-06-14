@@ -29,12 +29,14 @@ public class ListAllValuesByKey {
         
         
         
-//we have to import "Set" if we use, and have to declare a type
+//we have to import "Set" if we use, and have to declare a type -- a set will not do repeats!!!
         Set<String> keys = populations.keySet();
+//Type of class Set will hold Strings, called keys, we'll make it equal to all the keys in our populations hashmap
         
         //if we can iterate through keys we can iterate through values
         for (String k: keys){
             System.out.println("the population of " + k + " is " + populations.get(k));
+                                                   //our key     //our value in populations that correspond to this key   
         
         }
         

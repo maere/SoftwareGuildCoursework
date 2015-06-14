@@ -23,11 +23,13 @@ public class ArrayListEnhancedForLoop {
         System.out.println("List size: " + stringList.size());  
         
         //enhanced for loop - for each
+                            //for an ArrayList we can use both a for/each and the Iterator class
         for(String s: stringList)
         {
             System.out.println(s);
         }
-        //to get the index, would run a for loop and use stringList.get(i) and loop limit would be stringList.size()
+        //to get the index, would run a for loop and use:
+        // stringList.get(i) --- loop limit would be stringList.size()
         //can also use .indexOf method to get index numbers (not get(i)) in an enhanced for loop
 
         

@@ -16,25 +16,11 @@ public class ClassIOLab {
     // (cont.): double value, double max, double min
     
     //fields
-    private String stringOutVal;
-    private String promptVal;
-    
-    private int minVal;
-    private int maxVal;
-    
-    private float floatVal;
-    private double dblVal;
-    private int intVal;
-    
+        //don't need fields -- we will not need anything in this class but what's in teh methods
+
     //construtor
-    public ClassIOLab(String promptVal, String stringOutVal, int minVal, int maxVal, float floatVal, double dblVal, int intVal){
-        this.promptVal = promptVal;
-        this.stringOutVal = stringOutVal;
-        this.minVal = minVal;
-        this.maxVal = maxVal;
-        this.intVal = intVal;
-        this.dblVal = dblVal;
-        this.floatVal = floatVal;
+    public ClassIOLab(){
+        //will not need anything in here
     }
     
     //methods--generalized
@@ -46,18 +32,19 @@ public class ClassIOLab {
     //methods--converted from requirements
         //display prompt, read in an integer
             //The prompt value should be passed in as a parameter and the value that is read in *should be the return value* of the method.
-        public int returnInt(String prompt, int intVal){
+        public int returnInt(String prompt){ //returning integer, so I don't need to ask for it
             Scanner scInt = new Scanner(System.in);
             System.out.println(prompt);
-            intVal = scInt.nextInt();
+            int intVal = scInt.nextInt(); //delete from field
             return intVal;
         }
         
         //display prompt and read in an integer...with min and max value
             //prompt val, min and max passed in as params--return value is the value read in
                 //must keep asking for value until is within the appropriate range
-        public int intakeValidator(String prompt, int intVal, int minVal, int maxVal){
-            do {
+        public int intakeValidator(String prompt, int minVal, int maxVal){
+        int intVal;
+            do { //returning in val
             Scanner scInt = new Scanner(System.in);
             System.out.println(prompt);
             intVal = scInt.nextInt();
@@ -67,7 +54,7 @@ public class ClassIOLab {
             
         }
         //display prompt and read in a string, return the string read in
-        public String stringOut(String prompt, String stringOutVal){
+        public String stringOut(String prompt){
             Scanner strSc = new Scanner(System.in);
             System.out.println(prompt);
             String currString = strSc.next();
@@ -75,7 +62,7 @@ public class ClassIOLab {
         
 }
         //display prompt and read float, return float
-        public float floatReader(String prompt, float floatVal){
+        public float floatReader(String prompt){
             Scanner fltSc = new Scanner(System.in);
             System.out.println(prompt);
             float currFloatVal = fltSc.nextFloat();
@@ -85,7 +72,8 @@ public class ClassIOLab {
         //display prompt and read float, validate for min/max values
             //prompt val, min, max are passed in as params -- return is value read in
                 //must keep asking until is within range
-        public float floatValidator(String prompt, float floatVal, int minVal, int maxVal){
+        public float floatValidator(String prompt, int minVal, int maxVal){
+            float floatVal;
             do {
             Scanner fltSc = new Scanner(System.in);
             System.out.println(prompt);
@@ -97,16 +85,17 @@ public class ClassIOLab {
         }
         
         //display prompt for double, read in 
-        public double doubleReader(String prompt, double dblVal){
+        public double doubleReader(String prompt){
             Scanner dblSc = new Scanner(System.in);
             System.out.println(prompt);
-            dblVal = dblSc.nextDouble();
+            double dblVal = dblSc.nextDouble();
             return dblVal;
         }
     
         
         //display prompt for double, read in value, min, max, and run until within range, ret val
-         public double doubleReader(String prompt, double dblVal, double dblMin, double dblMax){
+         public double doubleReader(String prompt, double dblMin, double dblMax){
+             double dblVal;
             do {
                 Scanner dblSc = new Scanner(System.in);
                 System.out.println(prompt);

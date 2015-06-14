@@ -23,11 +23,14 @@ public class ListAllValues {
         populations.put("UK", 63000000);
         populations.put("Japan", 127000000);
         
-        //pulling a collection of values--I guess this is like a set
-        //collections allow repeat values, set does not
+        //pulling a collection of values--I guess this is similar to a set
+        //*collections allow repeat values*, *set does not*
+        
         //have to import Collection package/library
         Collection<Integer> popValues = populations.values();
+        //Class   Type   of variable  = ourHashMaps.values -- our data is now stored in a collection called popValues
         
+    // need Type in for/each
         for(Integer p: popValues){
             System.out.println(p); //will just give us a collection of values with repeats
                 //lexigraphically? how does it order the output--seems random

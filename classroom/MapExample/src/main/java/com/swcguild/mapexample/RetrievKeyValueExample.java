@@ -21,7 +21,10 @@ public class RetrievKeyValueExample {
         populations.put("UK", 63000000);
         populations.put("Japan", 127000000);
         
-        Integer japanPop = populations.get("Japan"); //if we want to store this as a variable
+        
+        //if we want to pull the value out of the hashmap and store as a variable....
+        
+        Integer japanPop = populations.get("Japan"); //declare a Type for the var, call the method .get passing in key to get corresponding value
         System.out.println("The population of japan is: " + japanPop);
         
         //keys come back to you as a set  - a set collection - each key has to be a unique value (one and only on)

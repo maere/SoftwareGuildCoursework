@@ -13,18 +13,14 @@ import java.util.Scanner;
  */
 public class SimpleCalculator {
     
-//Design a class (no main method) 
-    //that performs basic math operations (addition,subtraction, multiplication, division) on 2 operands.
+//Design a class (no main method) that performs basic math operations (addition,subtraction, multiplication, division) on 2 operands.
     
     //fields
-   
-    private float a, b; //takes decimals
+        //it's okay to not have fields if we won't be reusing the value outside of a method 
    
     //class constructor   
     public SimpleCalculator(){
-        //this.a = a;
-        //this.b = b;
-        //Scanner keyInput = new Scanner(System.in);
+       //is okay to not have anything in here
     }
 //calculations
     

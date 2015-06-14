@@ -19,7 +19,7 @@ public class FileIOSample {
     public static void main(String[] args) throws Exception {  
         
 //we are getting an error in the PrintWriter line so we need to add an exception 
-        PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
+        PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt")); //Filewriter!!
            
         out.println("First line");
          out.println("Second line.");
@@ -30,8 +30,11 @@ public class FileIOSample {
          out.flush();
          out.close();
          
+         
+         
+         
          //now we can get it to read out of a file, vs. off the console
-         Scanner sc = new Scanner(new BufferedReader(new FileReader("OutFile.txt")));
+         Scanner sc = new Scanner(new BufferedReader(new FileReader("OutFile.txt"))); //File Reader!!
          
          while (sc.hasNextLine()){   
                  String currentLine = sc.nextLine();

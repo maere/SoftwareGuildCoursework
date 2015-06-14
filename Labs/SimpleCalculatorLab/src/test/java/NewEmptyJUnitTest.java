@@ -23,14 +23,15 @@ public class NewEmptyJUnitTest {
 
     
     public NewEmptyJUnitTest() {
-        //instantiate the object
+        
         
     }
     
    //ignore the Before and After
     @Before
     public void setUp() {
-                myCalculator = new SimpleCalculator();
+        //instantiate the object
+        myCalculator = new SimpleCalculator();
 
         
     }
@@ -48,16 +49,16 @@ public class NewEmptyJUnitTest {
     //first test 
     @Test
     public void test2and2are4(){ //method name can't start w. number needs, lowercase
-        double result;
+        float result;
         result = myCalculator.add(2, 2);
-        Assert.assertEquals(4, result);
+        Assert.assertEquals(4, result, 0);
     
     }
     @Test
     public void test10minus2(){
-        double result;
+        float result;
         result = myCalculator.subtract(10, 2);
-        Assert.assertEquals(8.0, result);
+        Assert.assertEquals(8.0, result, 0);
     }
     
     /*
@@ -70,17 +71,17 @@ public class NewEmptyJUnitTest {
     */
     @Test
     public void test3time11(){
-        double result;
+        float result;
         result = myCalculator.multilply(3, 11);
-        Assert.assertEquals(33.0, myCalculator.multilply(3, 11));
+        Assert.assertEquals(33.0, result, 0); // can also skip result and just input myCalculator.multilply(3, 11),
     }
     
     
     @Test
     public void test100dividedBy20(){
-        double result;
+        float result;
         result = myCalculator.divide(100, 20);
-        Assert.assertEquals(5, result);
+        Assert.assertEquals(5, result, 0);
         
     }
 }

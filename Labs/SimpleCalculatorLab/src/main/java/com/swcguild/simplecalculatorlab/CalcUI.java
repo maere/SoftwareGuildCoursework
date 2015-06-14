@@ -14,10 +14,20 @@ import java.util.Scanner;
 public class CalcUI {
     
      private Scanner scObj;
-     float a;
-     float b;
+     // deleted a and b as fields bc we don't need them globally--returned from a function
     //The UI should give the user a choice of operations - one of the choices should be to exit the program
-    //user input method
+  
+     //fields
+     //can make the instantiation of our calculator object a field!!!
+     private final SimpleCalculator myCalc;  //b/c we'll need the calc throughout, so we declare it here
+                                        //if declaring here we must also assign a name for field 
+                                        //so that we can grab it as an object and perform methods on it
+     
+     //constructor for calcUI (we need this for our App to grab this and run these methods)
+     public CalcUI(){
+      this.myCalc = new SimpleCalculator(); // even though we declared, we still have to instantiate
+                                            //now we can grab it
+     }
      
     public void requestInput(){
         System.out.println("Which of the following would you like to do?");
@@ -30,24 +40,23 @@ public class CalcUI {
         
     }
     
-    public float userCalcRequest(){
-        //int[] input;  //input = new int[3];         
-        Scanner keyInput = new Scanner(System.in);
-        float op = scObj.nextFloat(); //operator
-        //input[0] = op;
-       
+    public int userCalcRequest(){         
+        Scanner sc = new Scanner(System.in);
+        int op = sc.nextInt(); //operator
         return op;
     }
     
     // Once the user selects an operations, the UI should ask the user for 2 operands 
     public float operand1(){
+        Scanner scObj = new Scanner(System.in);
         System.out.println("What's your first number?");
-        a = scObj.nextFloat(); //first number;     
+        float a = scObj.nextFloat(); //first number;     
         return a;
     }
     public float operand2(){
+        Scanner scObj = new Scanner(System.in);
         System.out.println("What's your second number?");              
-        b = scObj.nextFloat(); //first number
+        float b = scObj.nextFloat(); //first number
         //input[1] = b;
         return b;
     }
@@ -58,23 +67,41 @@ public class CalcUI {
 //and then display the result of the calculation
     //each calc method should return the result of the calc
   
-    public void getCalcFunctions(float op, float a, float b){
+    public void getCalcFunctions(float op){
+        
         if(op==5){
         goodBye();
             
         }
         else if(op==1){
-            add(a, b);
+            float a = operand1();
+            float b = operand2();
+            float result = myCalc.add(a, b); //need to call our method on the object we instantiated
+            System.out.println("Your result is: " + result);//we can now print
         }
         else if(op==2){
+            float a = operand1();
+            float b = operand2();
+            float result = myCalc.subtract(a, b); 
+            System.out.println("Your result is: "  + result);
         }
         else if(op==3){
+           float a = operand1();
+            float b = operand2();
+            float result = myCalc.multilply(a, b);
+            System.out.println("Your result is: " + result);
         }
         else if(op==4){
+            float a = operand1();
+            float b = operand2();
+            float result = myCalc.divide(a, b); 
+            System.out.println("Your result is: " + result);
         }
         else{
             System.out.println("Not a valid choice.  Please reenter a value 1-5");
         }
+    
+    
     }
                              
     
