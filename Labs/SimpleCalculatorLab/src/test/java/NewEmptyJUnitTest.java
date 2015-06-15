@@ -72,7 +72,7 @@ public class NewEmptyJUnitTest {
     @Test
     public void test3time11(){
         float result;
-        result = myCalculator.multilply(3, 11);
+        result = myCalculator.multiply(3, 11);
         Assert.assertEquals(33.0, result, 0); // can also skip result and just input myCalculator.multilply(3, 11),
     }
     

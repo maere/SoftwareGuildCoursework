@@ -13,14 +13,16 @@ package com.swcguild.statecapitals;
  */
 public class Capital {
    //properties
+        String stateN; //finally just added the state name to the object bc wasn't able to print by separating Hash from Collection
 	String capName;
 	int pop;
 	int sqMiles;
        
         
         //constructor
-        public Capital(String capName, int pop, int sqMiles)  
+        public Capital(String stateN, String capName, int pop, int sqMiles)  
     {
+        this.stateN = stateN;
         this.capName = capName;
         this.pop = pop;
         this.sqMiles = sqMiles;

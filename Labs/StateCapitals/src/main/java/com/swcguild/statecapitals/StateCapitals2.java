@@ -8,20 +8,18 @@ package com.swcguild.statecapitals;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 /*
 apparently you can construct two classes inside one file, but this didn't seem to work for me when 
 I got to trying to draw access the properties of the object--so I broke out into another class
-This was what the class consisted of here:
 
 public class Capital{
-
 	String capNam;
 	int pop;
 	int sqMiles;
 }
-
 
 */
 /**
@@ -32,72 +30,84 @@ public class StateCapitals2 {
         
     //properties
         HashMap<String, Capital> capitalsMap;
+        Scanner sc;
         
-    
     //StateCapitals2 constructor
        public StateCapitals2(){
            capitalsMap = new HashMap();  
        }
        
-       
+ //method to add key/value data to our HashMap of states and their capital objects
        public void addKeyValueToStateHash(String stateName, Capital capName){
             //we use the .put method to build our HashMap and add our key, value pairs (state/cap)
                 capitalsMap.put(stateName, capName);//"Alabama", montgomery                   
                 //capitalsMap.put();                //"Alaska", juneau
-                                                     //"Arizona", phoenix
-                                                    //"Arkansas", littlerock
        }
-        
-         
-    //creates Capital data objects
-       //public void createCapitalDataObjects(){
-          
-                    
-                //Capital littlerock = new Capital();
-                    //montgomery.capName = "Little Rock";
-                    //montgomery.pop   = 193000;
-                    //montgomery.sqMiles  = 113; 
-                    
-     
-           //} 
-         
+
     // prints out info from HashMap      
        public void printOutCapitalObjInfo(){  //prints out the data for each Capital object in the HashMap
+           System.out.println("STATE/CAPITAL PAIRS:");
+           System.out.println("===================");
            
-           ///will need to make a key Set 
-           Collection<Capital> stateCollectionSet = capitalsMap.values(); //call the .ketSet() method to pull the keys from the HashMap into a set
-
-           for (Capital c : stateCollectionSet)  //had to switch to a Collection because I needed the value() method to pull the objects
-        {                                       //then once I had a collection of objects, I could user the .property method to get the properties from the object
-            System.out.println(c);
-       
-        }
-          
-           for (Capital c : stateCollectionSet)
-        {   
-            Object currentName;
-            currentName = capitalsMap.get(c.capName); 
-            System.out.println(currentName);
+           //Set<String> keys = capitalsMap.keySet(); //create a key set of all the key values (state names)
+   
+           //had to also create a Collection because I needed the .value() method to pull the objects
+           Collection<Capital> stateCollectionSet = capitalsMap.values(); //pull the values from the HashMap
+           
+            //for/each, print the key (state name)
+            //for (String s : keys)
+            //{
+            //    System.out.println(s);
+            //    System.out.println(capitalsMap.get(s.capName));
+            //}    
         
-        }
            
+           //then once I had a collection of objects, I could user the .property method to get the properties from the object
+           for (Capital c : stateCollectionSet)
+            {   
+            System.out.println(c.stateN + " - " + c.capName + " | Pop: "+ c.pop +" | Area: "  + c.sqMiles);
+        
+            }
+           /*
+Alabama - Montgomery | Pop: 205000 | Area: 156 sq mi
+           */
+           
+           //for (Capital c : stateCollectionSet)  
+            //{                                       
+            //System.out.println(c); // this is just the object as reference # in memory
+            //}
           
           // (hint - use the *key set* to get each capital object out of the map one by one 
             //and then print each field of the Capital object to the screen)
-           
-           // then print the Name, Population, and Square mileage for each capital along with its (sout the capName + pop + sqMiles)
-            //corresponding state name to the screen 
        
        }
     
        public void testForPopulation(){
            //asks user for userInput (min pop)
+          
+           sc =  new Scanner(System.in);
+           System.out.println("Please enter a lower limit for population:");
+           int popSearch = sc.nextInt();
+           System.out.println("LISTING CAPITALS WITH POPULATIONS GREATER THAN: " + popSearch);
            
            //for each/loop where the code pulls population and examines value
+          Collection<Capital> stateCollectionSet = capitalsMap.values(); //pull the values from the HashMap
+          
+           for (Capital c : stateCollectionSet)
+            {   
+                if(c.pop>popSearch)
+                {
+                System.out.println(" - " + c.capName + " | Pop: "+ c.pop +" | Area: "  + c.sqMiles);
+        
+                }
+           
+            }
                 //if the value is over useInput print out all info for capital obj
        }
-    
-    
+ 
+ }//end primary class
+           
+
 /*
        public Capital assignValues(){
        //we will try to do the capital object creation & input programatically 
@@ -109,18 +119,20 @@ public class StateCapitals2 {
        }
 */
            
-           
- }//end primary class
-           
+
+  //creates Capital data objects               /// don't need this method becuase we are doing with constructor
+       //public void createCapitalDataObjects(){   //could also do with a properties accessor
+          
+                    
+                //Capital littlerock = new Capital();
+                    //montgomery.capName = "Little Rock";
+                    //montgomery.pop   = 193000;
+                    //montgomery.sqMiles  = 113; 
+                    
+     
+           //} 
          
-    
 
- 
-    
-       
-
-            
-      
     
     //this is our Object constructor, we use it to create a capital objects
     //public StateCapitals2 ()

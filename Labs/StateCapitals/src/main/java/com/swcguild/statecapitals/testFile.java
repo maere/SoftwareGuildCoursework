@@ -11,8 +11,8 @@ package com.swcguild.statecapitals;
  */
 public class testFile {
     public static void main(String[] args) {
-        Capital montgomery = new Capital("Montogmery", 2015000, 156);
-        System.out.println(montgomery.capName);
+        //Capital montgomery = new Capital("", "Montogmery", 2015000, 156);
+        //SSystem.out.println(montgomery.capName);
     }
     
 }
