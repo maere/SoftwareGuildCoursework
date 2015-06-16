@@ -18,6 +18,16 @@ public class CalcUIRf {
      private Scanner scObj;
      private final SimpleCalculator myCalc;
      private int op;
+     
+    ConsoleIO2 con = new ConsoleIO2();
+        
+    public void run(){
+       
+      
+       
+    
+    }
+       
     
      
      //constructor for calcUI 
