@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package com.swcguild.warmupusinghashmaps616;
-
-
-
 /**
  *
  * @author apprentice
@@ -17,8 +14,6 @@ public class App {
        
       HashMapWarmUp teamHashScores = new HashMapWarmUp();
       teamHashScores.run();
-    
       }//end main
-    
-    
+   
 }

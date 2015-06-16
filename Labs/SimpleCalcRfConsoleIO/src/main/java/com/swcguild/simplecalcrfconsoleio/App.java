@@ -14,7 +14,8 @@ public class App {
         //instantiate object
         // instantiate UI class here, but NOT the calculator--calculator gets instantiated in the UI class
        CalcUIRf myCalcUI = new CalcUIRf();
-       myCalcUI.userCalcRequest();
+       myCalcUI.runGetInput();
+       //myCalcUI.getCalcFunctions(op);
       
         
         

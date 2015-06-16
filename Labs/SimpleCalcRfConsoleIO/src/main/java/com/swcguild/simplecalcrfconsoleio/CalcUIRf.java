@@ -16,104 +16,74 @@ public class CalcUIRf {
     
     
      private Scanner scObj;
-     private final SimpleCalculator myCalc;
+     private SimpleCalculator myCalc;
      private int op;
+     float result;
      
     ConsoleIO2 con = new ConsoleIO2();
         
     public void run(){
        
-      
-       
-    
     }
-       
-    
-     
+      
      //constructor for calcUI 
      public CalcUIRf(){
-      this.myCalc = new SimpleCalculator(); 
+      this.myCalc = new SimpleCalculator(); //this can now call add, subtract, mult  or divide
        }
      
    
-    public void requestInput(){
-        System.out.println("Which of the following would you like to do?");
-        System.out.println("--------------------------------------------");
-        System.out.println("1. Add");
-        System.out.println("2. Subtract");
-        System.out.println("3. Multiply");
-        System.out.println("4. Divide");
-        System.out.println("5. Exit");
+    public void runGetInput(){
+        op = con.readInt("\"Which of the following would you like to do? \n"
+                + "--------------------------------------------\n"
+                + "1. Add\n"
+                + "2. Subtract\n"
+                + "3. Multiply\n"
+        + "4. Divide\n"
+        + "5. Exit\n");
+        //System.out.println("Which of the following would you like to do?");
+        //System.out.println("--------------------------------------------");
+        //System.out.println("1. Add"); 
+       float a = con.readFloat("Please enter your first number: ");
+       float  b = con.readFloat("Please enter your second number: "); 
+        
+        getCalcFunctions(op, a, b);
+        
+        System.out.println("Your result is: " + result);
+       
         
     }
     
     
-    
-    //tried to swap this for something from Console IO but it didn't go well
-    public int userCalcRequest(){         
-        Scanner sc = new Scanner(System.in);
-        op = sc.nextInt(); //operator
-        return op;
-    }
-    
-    
-    
-    // Once the user selects an operations, the UI should ask the user for 2 operands 
-    public float operand1(){
-        scObj = new Scanner(System.in);
-        System.out.println("What's your first number?");
-        float a = scObj.nextFloat(); //first number;     
-        return a;
-    }
-    public float operand2(){
-        scObj = new Scanner(System.in);
-        System.out.println("What's your second number?");              
-        float b = scObj.nextFloat(); //first number
-        //input[1] = b;
-        return b;
-    }
-    public void getCalcFunctions(float op){
+    private float getCalcFunctions(int op, float a, float b){
         
         if(op==5){
         goodBye();
             
         }
         else if(op==1){
-            float a = operand1();
-            float b = operand2();
-            float result = myCalc.add(a, b); //need to call our method on the object we instantiated
-            System.out.println("Your result is: " + result);//we can now print
+            result = myCalc.add(a, b); //need to call our method on the object we instantiated 
         }
         else if(op==2){
-            float a = operand1();
-            float b = operand2();
-            float result = myCalc.subtract(a, b); 
-            System.out.println("Your result is: "  + result);
+            result = myCalc.subtract(a, b);   
         }
         else if(op==3){
-           float a = operand1();
-            float b = operand2();
-            float result = myCalc.multiply(a, b);
-            System.out.println("Your result is: " + result);
+           result = myCalc.multiply(a, b);
         }
-        else if(op==4){
-            float a = operand1();
-            float b = operand2();
-            float result = myCalc.divide(a, b); 
-            System.out.println("Your result is: " + result);
+        else if(op==4){ 
+            result = myCalc.divide(a, b); 
         }
         else{
             System.out.println("Not a valid choice.  Please reenter a value 1-5");
         }
     
-    
+    return result;
     }
                              
     
 // The UI should then display the menu of choices again
 //do while loop method
     
-    public void goodBye(){
+    private void goodBye(){
         // When the user chooses to exit the program, the UI should print a thank you message
         System.out.println("Thanks for using the calculator. Goodbye.");
     
