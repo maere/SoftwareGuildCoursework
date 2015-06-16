@@ -6,7 +6,6 @@
 package com.swcguild.simplecalcrfconsoleio;
 
 import java.util.Scanner;
-import com.swcguild.simplecalcrfconsoleio.ConsoleIOLab;
 
 
 /**
@@ -40,13 +39,13 @@ public class CalcUIRf {
     
     
     
-    /*
+    //tried to swap this for something from Console IO but it didn't go well
     public int userCalcRequest(){         
         Scanner sc = new Scanner(System.in);
         op = sc.nextInt(); //operator
         return op;
     }
-    */
+    
     
     
     // Once the user selects an operations, the UI should ask the user for 2 operands 

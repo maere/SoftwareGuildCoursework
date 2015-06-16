@@ -13,12 +13,12 @@ public class App {
      public static void main(String[] args) {
         //instantiate object
         // instantiate UI class here, but NOT the calculator--calculator gets instantiated in the UI class
-        CalcUIRf myCalcUI = new CalcUIRf();
+       CalcUIRf myCalcUI = new CalcUIRf();
+       ConsoleIO2 con = new ConsoleIO2();
         
-        myCalcUI.returnInt("What do you want to do? (1-4)");
-        
+        myCalcUI.
         //now we run methods on our instantiated object
-        myCalcUI.requestInput();
+        myCalcUI
         int op = myCalcUI.userCalcRequest();
         myCalcUI.getCalcFunctions(op);
        
