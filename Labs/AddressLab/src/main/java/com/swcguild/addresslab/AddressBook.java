@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  *
- * @author apprentice
+ * @author apprentice -- DAO
  */
 public class AddressBook {
     
@@ -33,12 +33,16 @@ public class AddressBook {
       //constructor
     HashMap<Integer, Address> addressMap = new HashMap<>();
     
-    static int counter =0; //is all one of these fields for all address books we may want to make
+    //this is only use to create a unique ID, NOT to keep track of records
+    //static int counter; //is all one of these fields for all address books we may want to make
     //ArrayList<String> stringList = new ArrayList<>(); 
+    
+    //we need to use the HashMap to count records, to figure out where to inserrt the 
+    //next record or where to pull the from
    
    
     //read and write data methods
-    public void loadToAddresses()throws FileNotFoundException {
+    public void loadAddresses()throws FileNotFoundException {
        Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
        
        String currentLine;
@@ -66,12 +70,13 @@ public class AddressBook {
      public void writeToAddresses() throws IOException {
      PrintWriter out = new PrintWriter(new FileWriter(ADDRESSES_FILE));
      
-     ArrayList addressKeys = this.getAllAddresses();
+     //this is the ArrayList we get from all the objects we just pulled from our hash
+     ArrayList<Address> addressKeys = this.getAllAddresses();
      //do we need to use the keyArray instead?  
                 
-        for(Object s: addressKeys)
+        for(Address currentAddress: addressKeys)//this is a bunch of objects (the values)
         {
-            Address currentAddress = this.getAddress(idNumber);
+            
             
             //String strI = Integer.toString(i);
             String strId = Integer.toString(currentAddress.getIdNumber());
@@ -83,44 +88,40 @@ public class AddressBook {
                     currentAddress.getCity() + DELIMITER +
                     currentAddress.getState() + DELIMITER +
                     currentAddress.getZipCode());
+            //flush before you leave the loop
+            out.flush();
         }
+    //and close
+        out.close();
+        
+     }
      
-     /*
-    for(int i=0; i<AddressKeys.size(); i++){
-         Address currentAddress = this.getAddress(AddressKeys[i])
-                
-     }
-    */
-    
-     }
     //getters and setters
-     public Address getAddress(int idNumber){
+    public Address getAddress(int idNumber){
          return addressMap.get(idNumber);
-     }
-    
+    }
     //methods
     
-    public void addAddressToBook(Address addressObject){
-      counter++;
-      
-      idNumber= counter;
-      
+    public void addAddressToBook(Address addressObject) throws IOException{
+      idNumber = addressMap.size()+1;
+      //idNumber++;
+      //idNumber= counter;
       addressMap.put(idNumber, addressObject);
-    
+    //now id/Object is in the HashMap, but has not yet been written to the file
+      //addressObject.setIdNumber(idNumber);
+      
     }
     
-    public Address removeAddress(String lastName) {
-        addressMap.remove(idNumber, addressObject);
-        return addressObject;
-        
-        
+    public void removeAddress(int idNumber) {
+        addressMap.remove(idNumber); ///.remove(idNumber, addressObject);
+        //return addressObject;
+  
     }
     
     
     //get address from the hash
     
     //get all addresses from hash
-
     ArrayList<Address> getAllAddresses() {
         
         Set<Integer> keys = addressMap.keySet();

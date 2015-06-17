@@ -1,0 +1,1 @@
+0::Apple::Adrian::123 Apple St::Appleton::null::99999

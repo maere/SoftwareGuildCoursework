@@ -7,7 +7,7 @@ package com.swcguild.addresslab;
 
 /**
  *
- * @author apprentice
+ * @author apprentice--DTO
  */
 public class Address {
     //fields -- these should all be privately scoped
@@ -17,12 +17,16 @@ public class Address {
     private String city;
     private String state;
     private int zipCode;
-    private final int idNumber;
+    private int idNumber;
+    
+    static int instanceCounter = 0;
+
     
     //contstructor
     
     public Address(int idNumber){
         this.idNumber = idNumber;
+        this.idNumber = instanceCounter++;
         
         
         //this.firstName = firstName;
@@ -35,7 +39,11 @@ public class Address {
     
     }
     
-    
+    //counter added here using above fields
+    //public void myCounter(){
+    //    instanceCounter++;
+    //    counter=instanceCounter;
+    //}
     
     
     //later functionality:
@@ -46,6 +54,11 @@ public class Address {
     public int getIdNumber() {
         return idNumber;
     }
+
+    public void setIdNumber(int idNumber) {
+        this.idNumber = idNumber;
+    }
+    
 
     public String getFirstName() {
         return firstName;
