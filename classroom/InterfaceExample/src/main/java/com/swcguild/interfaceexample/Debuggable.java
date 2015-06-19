@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.dvdlab;
+package com.swcguild.interfaceexample;
 
 /**
  *
  * @author apprentice
  */
-public class DVDController {
-    
+public interface Debuggable {
+    public void displayStatus(String id);
+    public void displayError(String error);
 }

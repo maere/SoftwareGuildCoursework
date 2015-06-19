@@ -17,6 +17,13 @@ class Student {
     private String lastName;
     private String cohort;
 
+    
+    //constructor
+    public Student(String studentId)
+    {
+        this.studentId = studentId;
+    }
+    
     public String getStudentId() {
         return studentId;
     }
@@ -50,10 +57,5 @@ class Student {
     }
     
     
-    //constructor
-    public Student(String studentId)
-    {
-        this.studentId = studentId;
-    }
     
 }

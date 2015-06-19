@@ -36,9 +36,13 @@ public class CaughtSpeedingTest {
         
     }
 
-   //@Test
+   @Test
 //CaughtSpeeding(60, false) → 0
+    
+    @Test
 //CaughtSpeeding(65, false) → 1
+    
+    @Test
 //CaughtSpeeding(65, true) → 0
     
     // @Test

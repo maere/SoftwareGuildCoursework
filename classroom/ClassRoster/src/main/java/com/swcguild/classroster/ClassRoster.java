@@ -70,8 +70,10 @@ public class ClassRoster {
             Student currentStudent = this.getStudent(keys[i]);//getStudent is a method we wrote (below) to return a student object
                                                     //what we pass in as a value for get student will return the student object value
                                                     //which at this point is an object in memory--it doesn't actually have a name    
-            out.print(currentStudent.getStudentId() + DELIMITER + currentStudent.getFirstName() +  DELIMITER + currentStudent.getLastName() +  DELIMITER + currentStudent.getCohort());
-            currentStudent.getCohort();
+            out.print(currentStudent.getStudentId() 
+                    + DELIMITER + currentStudent.getFirstName() 
+                    +  DELIMITER + currentStudent.getLastName() 
+                    +  DELIMITER + currentStudent.getCohort());
             out.flush();
         }
     }

@@ -5,12 +5,20 @@
  */
 package com.swcguild.dvdlab;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  *
  * @author apprentice
  */
 public class App {
-    
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        DVDLibraryController mainObjectController = new DVDLibraryController();
+       mainObjectController.run();
+        
+    }
+
 }
 /*
 Requirements: about Collections and Maps

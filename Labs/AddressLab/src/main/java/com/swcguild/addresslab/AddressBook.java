@@ -49,7 +49,7 @@ public class AddressBook {
        String[]currentTokens;
        
        while(sc.hasNextLine()){
-           currentLine = sc.nextLine();
+           currentLine = sc.nextLine();  
            currentTokens = currentLine.split(DELIMITER); //why not "::"?
            
            Address currentAddress  = new Address(Integer.parseInt(currentTokens[0])); //we have to parseInt bc evertying out of a file reader is a string
@@ -61,6 +61,7 @@ public class AddressBook {
            currentAddress.setZipCode(Integer.parseInt(currentTokens[6]));
            
            addressMap.put(currentAddress.getIdNumber(), currentAddress);
+           
        }
        //close
        sc.close();
@@ -76,8 +77,7 @@ public class AddressBook {
                 
         for(Address currentAddress: addressKeys)//this is a bunch of objects (the values)
         {
-            
-            
+
             //String strI = Integer.toString(i);
             String strId = Integer.toString(currentAddress.getIdNumber());
            
