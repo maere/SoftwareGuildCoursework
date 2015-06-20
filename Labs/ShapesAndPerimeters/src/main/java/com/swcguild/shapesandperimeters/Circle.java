@@ -9,20 +9,30 @@ package com.swcguild.shapesandperimeters;
  *
  * @author apprentice
  */
-public class Circle {
-    protected int diameter;
+public class Circle extends Shape{
+
+    protected float diameter = io.readFloat("For the CIRCLE shape\nPlease enter the diameter \n");
     
-    public Circle{
     
+    
+    public Circle() {
+        this.name = "Circle";
     }
     
-    //methods
+    public float area() {
     
-    //
-    public float area(){
-    //we needed to cast PI to a a float bc is a double
-        // float area = (float (Math.PI*(Math.pow((diameter/2), 2)));
-    
+        float area = (float) (Math.PI*(Math.pow((diameter/2), 2)));
+        
+        return area;
     }
     
+    public float perimeter() {
+    
+        float perimeter = (float) (Math.PI*(diameter));
+        
+        return perimeter;
+    }
 }
+
+
+

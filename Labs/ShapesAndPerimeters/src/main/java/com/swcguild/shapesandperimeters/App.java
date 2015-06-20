@@ -7,14 +7,63 @@ package com.swcguild.shapesandperimeters;
 
 /**
  *
- * @author apprentice
+ * @author: PAIR: This was an in-class pair with Dan.
  */
 public class App {
+   
+    ConsoleIO io = new ConsoleIO();
     
+    public static void main(String[] args) {
+
+        Shape mySquare = new Square();
+        mySquare.color = "Red";
+        
+        Shape myRectangle = new Rectangle();
+        myRectangle.color = "Purple";
+        
+        Shape myTriangle = new Triangle();
+        myTriangle.color = "Blue";
+        
+        Shape myCircle = new Circle();
+        myCircle.color = "Green";
+
+        Shape[] shapeArray;
+
+        shapeArray = new Shape[4];
+
+//        shapeArray[0] = mySquare.area();
+//        shapeArray[1] = mySquare.perimeter();
+        
+        shapeArray[0] = mySquare;
+        //shapeArray[1] = mySquare.perimeter();
+        
+        shapeArray[1] = myRectangle;
+        //shapeArray[3] = myRectangle.perimeter();
+        
+        shapeArray[2] = myTriangle;
+        //shapeArray[5] = myTriangle.perimeter();
+        
+        shapeArray[3] = myCircle;
+        //shapeArray[7] = myCircle.perimeter();
+        
+        
+        
+        for (Shape s : shapeArray) {
+            System.out.println("This is a "+s.color+" "+s.name+" with an area of "+s.area()+" and a perimeter of "+s.perimeter());
+        
+        }
+        
+        
+        
+        //coming back to enhanced for loop, later...much later.
+//        float result1 = mySquare.area();
+//        float result2 = mySquare.perimeter();
+//        System.out.println(result1);
+//        System.out.println(result2);
+    }
 }
 
-/*PAIR: This was an in-class pair with Dan.
-
+/*
 Requirements
 Create a set of classes that represent a square, rectangle, triangle and circle. 
 

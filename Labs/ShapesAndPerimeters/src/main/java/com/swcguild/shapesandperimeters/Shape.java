@@ -9,28 +9,20 @@ package com.swcguild.shapesandperimeters;
  *
  * @author apprentice
  */
-public class Shape {
+public abstract class Shape {
     
-    //protected class
     protected String color;
-    //could also do a side parameter and extend taht out for each class to shape specific variables
-    //eg. int length = side: and ask for a paramter called length
-  
-    //protected int diameter;
-    
-    
-    //methods
-    public float area(){
-        return 0;
-    }
-    
-    public float perimeter(){
-        return 0;
-    }
+    protected String name;
+    ConsoleIO io = new ConsoleIO();
+       
+    //constructor
+    public Shape(){
    
+    }
     
     
+    public abstract float area();
     
-    
+    public abstract float perimeter();
     
 }

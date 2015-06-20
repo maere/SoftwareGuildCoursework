@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author apprentices: Angela and Mary
  */
 public class App {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, Exception {
         //instantiate an address book controller to call our run method
         AddressBookController addressBookRunner = new AddressBookController();
         addressBookRunner.run();

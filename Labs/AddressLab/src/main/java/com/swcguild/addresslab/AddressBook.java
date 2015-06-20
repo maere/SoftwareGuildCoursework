@@ -52,7 +52,8 @@ public class AddressBook {
            currentLine = sc.nextLine();  
            currentTokens = currentLine.split(DELIMITER); //why not "::"?
            
-           Address currentAddress  = new Address(Integer.parseInt(currentTokens[0])); //we have to parseInt bc evertying out of a file reader is a string
+           Address currentAddress  = new Address(); //we have to parseInt bc evertying out of a file reader is a string
+           currentAddress.setIdNumber(Integer.parseInt(currentTokens[0]));
            currentAddress.setFirstName(currentTokens[1]);
            currentAddress.setLastName(currentTokens[2]);
            currentAddress.setStreet(currentTokens[3]);
@@ -103,9 +104,31 @@ public class AddressBook {
     //methods
     
     public void addAddressToBook(Address addressObject) throws IOException{
-      idNumber = addressMap.size()+1;
+      //idNumber = addressMap.size()+1;
       //idNumber++;
       //idNumber= counter;
+        
+//FIX: for counter
+       Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
+       
+       String currentLine;
+       String[]currentTokens;
+       Boolean notLast;
+       
+       while(sc.hasNextLine()){
+           currentLine = sc.nextLine(); 
+            if (sc.hasNextLine()){
+                    notLast=true;
+            }
+            else{
+                notLast=false;
+                return currentString;
+                }
+           
+           currentTokens = currentLine.split(DELIMITER); //why not "::"?
+      
+               
+           
       addressMap.put(idNumber, addressObject);
     //now id/Object is in the HashMap, but has not yet been written to the file
       //addressObject.setIdNumber(idNumber);

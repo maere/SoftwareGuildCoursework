@@ -11,20 +11,27 @@ package com.swcguild.shapesandperimeters;
  */
 public class Square extends Shape {
     
-    float side;
+ float side = io.readFloat("For the SQUARE shape\nPlease enter the length of your side\n");
     
-    public Square(){
-   
+    
+    public Square( ) {
+    this.name = "Square";
+        
     }
     
-    //@Override
-    public float area(){
+    public float area() {
+        
+       
         float area = side*side;
         return area;
     }
     
-    public float perimeter(){
+    public float perimeter() {
+        
+    
+        
         float perimeter = side*4;
+        
         return perimeter;
     
     }

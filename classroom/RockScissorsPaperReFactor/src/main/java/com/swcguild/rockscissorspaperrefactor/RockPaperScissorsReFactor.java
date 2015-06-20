@@ -5,6 +5,9 @@
  */
 package com.swcguild.rockscissorspaperrefactor;
 
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
  * @author apprentice
