@@ -67,8 +67,14 @@ public class App {
        
         
         //ABSTRACT BASE CLASS
-            //now that we've made the class abstract we can't instantiate it!
-       Employee employee = new Employee();
+            //now that we've made the class abstract we can't instantiate it--unless we create the method indicated
+        //by the base class
+       Employee employee = new Employee() {
+       
+           public void createObjectives(){
+           
+           }
+       };
     }
     
 }
