@@ -1,0 +1,6 @@
+userNum::lastName::firstName::pin::balance
+001::Apple::Annie::1111::1000
+002::Boyd::Bob::2222::2000
+003::Carson::Cat::3333::3000
+004::Dillard::Dan::4444::4000
+005::Edwards::Emily::5555:5000

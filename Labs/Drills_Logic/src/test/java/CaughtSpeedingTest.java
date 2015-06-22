@@ -39,23 +39,29 @@ public class CaughtSpeedingTest {
 //CaughtSpeeding(60, false) → 0
     public void test60andFalse() {
         int result = carTestObj.CaughtSpeeding(60, false);
-        Assert.assertEquals(1, result);
+        Assert.assertEquals((Integer)1, (Integer) result);
     }
 
     @Test
 //CaughtSpeeding(65, false) → 1
     public void test65andFalse() {
         int result = carTestObj.CaughtSpeeding(65, false);
-        Assert.assertEquals(1, result);
+        Assert.assertEquals((Integer)1, (Integer) result);
     }
 
     @Test
 //CaughtSpeeding(65, true) → 0
     public void test65andTrue() {
         int result = carTestObj.CaughtSpeeding(65, true);
-        Assert.assertEquals(0, result);
+        Assert.assertEquals((Integer)0, (Integer)result);
     }
 
     // @Test
     // public void hello() {}
+    @Test
+    public void test40andTrue() {
+        int result = carTestObj.CaughtSpeeding(65, true);
+        Assert.assertEquals((Integer) 40, (Integer) result);
+    }
+
 }
