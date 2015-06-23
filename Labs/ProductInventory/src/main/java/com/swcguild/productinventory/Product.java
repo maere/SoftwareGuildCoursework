@@ -11,7 +11,6 @@ package com.swcguild.productinventory;
  */
 public class Product {
     protected String type;
-    protected Product productType;
     protected String productName;
     protected float price;
     protected Integer sku;
@@ -23,7 +22,6 @@ public class Product {
     
     public Product(String productName){
         this.productName = productName;
-        this.productType = productType;
         this.sku = sku;
         //this.productType = productType;
         //this.type = type;

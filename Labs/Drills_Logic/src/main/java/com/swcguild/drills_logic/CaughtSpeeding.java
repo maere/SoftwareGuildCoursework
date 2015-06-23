@@ -12,17 +12,17 @@ package com.swcguild.drills_logic;
 public class CaughtSpeeding {
 
     public int CaughtSpeeding(int speed, boolean isBirthday) {
-        int ticket;
+        int ticket=0;
 
         if (isBirthday == true) {
             speed = speed - 5;
         }
 
-        if (speed < 60) {
+        if (speed <= 60) {
             ticket = 0;
         } else if (speed >= 61 && speed <= 80) {
             ticket = 1;
-        } else{
+        } else if(speed >80){
             ticket = 2;
         }
 
@@ -43,6 +43,8 @@ public class CaughtSpeeding {
      Unless it is your birthday -- on that day, 
      your speed can be 5 higher in all cases. 
 
-
+//CaughtSpeeding(60, false) → 0  - not a birthday AT 60 so speed = 60
+//CaughtSpeeding(65, false) → 1 - not a birthday over 60 so speed = 65
+//CaughtSpeeding(65, true) → 0 - is a birthday, over 60 (so speed = 60
 
      */

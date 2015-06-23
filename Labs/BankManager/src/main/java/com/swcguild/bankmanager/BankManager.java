@@ -38,21 +38,27 @@ public class BankManager {
           String lastName = con.readString("Enter account holder's last name:");
           int pin = con.readInt("Enter PIN you would like to use for the account: ");
           float balance = con.readFloat("Enter the initial deposit for opening the account:");
+          
           int accountType = con.readInt("Enter 1 to open a savings account, or 2 to open a checking account:");
+          Account newAccount = null; //null is an okay value to set an object to
           
          //instantiate object
           if(accountType==1){
-              Savings newAccount = new Savings(userNum, firstName, lastName, pin, balance);
+              newAccount = new Savings(userNum, firstName, lastName, pin, balance);
           }
           else if(accountType==2){
-              Checking newAccount = new Checking(userNum, firstName, lastName, pin, balance);
+            newAccount = new Checking(userNum, firstName, lastName, pin, balance);
           }
           else{
               System.out.println("There has been an error.");
           }
          
          //set properties of object
-          newAccount.
+          newAccount.firstName = firstName;
+          newAccount.lastName = lastName;
+          newAccount.pinNumber = pin;
+          newAccount.balance = balance;
+          //how to add account number?
          
          //put object into hash
     

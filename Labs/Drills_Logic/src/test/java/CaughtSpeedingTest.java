@@ -39,18 +39,18 @@ public class CaughtSpeedingTest {
 //CaughtSpeeding(60, false) → 0
     public void test60andFalse() {
         int result = carTestObj.CaughtSpeeding(60, false);
-        Assert.assertEquals((Integer)1, (Integer) result);
+        Assert.assertEquals(0, result);
     }
 
     @Test
 //CaughtSpeeding(65, false) → 1
     public void test65andFalse() {
         int result = carTestObj.CaughtSpeeding(65, false);
-        Assert.assertEquals((Integer)1, (Integer) result);
+        Assert.assertEquals(1, result);
     }
 
     @Test
-//CaughtSpeeding(65, true) → 0
+    //CaughtSpeeding(65, true) → 0
     public void test65andTrue() {
         int result = carTestObj.CaughtSpeeding(65, true);
         Assert.assertEquals((Integer)0, (Integer)result);
@@ -58,10 +58,11 @@ public class CaughtSpeedingTest {
 
     // @Test
     // public void hello() {}
+    /*
     @Test
     public void test40andTrue() {
         int result = carTestObj.CaughtSpeeding(65, true);
         Assert.assertEquals((Integer) 40, (Integer) result);
     }
-
+    */
 }
