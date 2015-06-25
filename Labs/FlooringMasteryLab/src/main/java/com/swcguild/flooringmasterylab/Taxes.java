@@ -16,31 +16,34 @@ import java.util.Scanner;
  *
  * @author apprentice
  */
-public class Taxes {
+public class Taxes implements TaxesDAOFileImpl{
+
     final String TAXES_FILE = "Taxes.txt";
-    Map<String, Double> taxMap = new HashMap<>();
-    
+    private HashMap<String, Double> taxMap;
+
     //constructor
-    public void taxes(){
-    //taxMap = new HashMap<>();
-    }
-    
-    public void loadTaxes() throws FileNotFoundException{
+    public Taxes() {
+        taxMap = new HashMap<>(); //we forgot to instantiate this!! 
         
-    Scanner sc = new Scanner(new BufferedReader(new FileReader(TAXES_FILE)));
-    
-    while(sc.hasNextLine()){
-    String currentStateToken = sc.next();
-    String currentRateToken = sc.next();
-    
-    
-    
-    taxMap.put(currentStateToken, Double.parseDouble(currentRateToken));
-    
     }
- 
-    
+
+    @Override
+    public HashMap loadTaxes() throws FileNotFoundException {
+
+        Scanner sc = new Scanner(new BufferedReader(new FileReader(TAXES_FILE)));
+
+        while (sc.hasNextLine()) {
+            String currentLine = sc.nextLine();
+            String[] currentTokens = currentLine.split(",");
+
+            String currentStateToken = currentTokens[0];
+            Double currentRateToken = Double.parseDouble(currentTokens[1]);
+
+            taxMap.put(currentStateToken, currentRateToken);
+
+        }
+        return taxMap;  //this method had to return a data structure in order for it to be available to the other classes
+
     }
-    
-    
+
 }

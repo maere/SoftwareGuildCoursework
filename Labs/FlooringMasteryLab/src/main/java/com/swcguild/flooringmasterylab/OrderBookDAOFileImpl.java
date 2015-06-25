@@ -5,10 +5,25 @@
  */
 package com.swcguild.flooringmasterylab;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author apprentice
  */
 public interface OrderBookDAOFileImpl {
     
+    public void loadOrderFile(String date) throws FileNotFoundException;
+    
+    public void writeOrderFile(String date) throws IOException;
+    
+    public ArrayList listOrders(String orderDate) throws FileNotFoundException;
+    
+    public void putOrders(Order order) throws IOException;
+    
+    public void getOrder(int orderNum);
+    
+    public void removeOrder(int orderNum);
 }

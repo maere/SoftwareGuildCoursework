@@ -6,22 +6,22 @@
 package com.swcguild.flooringmasterylab;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  *
  * @author apprentice
  */
 public class App {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         OrderController testRun = new OrderController();
-        Materials matRun = new Materials();
-        Taxes taxRun = new Taxes();
+        // matRun = new Materials();
+        //Taxes taxRun = new Taxes();
         
-        matRun.loadMatCosts();
-        taxRun.loadTaxes();
+        //matRun.loadMatCosts();
+        //taxRun.loadTaxes();
         
-        testRun.displayOrders();
-        testRun.addOrder();
+        testRun.run();
     }
     
 }

@@ -5,10 +5,16 @@
  */
 package com.swcguild.flooringmasterylab;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author apprentice
  */
 public interface MaterialsDAOFileImpl {
+    
+    public void loadMatCosts()throws FileNotFoundException;
+    
+    public double[] getMaterial(String key);
     
 }

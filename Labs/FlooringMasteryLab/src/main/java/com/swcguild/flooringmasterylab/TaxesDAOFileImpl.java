@@ -5,10 +5,15 @@
  */
 package com.swcguild.flooringmasterylab;
 
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+
 /**
  *
  * @author apprentice
  */
 public interface TaxesDAOFileImpl {
+    
+    public HashMap loadTaxes() throws FileNotFoundException;
     
 }

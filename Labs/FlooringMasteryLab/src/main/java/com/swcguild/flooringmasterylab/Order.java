@@ -22,7 +22,11 @@ public class Order {
     double totalLaborCost;
     double taxAdded;
     double totalCost;
-
+    String orderNotes;
+    
+    int id;
+    static int counter = 0; //we want this to be available to DVDLibrary class
+  
     public void setOrderNum(int orderNum) {
         this.orderNum = orderNum;
     }
@@ -33,6 +37,7 @@ public class Order {
     this.flooringType = flooringType;
     this.state = state;
     this.area = area;
+    this.id = ++counter;
     }
 
     public int getOrderNum() {
