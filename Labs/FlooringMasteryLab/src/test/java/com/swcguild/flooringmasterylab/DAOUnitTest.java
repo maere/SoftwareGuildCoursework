@@ -41,24 +41,24 @@ public class DAOUnitTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    @Test
-    public void loadData(){
-    OrderBook ob = new OrderBook();
-    ob.loadOrderFile("06012013");
-    }
-    
-    @Test
-    public void loadTaxData() {
-    
-        Taxes tx = new Taxes();
-        
-        try {
-            HashMap blah = tx.loadTaxes();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(DAOUnitTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    
-    }
+//    @Test
+//    public void loadData(){
+//    OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
+//    ob.loadOrderFile("06012013");
+//    }
+//    
+//    @Test
+//    public void loadTaxData() {
+//    
+//        TaxesDAOFileImpl tx = new TaxesDAOFileImpl();
+//        
+//        try {
+//            HashMap blah = tx.loadTaxes();
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(DAOUnitTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    
+//    
+//    }
   
 }

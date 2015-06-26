@@ -128,5 +128,27 @@ public class ConsoleIO {
         return result;
     }
     
+    public String readYorN(String prompt) {
+        boolean done = false;
+        String answer = null;
+        while (!done) {
+            try {
+                System.out.print(prompt);
+                answer = sc.nextLine();
+                if (answer.equalsIgnoreCase("Y") || (answer.equalsIgnoreCase("N"))) {
+                    done = true;
+                    return answer;
+                } else {
+                    System.out.print("Please enter only \"y\" or \"n\": ");
+                }
+            } catch (Exception e) {
+                System.out.print("Please enter only \"y\" or \"n\": ");
+            }
+        }
+        return answer;
+    }
+    
+   
+    
 }
  //this is a copy of Ilyas ConsoleIO. This lab was about overloading methods, apparently!

@@ -10,7 +10,7 @@ package com.swcguild.flooringmasterylab;
  * @author apprentice
  */
 public class Order {
-    int orderNum;
+    //int orderNum;
     String lastName;
     String state;
     double taxRate;
@@ -22,27 +22,36 @@ public class Order {
     double totalLaborCost;
     double taxAdded;
     double totalCost;
-    String orderNotes;
+    private String orderNotes;
     
     int id;
-    static int counter = 0; //we want this to be available to DVDLibrary class
-  
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
-    
+    //static int counter = 0; //we want this to be available to the DAO class
+                            /*
+                              public void setOrderNum(int orderNum) {
+                                  this.orderNum = orderNum;
+                              }
+                              */
     //constructor
     public Order (String lastName, String flooringType, String state, double area){
     this.lastName = lastName;
     this.flooringType = flooringType;
     this.state = state;
     this.area = area;
-    this.id = ++counter;
+    //this.id = ++counter;
+    }
+                            /*
+                                public int getOrderNum() {
+                                    return orderNum;
+                                }
+                             */   
+    public int getId() {
+        return id;
     }
 
-    public int getOrderNum() {
-        return orderNum;
+    public void setId(int id) {
+        this.id = id;
     }
+   
 
     public String getLastName() {
         return lastName;
@@ -131,7 +140,16 @@ public class Order {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
-   
+
+    public String getOrderNotes() {
+        return orderNotes;
+    }
+
+    public void setOrderNotes(String orderNotes) {
+        this.orderNotes = orderNotes;
+    }
+
+
     
     
     
