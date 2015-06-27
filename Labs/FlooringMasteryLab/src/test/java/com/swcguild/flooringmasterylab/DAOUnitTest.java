@@ -6,10 +6,14 @@
 package com.swcguild.flooringmasterylab;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,19 +25,20 @@ import org.junit.BeforeClass;
  */
 public class DAOUnitTest {
     
+
     public DAOUnitTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
-        
+
     }
-    
+
     @Before
     public void setUp() {
- 
+
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -41,24 +46,70 @@ public class DAOUnitTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-//    @Test
-//    public void loadData(){
-//    OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
-//    ob.loadOrderFile("06012013");
-//    }
-//    
-//    @Test
-//    public void loadTaxData() {
-//    
-//        TaxesDAOFileImpl tx = new TaxesDAOFileImpl();
-//        
-//        try {
-//            HashMap blah = tx.loadTaxes();
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(DAOUnitTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    
-//    
-//    }
-  
+    /*
+    @Test
+    public void loadData() throws FileNotFoundException {
+        OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
+        ob.loadOrderFile("JUNIT_TEST-06262015");
+    }
+
+    @Test
+    public void loadTaxData() {
+
+        TaxesDAOFileImpl tx = new TaxesDAOFileImpl();
+
+        try {
+            HashMap blah = tx.loadTaxes();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DAOUnitTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @Test
+    public void loadMatData() {
+
+        MaterialsDAOFileImpl mt = new MaterialsDAOFileImpl();
+
+        try {
+            HashMap matMap = mt.loadMatCosts();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DAOUnitTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Test
+    public void writeFile() throws IOException {
+        
+
+        OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
+        ob.loadOrderFile("JUNIT_TEST-06262015");
+        
+        ob.writeOrderFile("JUNIT_TEST-06262015");
+
+    }
+
+    @Test
+    public void listOrders() throws FileNotFoundException {
+
+        OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
+        ob.listOrders("JUNIT_TEST-06262015");
+
+    }
+*/
+    @Test
+    public void testUniqueDateSet() throws FileNotFoundException{
+        OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
+        ob.loadOrderFile("JUNIT_TEST-06262015");
+        //may need orders
+        Set<String> resultSet = new HashSet<String>();
+        resultSet = ob.getUniqueDate();
+        boolean testDate = resultSet.contains("06262015");
+        Assert.assertTrue(testDate);
+        
+    
+    }
+    
+    
 }

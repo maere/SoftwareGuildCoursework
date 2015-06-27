@@ -38,11 +38,11 @@ public class OrderFactory {
         
     }
 
-    public Order createFinalOrder(String lastName, double length, double width, String flooringType, String state){
+    public Order createFinalOrder(String lastName, double length, double width, String flooringType, String state, String date){
         
         area = calculateArea(length, width);
         //we have enough to instantiate
-        Order newOrder = new Order(lastName, flooringType, state, area);  //// are we creating the order object twice in this chain?  once here and then again when we call this method in conroller?
+        Order newOrder = new Order(lastName, flooringType, state, area, date);  //// are we creating the order object twice in this chain?  once here and then again when we call this method in conroller?
 
         //need to get data from the MaterialsDAOFileImpl dataMap corresponding to the flooring type
         //double [] tempArray = new double [2];

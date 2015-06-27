@@ -5,6 +5,9 @@
  */
 package com.swcguild.flooringmasterylab;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -13,8 +16,9 @@ import java.util.Scanner;
  * @author apprentice
  */
 public class ConsoleIO {
-     private Scanner sc = new Scanner(System.in);
-    
+
+    private Scanner sc = new Scanner(System.in);
+
     public void print(String msg) {
         System.out.println(msg);
     }
@@ -24,7 +28,7 @@ public class ConsoleIO {
         System.out.println(prompt);
         return mySc.nextLine();
     }
-    
+
     public int readInt(String prompt) {
         boolean badInput;
         int result = 0;
@@ -127,28 +131,70 @@ public class ConsoleIO {
 
         return result;
     }
-    
+
     public String readYorN(String prompt) {
-        boolean done = false;
-        String answer = null;
-        while (!done) {
-            try {
-                System.out.print(prompt);
-                answer = sc.nextLine();
-                if (answer.equalsIgnoreCase("Y") || (answer.equalsIgnoreCase("N"))) {
-                    done = true;
-                    return answer;
-                } else {
-                    System.out.print("Please enter only \"y\" or \"n\": ");
-                }
-            } catch (Exception e) {
+        Scanner newSc = new Scanner(System.in);
+        boolean finished = false;
+        String answer = "";
+        while (!finished) {
+
+            System.out.print(prompt);
+            answer = newSc.nextLine();
+            if (answer.equalsIgnoreCase("Y") || (answer.equalsIgnoreCase("N"))) {
+
+                finished = true;
+                return answer;
+
+            } else {
                 System.out.print("Please enter only \"y\" or \"n\": ");
+
             }
+
         }
         return answer;
     }
-    
-   
-    
+
+    public String readDateMMddyyyy(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+
+//        final DateTimeFormatter dtf = DateTimeFormatter.BASIC_ISO_DATE;
+//        final LocalDate dt = dtf.parseLocalDate(yourinput);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddyyyy");
+        boolean over = false;
+        LocalDate date = null;
+        String answer;
+        String result;
+        while (!over) {
+
+            System.out.println(prompt);
+
+            answer = scanner.nextLine();
+            if (answer.equals("")) {
+                over = true;
+
+            } else {
+
+                try {
+
+                    date = LocalDate.parse(answer, formatter);
+                    over = true;
+                } catch (NullPointerException n) {
+                    over = true;
+                } catch (DateTimeParseException e) {
+                    over = false;
+                }
+            }
+        }
+        if (date == null) {
+            result = "";
+        } else {
+            result = date.toString();
+            String[] parts = result.split("-");
+            result = parts[1] + parts[2] + parts[0];
+
+        }
+        return result;
+    }
+
 }
- //this is a copy of Ilyas ConsoleIO. This lab was about overloading methods, apparently!
+//this is a copy of Ilyas ConsoleIO. This lab was about overloading methods, apparently!

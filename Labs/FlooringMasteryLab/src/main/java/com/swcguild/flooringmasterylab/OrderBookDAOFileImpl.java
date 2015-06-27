@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -35,65 +36,68 @@ public class OrderBookDAOFileImpl implements OrderBook {
 
     //String date;
     HashMap<Integer, Order> orderMap = new HashMap<Integer, Order>(); // this will change dynamically depending on the date and datefile
-    //ArrayList<Order> orders = new ArrayList<Order>();
+    ArrayList<Order> orders = new ArrayList<Order>();
     private String mode;
     private int globalId;
 
     //constructor
+    public OrderBookDAOFileImpl() {
+
+    }
+
     @Override
     public void loadOrderFile(String date) throws FileNotFoundException {
         String fileName = "Orders_" + date + ".txt";
 
         Scanner sc = null;
 
-        DateFormat df = new SimpleDateFormat("MMddyyyy");
-
-        Date today = Calendar.getInstance().getTime();
-
-        String dateCompare = df.format(today);
-
+//        DateFormat df = new SimpleDateFormat("MMddyyyy");
+//
+//        Date today = Calendar.getInstance().getTime();
+//
+//        String dateCompare = df.format(today);
         //try {
-            sc = new Scanner(new BufferedReader(new FileReader(fileName)));
+        sc = new Scanner(new BufferedReader(new FileReader(fileName)));
 
-            while (sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
 
-                String currentLine = sc.nextLine();
-                String[] currentToken = currentLine.split(",");
+            String currentLine = sc.nextLine();
+            String[] currentToken = currentLine.split(",");
 
-                //int orderNum = Integer.parseInt(currentToken[0]); //will get assigned when we push into the array list
-                int id = Integer.parseInt(currentToken[0]);
-                String lastName = currentToken[1];
-                String state = currentToken[2];
-                double taxRate = Double.parseDouble(currentToken[3]);
-                String flooringType = currentToken[4];
-                double area = Double.parseDouble(currentToken[5]);
-                double materialCostSqFt = Double.parseDouble(currentToken[6]);
-                double laborCostSqFt = Double.parseDouble(currentToken[7]);
-                double totalMatCost = Double.parseDouble(currentToken[8]);
-                double totalLaborCost = Double.parseDouble(currentToken[9]);
-                double taxAdded = Double.parseDouble(currentToken[10]);
-                double totalCost = Double.parseDouble(currentToken[11]);
-                
+            //int orderNum = Integer.parseInt(currentToken[0]); //will get assigned when we push into the array list
+            int id = Integer.parseInt(currentToken[0]);
+            String lastName = currentToken[1];
+            String state = currentToken[2];
+            double taxRate = Double.parseDouble(currentToken[3]);
+            String flooringType = currentToken[4];
+            double area = Double.parseDouble(currentToken[5]);
+            double materialCostSqFt = Double.parseDouble(currentToken[6]);
+            double laborCostSqFt = Double.parseDouble(currentToken[7]);
+            double totalMatCost = Double.parseDouble(currentToken[8]);
+            double totalLaborCost = Double.parseDouble(currentToken[9]);
+            double taxAdded = Double.parseDouble(currentToken[10]);
+            double totalCost = Double.parseDouble(currentToken[11]);
+            date = currentToken[12];
 
-                Order currentOrder = new Order(lastName, flooringType, state, area);
+            Order currentOrder = new Order(lastName, flooringType, state, area, date);
 
-                //currentOrder.setOrderNum(orderNum);
-                currentOrder.setId(id);
-                currentOrder.setTotalMatCost(totalMatCost);
-                currentOrder.setTotalLaborCost(totalLaborCost);
-                currentOrder.setTotalCost(totalCost);
-                currentOrder.setTaxRate(taxRate);
-                currentOrder.setTaxAdded(taxAdded);
-                currentOrder.setMaterialCostSqFt(materialCostSqFt);
-                currentOrder.setLaborCostSqFt(laborCostSqFt);
-               
+            //currentOrder.setOrderNum(orderNum);
+            currentOrder.setId(id);
+            currentOrder.setTotalMatCost(totalMatCost);
+            currentOrder.setTotalLaborCost(totalLaborCost);
+            currentOrder.setTotalCost(totalCost);
+            currentOrder.setTaxRate(taxRate);
+            currentOrder.setTaxAdded(taxAdded);
+            currentOrder.setMaterialCostSqFt(materialCostSqFt);
+            currentOrder.setLaborCostSqFt(laborCostSqFt);
+            currentOrder.setDate(date);
 
-                orderMap.put(id, currentOrder);  ///orderMap. -- need to get largest key---is this available from keyset or array list?
+            orderMap.put(id, currentOrder);  ///orderMap. -- need to get largest key---is this available from keyset or array list?
 
-            }
-            //orders.add(currentOrder);
-            sc.close();
-            System.out.println("Orders for " + date + " loaded successfully.");
+        }
+        //orders.add(currentOrder);
+        sc.close();
+        System.out.println("Orders for " + date + " loaded successfully.");
 
 //        } catch (FileNotFoundException e) {
 //            if (date.equalsIgnoreCase(dateCompare)) {
@@ -121,13 +125,11 @@ public class OrderBookDAOFileImpl implements OrderBook {
         PrintWriter out = new PrintWriter(new FileWriter(fileName));
 
         //set can only have one value of each: so
-        
            //ArrayList<Order> orderList = new ArrayList<Order>(orderMap.values());
-       
         //create a keyset of our orderbook and use that to iterate through them
         Set<Integer> keys = orderMap.keySet();
-           for (Integer k : keys){ //(int i= 0; i<orderList.size(); i++)
-                Order currentOrder = orderMap.get(k);
+        for (Integer k : keys) { //(int i= 0; i<orderList.size(); i++)
+            Order currentOrder = orderMap.get(k);
 
             out.println(currentOrder.getId() + "," //currentOrder.getOrderNum() + ","
                     + currentOrder.getLastName() + ","
@@ -140,16 +142,15 @@ public class OrderBookDAOFileImpl implements OrderBook {
                     + currentOrder.getTotalMatCost() + ","
                     + currentOrder.getTotalLaborCost() + ","
                     + currentOrder.getTaxAdded() + ","
-                    + currentOrder.getTotalCost()); // deleted order num and subbed in Id
-           
-           }
+                    + currentOrder.getTotalCost() + ","// deleted order num and subbed in Id
+                    + currentOrder.getDate());
+
+        }
         //for (Integer k : keys) {
-           
-            
-            out.flush();
+
+        out.flush();
 
         //}
-
         out.close();
 
     }
@@ -159,35 +160,43 @@ public class OrderBookDAOFileImpl implements OrderBook {
     @Override
     public ArrayList listOrders(String orderDate) throws FileNotFoundException {
         //loadOrderFile(orderDate);    
-        ArrayList<Order> orders = new ArrayList<Order>();
-        Set<Integer> keys = orderMap.keySet();
+        //ArrayList<Order> orders = new ArrayList<Order>();
+      
+          Set<Integer> keys = orderMap.keySet();
 
         for (Integer k : keys) {
             Order currentOrder = orderMap.get(k);
            orders.add(currentOrder);
 
         }
-        
+
+        return orders;
+
+//        for (Integer k : keys) {
+//            Order currentOrder = orderMap.get(k);
+//            orders.add(currentOrder);
+//
+//        }
+
         return orders;
 
     }
 
-   
     public void readConfig() throws FileNotFoundException {
         Scanner sc = new Scanner(new BufferedReader(new FileReader("config.txt")));
         mode = sc.nextLine();
         globalId = Integer.parseInt(sc.nextLine());
         sc.close();
     }
-    
-    public void saveConfig() throws IOException{
+
+    public void saveConfig() throws IOException {
         PrintWriter out = new PrintWriter(new FileWriter("config.txt"));
         out.println(mode);
         out.println(globalId);
         out.flush();
         out.close();
     }
-    
+
     @Override
     public void putOrders(Order order) throws IOException {
         //will take the gloabalId
@@ -195,12 +204,11 @@ public class OrderBookDAOFileImpl implements OrderBook {
         orderMap.put(order.id, order);
         saveConfig();
     }
-    
+
     public void putEditedOrder(Order order) throws IOException {
-    
+
         orderMap.put(order.id, order);
-        
-    
+
     }
 
     @Override
@@ -211,10 +219,48 @@ public class OrderBookDAOFileImpl implements OrderBook {
     }
 
     @Override
-    public void removeOrder(int id) { 
+    public void removeOrder(int id) {
         orderMap.remove(id);
-    //orderNum
+        //orderNum
     }
+
+//method from the DAO to getUniqueDate
+    @Override
+    public Set<String> getUniqueDate() {
+        Set<String> currentDates = new HashSet<String>();
+        Set<Integer> keys = orderMap.keySet();
+
+        for (Integer k : keys) {
+            Order currentOrder = orderMap.get(k);
+            currentDates.add(currentOrder.getDate());//orders.add(currentOrder);
+        }
+        //for (Order o: orderMap){
+        //   String currentDate = o.getDate();
+        //}
+        return currentDates;
+    }
+
+    //method from the DAO to get a list of Orders by a Date
+
+    public List<Order> getOrdersByDate(String date) {
+        return null;
+     
+    }
+    
+    public void saveOrders(){
+     Set<String> dates = this.getUniqueDate();
+        for (String uniqueDate: dates)
+        {
+        List<Order> orders = this.getOrdersByDate(uniqueDate);
+        String file = ("Orders_"+uniqueDate+".txt");
+        for (Order order: orders){
+            //save out to file
+            //flush();
+        }
+            //close();
+        }
+    }
+
 }
 
 

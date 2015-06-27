@@ -23,6 +23,7 @@ public class Order {
     double taxAdded;
     double totalCost;
     private String orderNotes;
+    private String date;
     
     int id;
     //static int counter = 0; //we want this to be available to the DAO class
@@ -32,12 +33,17 @@ public class Order {
                               }
                               */
     //constructor
-    public Order (String lastName, String flooringType, String state, double area){
+    public Order (String lastName, String flooringType, String state, double area, String date){
     this.lastName = lastName;
     this.flooringType = flooringType;
     this.state = state;
     this.area = area;
+    this.date = date;
     //this.id = ++counter;
+    }
+
+    Order() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
                             /*
                                 public int getOrderNum() {
@@ -147,6 +153,14 @@ public class Order {
 
     public void setOrderNotes(String orderNotes) {
         this.orderNotes = orderNotes;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 

@@ -16,12 +16,12 @@ import java.util.Scanner;
  *
  * @author apprentice
  */
-public class MaterialsDAOFileImpl implements Materials{
+public class MaterialsDAOFileImpl implements Materials {
 
     final String PRODUCT_FILE = "Products.txt";
     //whenever we make our fields, we make them private and then we will know if we didn't put in the getters and setters we needed
-    
-    private Map<String, double[]> materialsMap = new HashMap<String, double[]>(); //we need to restate what our Types are in the second half as well...
+
+    private HashMap<String, double[]> materialsMap = new HashMap<String, double[]>(); //we need to restate what our Types are in the second half as well...
     //esp going from Map to HashMap or List to ArrayLIst (these are interfaceds)
     //if we dont do this, it will just assume this is a random object, and make type object/object
 
@@ -32,17 +32,15 @@ public class MaterialsDAOFileImpl implements Materials{
         //sqFtCosts[1] = 0;
     }
 
-    
     @Override
-    public void loadMatCosts() throws FileNotFoundException {
+    public HashMap loadMatCosts() throws FileNotFoundException {
         double[] sqFtCosts = new double[2];
         Scanner sc = new Scanner(new BufferedReader(new FileReader(PRODUCT_FILE)));
 
         while (sc.hasNextLine()) {
-           String currentLine = sc.nextLine();
-           String [] currentTokens = currentLine.split(",");
-            
-            
+            String currentLine = sc.nextLine();
+            String[] currentTokens = currentLine.split(",");
+
             String currMat = currentTokens[0];
             Double matCostSqFt = Double.parseDouble(currentTokens[1]);
             Double laborCostSqFt = Double.parseDouble(currentTokens[2]);
@@ -53,7 +51,7 @@ public class MaterialsDAOFileImpl implements Materials{
             materialsMap.put(currMat, sqFtCosts);
 
         }
-
+        return materialsMap;
     }
 
     @Override

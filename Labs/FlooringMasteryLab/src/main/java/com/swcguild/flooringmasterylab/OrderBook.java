@@ -8,6 +8,8 @@ package com.swcguild.flooringmasterylab;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -26,6 +28,9 @@ public interface OrderBook {
     public Order getOrder(int orderNum);
     
     public void removeOrder(int orderNum);
+    
+    public Set<String> getUniqueDate();
+    public List<Order> getOrdersByDate();
     
 
 }

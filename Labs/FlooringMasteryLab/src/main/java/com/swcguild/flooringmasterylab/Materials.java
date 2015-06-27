@@ -6,6 +6,7 @@
 package com.swcguild.flooringmasterylab;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.io.FileNotFoundException;
  */
 public interface Materials {
     
-    public void loadMatCosts()throws FileNotFoundException;
+    public HashMap loadMatCosts()throws FileNotFoundException;
     
     public double[] getMaterial(String key);
     

@@ -46,7 +46,7 @@ public class OrderController {
 
     OrderBookDAOFileImpl testBook = new OrderBookDAOFileImpl(); //if it gets cranky will pull this
 
-    ArrayList<Order> orders;  //orders should be a List, when you instantiate it you set it as ArrayList
+    //ArrayList<Order> orders;  //orders should be a List, when you instantiate it you set it as ArrayList
     private String mode;
     private int globalId;
 
@@ -149,8 +149,13 @@ public class OrderController {
         Date today = Calendar.getInstance().getTime(); //system date
         String systemDate = df.format(today);
 
-        date = io.readString("Please enter the date as: MMDDYYYY.\nHit 'enter' to use system date " + systemDate + " ."); //if date is null use system date
+        //date = io.readString("Please enter the date as: MMDDYYYY.\nHit 'enter' to use system date " + systemDate + " ."); //if date is null use system date
 
+        date = io.readDateMMddyyyy("Please enter the date as: MMDDYYYY.\nHit 'enter' to use system date " + systemDate + " .");
+        
+        
+        
+        
         //moved workaround to unusedcode file
         //date = io.readString("Please enter the date as: MMDDYYYY");
         date = (date.isEmpty()) ? systemDate : date;
@@ -223,7 +228,7 @@ public class OrderController {
         //   id = previousId+1;
         //}
         //need to instantiate business object and call methods from our business logic 
-        Order myOrder = calcGenerator.createFinalOrder(lastName, length, width, flooringType, state); //this is to assign the value of the returned object
+        Order myOrder = calcGenerator.createFinalOrder(lastName, length, width, flooringType, state, this.date); //this is to assign the value of the returned object
 
         //myOrder.setId(id);
         //write to memory - hashmap
@@ -236,25 +241,33 @@ public class OrderController {
     }
 
     public void displayOrders() throws FileNotFoundException {
-        int dateInt = io.readInt("Please enter the date as: MMDDYYYY", 1012013, 12312015);
+        String date = io.readDateMMddyyyy("Please enter the date as: MMDDYYYY");
 
-//        String month = String.format("%02d", io.readInt("Please enter the month [1-12]:", 1, 12));
-//        String day = String.format("%02d", io.readInt("Please enter the day as [1-31]:", 1, 31));
-//        String year = String.format("%04d", io.readInt("Please enter the year as [2000-2015]:", 2000, 2015));
-//
-//        String date = month + day + year;
-        String date = String.format("%08d", dateInt);
+
         //orders = testBook.loadOrderFile(date);
         try {
 
             testBook.loadOrderFile(date);
 
-            ArrayList<Order> orders = testBook.listOrders(date);
+            //We're going to load hashmap
+            //ArrayList<Order> orders = testBook.listOrders(date);
+            testBook.listOrders(date);
+            
+            //ArrayList<Order> orders = testBook.orders;
+            
+            //call a method from the DAO to getUniqueDate
+            Set<String> hashDates= testBook.getUniqueDate();
+           
+            for(String uniqueDate: hashDates){
+            //call a method from the DAO to get a list of Orders by Date
+                
+            }
+            
             for (Order o : orders) {
 
                 //this needs to iterate
                 System.out.println("====================");
-                System.out.println("Order #: " + o.getId()//.getOrderNum()
+                System.out.println("Date: "+o.getDate()+"\nOrder #: " + o.getId()//.getOrderNum()
                         + "\nName: " + o.getLastName()
                         + "\nFlooring Type: " + o.getFlooringType() + "\nSquare Footage: " + o.getArea()
                         + "\nTotal Cost: $" + o.getTotalCost());
