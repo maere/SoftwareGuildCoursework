@@ -1,2 +1,3 @@
-0::Apple::Adrian::123 Apple St::Appleton::null::99999
-2::Main::Method::123 Elms st::Akron::OH::12345
+1::George::Hartrisosn::3 Elm St.::Akron::OH::4456
+2::Harrfty::harvey::123::Akrno::OH::23627
+3::Cat::Carson::678 Oak st::Akron::OH::34526

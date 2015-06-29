@@ -12,153 +12,133 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
  * @author apprentice -- DAO
  */
 public class AddressBook {
-    
+
     //fields (class level variables)
     //to store our addresses
     public static final String ADDRESSES_FILE = "addresses.txt";
     public static final String DELIMITER = "::";
-    
-    int idNumber;
+
+    static int idNumber;
     Address addressObject;
-    
-      //constructor
+
+    //constructor
     HashMap<Integer, Address> addressMap = new HashMap<>();
-    
+
     //this is only use to create a unique ID, NOT to keep track of records
     //static int counter; //is all one of these fields for all address books we may want to make
     //ArrayList<String> stringList = new ArrayList<>(); 
-    
     //we need to use the HashMap to count records, to figure out where to inserrt the 
     //next record or where to pull the from
-   
-   
     //read and write data methods
-    public void loadAddresses()throws FileNotFoundException {
-       Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
-       
-       String currentLine;
-       String[]currentTokens;
-       
-       while(sc.hasNextLine()){
-           currentLine = sc.nextLine();  
-           currentTokens = currentLine.split(DELIMITER); //why not "::"?
-           
-           Address currentAddress  = new Address(); //we have to parseInt bc evertying out of a file reader is a string
-           currentAddress.setIdNumber(Integer.parseInt(currentTokens[0]));
-           currentAddress.setFirstName(currentTokens[1]);
-           currentAddress.setLastName(currentTokens[2]);
-           currentAddress.setStreet(currentTokens[3]);
-           currentAddress.setCity(currentTokens[4]);
-           currentAddress.setState(currentTokens[5]);
-           currentAddress.setZipCode(Integer.parseInt(currentTokens[6]));
-           
-           addressMap.put(currentAddress.getIdNumber(), currentAddress);
-           
-       }
-       //close
-       sc.close();
+    public void loadAddresses() throws FileNotFoundException {
+        Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
+        Integer highestId = 0; //always need to initialize!!
+        String currentLine;
+        String[] currentTokens;
+
+        while (sc.hasNextLine()) {
+            currentLine = sc.nextLine();
+            currentTokens = currentLine.split(DELIMITER); //why not "::"?
+
+            Address currentAddress = new Address(); //we have to parseInt bc evertying out of a file reader is a string
+            currentAddress.setIdNumber(Integer.parseInt(currentTokens[0]));
+            currentAddress.setFirstName(currentTokens[1]);
+            currentAddress.setLastName(currentTokens[2]);
+            currentAddress.setStreet(currentTokens[3]);
+            currentAddress.setCity(currentTokens[4]);
+            currentAddress.setState(currentTokens[5]);
+            currentAddress.setZipCode(Integer.parseInt(currentTokens[6]));
+            
+            
+            if (currentAddress.getIdNumber()>highestId){
+                highestId= currentAddress.getIdNumber();
+            }
+            addressMap.put(currentAddress.getIdNumber(), currentAddress);
+        }
+        //setting id for next item 
+        idNumber = highestId++;
+        
+        sc.close();
     }
-    
-    
-     public void writeToAddresses() throws IOException {
-     PrintWriter out = new PrintWriter(new FileWriter(ADDRESSES_FILE));
-     
-     //this is the ArrayList we get from all the objects we just pulled from our hash
-     ArrayList<Address> addressKeys = this.getAllAddresses();
-     //do we need to use the keyArray instead?  
-                
-        for(Address currentAddress: addressKeys)//this is a bunch of objects (the values)
+
+    public void writeToAddresses() throws IOException {
+        PrintWriter out = new PrintWriter(new FileWriter(ADDRESSES_FILE));
+
+        //this is the ArrayList we get from all the objects we just pulled from our hash
+        ArrayList<Address> addressKeys = this.getAllAddresses();
+        //do we need to use the keyArray instead?  
+
+        for (Address currentAddress : addressKeys)//this is a bunch of objects (the values)
         {
 
             //String strI = Integer.toString(i);
             String strId = Integer.toString(currentAddress.getIdNumber());
-           
-            out.println(strId + DELIMITER + 
-                    currentAddress.getFirstName()+ DELIMITER +
-                    currentAddress.getLastName()+ DELIMITER + 
-                    currentAddress.getStreet()+ DELIMITER + 
-                    currentAddress.getCity() + DELIMITER +
-                    currentAddress.getState() + DELIMITER +
-                    currentAddress.getZipCode());
+
+            out.println(strId + DELIMITER
+                    + currentAddress.getFirstName() + DELIMITER
+                    + currentAddress.getLastName() + DELIMITER
+                    + currentAddress.getStreet() + DELIMITER
+                    + currentAddress.getCity() + DELIMITER
+                    + currentAddress.getState() + DELIMITER
+                    + currentAddress.getZipCode());
             //flush before you leave the loop
             out.flush();
         }
-    //and close
+        //and close
         out.close();
-        
-     }
-     
+
+    }
+
     //getters and setters
-    public Address getAddress(int idNumber){
-         return addressMap.get(idNumber);
+    public Address getAddress(int idNumber) {
+        return addressMap.get(idNumber);
     }
     //methods
-    
-    public void addAddressToBook(Address addressObject) throws IOException{
-      //idNumber = addressMap.size()+1;
-      //idNumber++;
-      //idNumber= counter;
+
+    //adds to HASH
+    public void addAddressToBook(Address addressObject) throws IOException {
+    idNumber++;
+    addressObject.setIdNumber(idNumber);
         
-//FIX: for counter
-       Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
-       
-       String currentLine;
-       String[]currentTokens;
-       Boolean notLast;
-       
-       while(sc.hasNextLine()){
-           currentLine = sc.nextLine(); 
-            if (sc.hasNextLine()){
-                    notLast=true;
-            }
-            else{
-                notLast=false;
-                return currentString;
-                }
-           
-           currentTokens = currentLine.split(DELIMITER); //why not "::"?
-      
-               
-           
-      addressMap.put(idNumber, addressObject);
+    addressMap.put (idNumber, addressObject);
     //now id/Object is in the HashMap, but has not yet been written to the file
-      //addressObject.setIdNumber(idNumber);
-      
-    }
-    
-    public void removeAddress(int idNumber) {
+    //addressObject.setIdNumber(idNumber);
+
+}
+
+public void removeAddress(int idNumber) {
         addressMap.remove(idNumber); ///.remove(idNumber, addressObject);
         //return addressObject;
-  
+
     }
-    
-    
+
     //get address from the hash
-    
     //get all addresses from hash
     ArrayList<Address> getAllAddresses() {
-        
+
         Set<Integer> keys = addressMap.keySet();
-                 
+
         ArrayList addressArray = new ArrayList<>();
-        
-        for(Integer k: keys){
+
+        for (Integer k : keys) {
             //k.toString();  -- this just converts the uniqueID to a string
             addressArray.add(addressMap.get(k));
         }
-        
+
         return addressArray;  //this is a object array of all the addresses   
     }
 
-    
-    
-}
+    }

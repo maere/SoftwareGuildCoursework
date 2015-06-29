@@ -19,7 +19,7 @@ public class Address {
     private int zipCode;
     private int idNumber;
     
-    static int instanceCounter = 0; //so this willl get reset to 0 every time this application runs
+    //static int instanceCounter = 0; //so this willl get reset to 0 every time this application runs
     //the only way to make it persist is to put it in the data file
     //when we add to data store, we look at the last id number and add 1, and then set variable to +1
 
@@ -28,7 +28,7 @@ public class Address {
     
     public Address(){
         //this.idNumber = idNumber;
-        this.idNumber = instanceCounter++;
+        //this.idNumber = instanceCounter++;
         
         
         //this.firstName = firstName;

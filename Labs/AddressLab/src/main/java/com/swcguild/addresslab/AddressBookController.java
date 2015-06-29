@@ -27,7 +27,7 @@ public class AddressBookController {
         boolean keepGoing = true;
         int choice = 0;
 
-        myAddressBook.loadAddresses();
+        myAddressBook.loadAddresses(); //commented out becuase now we will call load addresses yeachg 
 
         while (keepGoing) {
             mainMenu();

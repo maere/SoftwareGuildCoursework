@@ -25,15 +25,16 @@ public class HighScore_129 {
         
         System.out.println("Please enter your score: ");
         int userScore = scan.nextInt();
+        String strScore = Integer.toString(userScore);
         
         System.out.println("Please enter your name: ");
         String name = scan.next();
         
         PrintWriter fileWriter = new PrintWriter(new FileWriter("score.txt"));
         
-        fileWriter.println(name + " scored a high score of ");
-        String strScore = Integer.toString(userScore);
-        fileWriter.println(strScore); //String.valueOf(userScore)
+        fileWriter.println(name + " scored a high score of " + strScore);
+       
+        //fileWriter.println(strScore); //String.valueOf(userScore)
         fileWriter.println("");
         fileWriter.flush();
         
