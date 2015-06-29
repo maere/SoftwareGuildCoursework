@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.flooringmasterylab;
+package com.swcguild.flooringmasterylab.dto;
 
 /**
  *
@@ -25,7 +25,7 @@ public class Order {
     private String orderNotes;
     private String date;
     
-    int id;
+    public int id;
     //static int counter = 0; //we want this to be available to the DAO class
                             /*
                               public void setOrderNum(int orderNum) {

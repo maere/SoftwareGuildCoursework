@@ -6,6 +6,11 @@
 package com.swcguild.flooringmasterylab;
 
 //import static com.swcguild.flooringmasterylab.Order.counter;
+import com.swcguild.flooringmasterylab.dto.Order;
+import com.swcguild.flooringmasterylab.operations.OrderFactory;
+import com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl;
+import com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl;
+import com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -140,7 +145,7 @@ public class OrderController {
         testBook = new OrderBookDAOFileImpl(); //if it gets cranky will pull this
 
         //read config file
-        testBook.readConfig();
+        mode = testBook.readConfig();
 
         //hand these items to the DAO
         String fileName; //will create filename
@@ -413,7 +418,13 @@ public class OrderController {
         //for (Order i : orderList) {
         //testBook.putOrders(i);
         //}
+        if (mode.equalsIgnoreCase("p")){
+        
         testBook.saveOrdersByDate();
+        } else {
+        io.print("You are in TEST mode, changes will not be saved to disk.");
+        
+        }
         //testBook.writeOrderFile();
         //testBook.orderMap.clear();--no need to clear the map when we save--will retain our hashmap
     }

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.flooringmasterylab;
+package com.swcguild.flooringmasterylab.dao;
 
+import com.swcguild.flooringmasterylab.dto.Order;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -222,11 +223,13 @@ public class OrderBookDAOFileImpl implements OrderBook {
 
     }
 
-    public void readConfig() throws FileNotFoundException {
+    public String readConfig() throws FileNotFoundException {
         Scanner sc = new Scanner(new BufferedReader(new FileReader("config.txt")));
         mode = sc.nextLine();
         globalId = Integer.parseInt(sc.nextLine());
         sc.close();
+        
+        return mode;
     }
 
     public void saveConfig() throws IOException {

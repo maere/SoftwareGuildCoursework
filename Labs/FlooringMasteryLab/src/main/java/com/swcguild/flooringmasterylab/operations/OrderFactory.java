@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.flooringmasterylab;
+package com.swcguild.flooringmasterylab.operations;
 
 //import static com.swcguild.flooringmasterylab.Order.counter;
+import com.swcguild.flooringmasterylab.dto.Order;
+import com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl;
+import com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.logging.Level;

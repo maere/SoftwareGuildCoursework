@@ -5,8 +5,13 @@
  */
 package com.swcguild.flooringmasterylab;
 
+import com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl;
+import com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl;
+import com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl;
+import com.swcguild.flooringmasterylab.dto.Order;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,11 +51,14 @@ public class DAOUnitTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    /*
+    
     @Test
     public void loadData() throws FileNotFoundException {
         OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
-        ob.loadOrderFile("JUNIT_TEST-06262015");
+        ob.loadOrderFile("01011900");
+        
+        
+        
     }
 
     @Test
@@ -82,30 +90,39 @@ public class DAOUnitTest {
     @Test
     public void writeFile() throws IOException {
         
-
-        OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
-        ob.loadOrderFile("JUNIT_TEST-06262015");
         
-        ob.writeOrderFile("JUNIT_TEST-06262015");
+        OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
+        ob.loadOrderFile("01011900");
+        Order testOrder = ob.getOrder(1);
+        testOrder.setLastName("Thisworks");
+        
+        ob.saveOrdersByDate();
+        ob.loadOrderFile("01011900");
+        String result = testOrder.getLastName();
+        
+        Assert.assertEquals("Thisworks", result);
+        
 
     }
 
     @Test
-    public void getOrdersByDate() throws FileNotFoundException {
+    public void testGetOrdersByDate() throws FileNotFoundException {
 
         OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
-        ob.getOrdersByDate("JUNIT_TEST-06262015");
-
+        ob.loadOrderFile("01011900");
+        ArrayList<Order> testOrders = ob.getOrdersByDate("01011900");
+        int arraySize = testOrders.size();
+        Assert.assertEquals(1, arraySize);
     }
-*/
+
     @Test
     public void testUniqueDateSet() throws FileNotFoundException{
         OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
-        ob.loadOrderFile("JUNIT_TEST-06262015");
+        ob.loadOrderFile("01011900");
         //may need orders
         Set<String> resultSet = new HashSet<String>();
         resultSet = ob.getUniqueDate();
-        boolean testDate = resultSet.contains("06262015");
+        boolean testDate = resultSet.contains("01011900");
         Assert.assertTrue(testDate);
         
     
