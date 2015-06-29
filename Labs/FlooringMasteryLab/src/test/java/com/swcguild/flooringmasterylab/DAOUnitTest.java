@@ -91,10 +91,10 @@ public class DAOUnitTest {
     }
 
     @Test
-    public void listOrders() throws FileNotFoundException {
+    public void getOrdersByDate() throws FileNotFoundException {
 
         OrderBookDAOFileImpl ob = new OrderBookDAOFileImpl();
-        ob.listOrders("JUNIT_TEST-06262015");
+        ob.getOrdersByDate("JUNIT_TEST-06262015");
 
     }
 */

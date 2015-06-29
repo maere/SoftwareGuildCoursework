@@ -46,7 +46,7 @@ public class OrderController {
 
     OrderBookDAOFileImpl testBook = new OrderBookDAOFileImpl(); //if it gets cranky will pull this
 
-    //ArrayList<Order> orders;  //orders should be a List, when you instantiate it you set it as ArrayList
+    //ArrayList<Order> ordersByDate;  //orders should be a List, when you instantiate it you set it as ArrayList
     private String mode;
     private int globalId;
 
@@ -194,8 +194,8 @@ public class OrderController {
         //String date = io.readString("Please enter the date as: MMDDYYYY"); //try catch exception?
 
         //testBook.loadOrderFile(date); //can't run this without loading file from memory first -- breaking point
-        //set next Id for object creation equal to +1 of the length of the list of orders
-        //        Order lastOrder = orders.get(orders.size() - 1);
+        //set next Id for object creation equal to +1 of the length of the list of ordersByDate
+        //        Order lastOrder = ordersByDate.get(ordersByDate.size() - 1);
         //        int tempId = lastOrder.getOrderNum();
         //        int newId = tempId + 1;
         String lastName = io.readString("Enter customer's last name: ");
@@ -222,8 +222,8 @@ public class OrderController {
 
         //call method that we write elsewhere to load data, check last item id, increment #, and clear hash -- session id data hashmap
         //int id = testBook.loadSessionIds(date); //the id passed from sessions hash from reading data file
-        //int lastIndex = testBook.orders.lastIndexOf(orders);
-        //int previousId = orders.get(lastIndex).getId(); //id pulled from last item recorded to hash
+        //int lastIndex = testBook.ordersByDate.lastIndexOf(ordersByDate);
+        //int previousId = ordersByDate.get(lastIndex).getId(); //id pulled from last item recorded to hash
         //if (id<=previousId){
         //   id = previousId+1;
         //}
@@ -241,8 +241,9 @@ public class OrderController {
     }
 
     public void displayOrders() throws FileNotFoundException {
+        //testBook.orders.clear();
         String date = io.readDateMMddyyyy("Please enter the date as: MMDDYYYY");
-
+        
 
         //orders = testBook.loadOrderFile(date);
         try {
@@ -250,20 +251,20 @@ public class OrderController {
             testBook.loadOrderFile(date);
 
             //We're going to load hashmap
-            //ArrayList<Order> orders = testBook.listOrders(date);
-            testBook.listOrders(date);
+            //ArrayList<Order> ordersByDate = testBook.getOrdersByDate(date);
+            ArrayList<Order> ordersByDate = testBook.getOrdersByDate(date);
             
-            //ArrayList<Order> orders = testBook.orders;
+            //ArrayList<Order> ordersByDate = testBook.ordersByDate;
             
             //call a method from the DAO to getUniqueDate
-            Set<String> hashDates= testBook.getUniqueDate();
-           
-            for(String uniqueDate: hashDates){
-            //call a method from the DAO to get a list of Orders by Date
-                
-            }
+//            Set<String> hashDates= testBook.getUniqueDate();
+//           
+//            for(String uniqueDate: hashDates){
+//            //call a method from the DAO to get a list of Orders by Date
+//                
+//            }
             
-            for (Order o : orders) {
+            for (Order o : ordersByDate) {
 
                 //this needs to iterate
                 System.out.println("====================");
@@ -279,16 +280,17 @@ public class OrderController {
             System.out.println("No file found");
         }
 
-        //orders = testBook.listOrders(date);
+        //orders = testBook.getOrdersByDate(date);
         //take values in HashMap and push to ArrayList
         //orders.
-//        for (int i = 0; i < orders.size(); i++) {
+//        for (int i = 0; i < ordersByDate.size(); i++) {
 //            io.print("====================");
-//            System.out.println("Order #: " + orders.get(i).getOrderNum()
-//                    + "\nName: " + orders.get(i).getLastName()
-//                    + "\nFlooring Type: " + orders.get(i).getFlooringType() + "\nSquare Footage: " + orders.get(i).getArea());
+//            System.out.println("Order #: " + ordersByDate.get(i).getOrderNum()
+//                    + "\nName: " + ordersByDate.get(i).getLastName()
+//                    + "\nFlooring Type: " + ordersByDate.get(i).getFlooringType() + "\nSquare Footage: " + ordersByDate.get(i).getArea());
 //            io.print("");
 //        }
+        
     }
 
     public void editOrder() throws FileNotFoundException, IOException {
@@ -305,7 +307,7 @@ public class OrderController {
 //        //load text file from memory
 //        testBook.loadOrderFile(orderDate);       
 
-        //display orders
+        //display ordersByDate
         displayOrders();
 
         //enter order id of order you want to edit
@@ -363,11 +365,12 @@ public class OrderController {
         Order editedOrder = calcGenerator.createEditedOrder(currentOrder);
         testBook.putEditedOrder(editedOrder);
 
-        io.print("Order successfully edited.");
-        io.print("Name: " + testBook.getOrder(orderId).getLastName());
-        io.print("Area: " + testBook.getOrder(orderId).getArea());
-        io.print("Flooring Type:" + testBook.getOrder(orderId).getFlooringType());
-        io.print("Total Cost: $" + testBook.getOrder(orderId).getTotalCost());
+        io.print("Updated order appears below, to save changes select option 5 from Main Menu");
+        io.print("Name: " + editedOrder.getLastName());
+        io.print("Area: " + editedOrder.getArea());
+        io.print("Flooring Type:" + editedOrder.getFlooringType());
+        io.print("Total Cost: $" + editedOrder.getTotalCost());
+        
 
     }
 
@@ -388,6 +391,7 @@ public class OrderController {
         if(confirm.equals("y"))
         {
          testBook.removeOrder(tempId);
+         
          io.print("Order deleted, but you must selected option 5 from the  main menu to save these changes.");
         }
         else{
@@ -404,18 +408,18 @@ public class OrderController {
         //ArrayList<Order> dailyOrders =  testBook.orderMap.values();
         //testBook.loadOrderFile(date);
 
-        ArrayList<Order> orderList = new ArrayList<Order>(testBook.orderMap.values());  //Collection<Order> keys = testBook.orderMap.values();
+//        ArrayList<Order> orderList = new ArrayList<Order>(testBook.orderMap.values());  //Collection<Order> keys = testBook.orderMap.values();
 
         //for (Order i : orderList) {
         //testBook.putOrders(i);
         //}
-        testBook.writeOrderFile(date);
+        testBook.saveOrdersByDate();
         //testBook.writeOrderFile();
         //testBook.orderMap.clear();--no need to clear the map when we save--will retain our hashmap
     }
 
     public void quit() throws IOException {
-        saveWork(date);
+        //saveWork(date);
         io.print("Goodbye.");
 
     }

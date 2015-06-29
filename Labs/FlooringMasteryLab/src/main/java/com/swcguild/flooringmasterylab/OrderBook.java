@@ -21,7 +21,7 @@ public interface OrderBook {
     
     public void writeOrderFile(String date) throws IOException;
     
-    public ArrayList listOrders(String orderDate) throws FileNotFoundException;
+    public ArrayList getOrdersByDate(String orderDate) throws FileNotFoundException;
     
     public void putOrders(Order order) throws IOException;
     
@@ -30,7 +30,8 @@ public interface OrderBook {
     public void removeOrder(int orderNum);
     
     public Set<String> getUniqueDate();
-    public List<Order> getOrdersByDate();
+    
+
     
 
 }
