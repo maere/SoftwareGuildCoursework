@@ -154,6 +154,26 @@ public class ConsoleIO {
         return answer;
     }
 
+    public String readStateOHMIPAIN(String prompt) {
+        Scanner stateSc = new Scanner(System.in);
+        String answer = "";
+        boolean fin = false;
+
+        while (!fin) {
+            answer = sc.nextLine();
+            if ((answer.equalsIgnoreCase("OH")) || (answer.equalsIgnoreCase("MI")) || (answer.equalsIgnoreCase("PA")) || (answer.equalsIgnoreCase("IN"))) {
+
+                fin = true;
+            } else {
+                System.out.println(prompt);
+                fin = false;
+
+            }
+        }
+        return answer;
+
+    }
+
     public String readDateMMddyyyy(String prompt) {
         Scanner scanner = new Scanner(System.in);
 

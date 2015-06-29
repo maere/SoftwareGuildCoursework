@@ -204,7 +204,7 @@ public class OrderController {
         //        int tempId = lastOrder.getOrderNum();
         //        int newId = tempId + 1;
         String lastName = io.readString("Enter customer's last name: ");
-        String state = io.readString("Please enter the state in this format (XX)");
+        String state = io.readStateOHMIPAIN("Please enter the state in this format (OH/MI/PA/IN):");
         int userFloorPref = io.readInt("Select your flooring type:\n1. Wood\n2. Carpet \n3. Laminate \n4. Tile \n", 1, 4);
         switch (userFloorPref) {
             case 1:

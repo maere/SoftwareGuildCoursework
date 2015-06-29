@@ -57,12 +57,17 @@ public class OrderBookDAOFileImpl implements OrderBook {
 //        Date today = Calendar.getInstance().getTime();
 //
 //        String dateCompare = df.format(today);
-        //try {
+        try {
         sc = new Scanner(new BufferedReader(new FileReader(fileName)));
 
+        
+        
         while (sc.hasNextLine()) {
 
+            
             String currentLine = sc.nextLine();
+            
+            
             String[] currentToken = currentLine.split(",");
 
             //int orderNum = Integer.parseInt(currentToken[0]); //will get assigned when we push into the array list
@@ -100,12 +105,10 @@ public class OrderBookDAOFileImpl implements OrderBook {
         sc.close();
         System.out.println("Orders for " + date + " loaded successfully.");
 
-//        } catch (FileNotFoundException e) {
-//            if (date.equalsIgnoreCase(dateCompare)) {
-//                System.out.println("");
-//            } else {
-//                System.out.println("\n** No orders found for " + date+" **");
-//            }
+        } catch (FileNotFoundException e) {
+           
+               System.out.println("\n** No orders found for " + date+" **");
+        }
 //                
 //            
 //        }
@@ -158,7 +161,7 @@ public class OrderBookDAOFileImpl implements OrderBook {
     public void saveOrdersByDate() throws FileNotFoundException, IOException {
         //HashMap<String, ArrayList<Order>> allClientOrders = new HashMap<>();
         
-        Set<String> dates = this.getUniqueDate(); //?should this be orderMap.getUniqueDate?
+        Set<String> dates = getUniqueDate(); //?should this be orderMap.getUniqueDate?
         for (String uniqueDate : dates) {
             ArrayList<Order> orders = getOrdersByDate(uniqueDate);
             
