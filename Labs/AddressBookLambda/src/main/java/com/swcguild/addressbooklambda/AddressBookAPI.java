@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -32,12 +34,20 @@ public interface AddressBookAPI {
     public void addAddressToBook(Address addressObject) throws IOException;
 
     //removes from Hash
-    public void removeAddress(int idNumber);
+    public void removeAddress(int idNumber) throws FileNotFoundException;
 
     //get all addresses from hash
     ArrayList<Address> getAllAddresses();
     
     public void writeToAddresses() throws IOException;
+    
+    public List<Address> citySearch(String city);
+    
+    public List<Address> zipSearch(int zipCode);
+    
+    public Map<String, List<Address>> stateSearch(String state);
+    
+    public List<Address> nameSearch(String lastName);
 
     
     

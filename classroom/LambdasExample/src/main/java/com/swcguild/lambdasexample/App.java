@@ -23,7 +23,7 @@ public class App {
                                         //it will instantiate without a reference of type...so as long as we are using 
                                         //a server object we are okay, but if we don't do that we are screwed and will do wierd stuff
    
-    //now we are making a bunch of servers to add to our ArrayList
+//now we are making a bunch of servers to add to our ArrayList
         Server one = new Server(); //we could have called this "server" instaed of one
         one.setName("web01");
         one.setIp("192.168.1.1");
@@ -76,25 +76,25 @@ public class App {
         servers.add(one);
         
         
-        //now we will print out names of all the Dell servers in our collection
+//now we will print out names of all the Dell servers in our collection
         String make = "Dell";       // we declare the make within the scope of our MAIN  method...means we can use it inside the lambda
         System.out.println("All " + make  + " servers in inventory: " );
         
 //IN ORDER TO USE LAMBDAS: need to make sure POM.xml file specifies version 1.8 -- not 1.7!!
         
-        //now we will turn our servers into a stream-- this method turns the collection into a stream ( steram is  a java object)
+//now we will turn our servers into a stream-- this method turns the collection into a stream (a stream is a java object)
                         
         servers.stream() //we don't need to put a dot here, after stream-- we can put it on the next line and the compiler will be able to read it
                 .filter((Server s) -> { //s or (Server s)   -> s.getMake or {} around this, but will have to return so it's verbose 
                         return s.getMake().equalsIgnoreCase(make); //if we want to return EVERY server...just say return true;
-                        }) //this statement returns true/falase (make does)
+                        }) //this statement returns true/false (will return the object if it passes the test and equals make)
                         // s is something we define, it's standing for server
                 .forEach(e-> System.out.println(e.getName()));
         
-        //we are passing in a paramter that is our DTO from teh collection,a nd the return is true or false
+        //we are passing in a paramter that is our DTO from the collection, and the return is true or false
         //if this filter returns true, it will pass that object in as part of the filtered collection
         
-  //2nd example - set a test -- here is age, and return only servers that pass this test -- since is a # we need <, ==, >
+//2nd example - set a test -- here is age, and return only servers that pass this test -- since is an int we need <, ==, >
         
         long testAge = 4;
         System.out.println("All servers older than " + testAge + "years in age in inventory: ");
@@ -103,8 +103,8 @@ public class App {
                 .forEach(e-> System.out.println(e.getName()));
         
         
- //3rd example - collect method
-            //lets create a List of our old servers called servers...
+//3rd example - collect method
+        //let's create a List of our old servers called servers...
         
         List<Server> oldServers = servers
                 .stream().filter(s ->s.getServerAge()> testAge)
@@ -117,7 +117,7 @@ public class App {
 //4th example - another aggregator--maptoLong
         double averageAge = servers.stream()      //not mapping the method to a long, but the stream to a long... a stream of server objects 
                 .mapToLong(Server::getServerAge) //every server that comes into MapToLong is going to get server age for that server and return that
-                                //double colon just says we are calling a method from WITHIN that Type--uinuqe to lambdas
+                                                 //double colon just says we are calling a method from WITHIN that Type--is unique to lambdas
                 
                 //we could paramaterize maptoLong by returning 
                 //.mapToLong(s-> s.getServerAge()) //this is the same as above, but clearer--the above is shorthand
@@ -126,9 +126,9 @@ public class App {
         
         System.out.println("Average of our servers is: " + averageAge + " years.");
         
-        //terminals are calls to .forEach, .collect, or 
-        //you can only call a lamdba  on things that are prefined...like a predicate, and a few other things....
-            //filters take the form of a predicate...Predicate is an interface (Type) that is specifically used for Lambdas
+        //"terminals" are the calls to .forEach, .collect, etc. -- I guess they "terminate" the job
+        //you can only call a lamdba  on things that are predefined...like a predicate, and a few other things....
+        //filters take the form of a predicate...Predicate is actually an interface (Type) that is specifically used for Lambdas
         
  //mary's test for a .collect(Collector.x) call
         double total = servers.stream().collect(Collectors.counting());
@@ -142,7 +142,7 @@ public class App {
 //ilya's example for collection of servers by Map<string, list>
         Map<String, List<Server>> groupedServers = 
                 servers.stream()
-                .collect(Collectors.groupingBy(Server::getMake)); //groupingBy returns a hashmap
+                .collect(Collectors.groupingBy(Server::getMake)); //groupingBy returns a hashmap, we set the String to result of getMake()
         for (String svrMake : groupedServers.keySet())//can use keySet because the method above returned a hashmap or hashset  
                                                     //string in this map is getMake = bc he chose this  when calling groupingby
                 

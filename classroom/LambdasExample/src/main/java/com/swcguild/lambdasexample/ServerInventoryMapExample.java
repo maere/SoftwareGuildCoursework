@@ -76,7 +76,7 @@ public class ServerInventoryMapExample {
           String make = "Dell";
           System.out.println("F1 outtput: All " + make + " servers in the inventory: ");
           
-          //basic difference between array and hashmap is how we call the objects up:
+//basic difference between array and hashmap is how we call the objects up:
           serverMap.values()
                   .stream()
                   .filter(s -> s.getMake().equalsIgnoreCase(make))
@@ -84,7 +84,7 @@ public class ServerInventoryMapExample {
           
           System.out.println("Next function tests for servers over 3 years: ");
           
-          //test
+//want to return servers over 3 years old, so create a test value to pass in...returns a boolean
           int testAge = 3;
           serverMap.values()
                   .stream()
@@ -93,17 +93,18 @@ public class ServerInventoryMapExample {
           
            System.out.println("next function just gets the name of all the older servers: ----------------------------");
           
-          //to get all servers out of the gate, we weill create a collection
+//to get all servers out of the gate, we will create a collection--we want to return a collection
           Collection<Server> oldServers = serverMap.values()
                   .stream()
                   .filter(s -> s.getServerAge() > testAge)
                   .collect(Collectors.toList());
+          
           System.out.println(oldServers.size());
           oldServers.forEach(s -> System.out.println(s.getName()));
           
            System.out.println("Next function calculates average age ----------------------------");
                  
-     //next example 
+//to get average age of servers - next example...we're looking for a doubl result....
            double averageAge = serverMap.values()
                    .stream()
                    .mapToLong(Server::getServerAge)

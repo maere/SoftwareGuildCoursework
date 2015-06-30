@@ -13,8 +13,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -37,7 +40,7 @@ public class AddressBookImpl implements AddressBookAPI{
 
     @Override
     public void loadAddresses() throws FileNotFoundException {
-          Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
+        Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
         Integer highestId = 0; //always need to initialize!!
         String currentLine;
         String[] currentTokens;
@@ -68,7 +71,7 @@ public class AddressBookImpl implements AddressBookAPI{
     }
 
     @Override
-    public Address getAddress(int idNumber) {
+    public Address getAddress(int idNumber) throws FileNotFoundException {
         
         return addressMap.get(idNumber);
         //To change body of generated methods, choose Tools | Templates.
@@ -84,7 +87,7 @@ public class AddressBookImpl implements AddressBookAPI{
     }
 
     @Override
-    public void removeAddress(int idNumber) {
+    public void removeAddress(int idNumber) throws FileNotFoundException{
          addressMap.remove(idNumber); //from the hash
     }
 
@@ -101,10 +104,9 @@ public class AddressBookImpl implements AddressBookAPI{
 
         return addressArray;  //this is a object arrayLIst of all the addresses   
     }
-
+    
     @Override
- 
-        public void writeToAddresses() throws IOException {
+    public void writeToAddresses() throws IOException {
         PrintWriter out = new PrintWriter(new FileWriter(ADDRESSES_FILE));
 
         //this is the ArrayList we get from all the objects we just pulled from our hash
@@ -128,6 +130,47 @@ public class AddressBookImpl implements AddressBookAPI{
         out.close();
 
     }//end write method
+    
+    @Override
+    public List<Address> nameSearch(String lastName){
+        
+        List<Address> all = getAllAddresses();
+        return all
+                .stream().filter(a -> a.getLastName().equalsIgnoreCase(lastName))
+                .collect(Collectors.toList());
+
+    }
+    
+    
+    @Override//added after interface--should I include in interface?
+    public List<Address> citySearch(String city){
+        
+          List<Address> all = getAllAddresses();
+          return all
+                .stream().filter(s -> s.getCity().equalsIgnoreCase(city))
+                .collect(Collectors.toList()); //this DOA method will return a list to this method in the controller
+}
+    
+    
+    @Override
+    public List<Address> zipSearch(int zipCode){
+        
+         List<Address> all = getAllAddresses();
+        return all
+                .stream().filter(z -> z.getZipCode() == zipCode)
+                .collect(Collectors.toList()); //could also get a range of zips --e.g. plus 10 in either direction to capture surrounding areas
+}
+    
+    @Override
+    public Map<String, List<Address>> stateSearch(String state){
+        
+        Map<String, List<Address>> citiesInState;
+        citiesInState= 
+                addressMap.values().stream().filter(s ->s.getState().equalsIgnoreCase(state))
+                .collect(Collectors.groupingBy(Address::getCity)); //groupingBy returns a hashmap
+ 
+        return citiesInState;
+}
 
     
 }//end class

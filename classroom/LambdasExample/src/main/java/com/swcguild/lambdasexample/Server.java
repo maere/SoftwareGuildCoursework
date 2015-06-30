@@ -75,5 +75,11 @@ public class Server {
         Period p = purchaseDate.until(LocalDate.now()); //passing in a function is not an anonymous function
         return p.getYears();
     }
+                                       
+    //copying his date method for DVDLibrary
+                                //Period is a date based amount with years, months, and days--all three fields are present but may be set to 0 ... can be negative
+                                 //LocalDate is an interface for a date without a timezone in the ISO-8601 calendar system -- can't use == or might cause issues
+    
+  
     
 }

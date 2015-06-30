@@ -8,18 +8,16 @@ In this lab you will add the following features to your address book:
 
 //1. Your address book must be able to handle multiple address entries with the same last
 name.
---
-
-//2. ***Searching by last name must return some sort of Collection or array of Address objects.***
 
 //5. The user must be able to search addresses by Zipcode
 //3. The user must be able to search addresses by City
+--
+//2. ***Searching by last name must return some sort of Collection or array of Address objects.***
 
 //4. The user must be able to search addresses by State
 
     //a. When searching by state, the results must be sorted into separate data
     structures by City (City is Key, ArrayList is object--see example)
-
 
 --
 

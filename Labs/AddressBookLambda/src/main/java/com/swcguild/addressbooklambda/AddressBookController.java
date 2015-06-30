@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -24,15 +27,13 @@ public class AddressBookController {
     public void run() throws IOException, Exception {
         boolean keepGoing = true;
         int choice = 0;
-        
-        try{
+
+        try {
             myAddressBook.loadAddresses(); //single source of truth, so we need to find out where it's at when we begin
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("This book has not yet been created. Would you like to create a book?");
             //change to ConsoleIO y/n and create addresses.txt file...
         }
-
-        
 
         while (keepGoing) {
             mainMenu();
@@ -47,7 +48,7 @@ public class AddressBookController {
                     removeAddress();
                     break;
                 case 3:
-                    findAddress();
+                    searchAddresses();
                     break;
                 case 4:
                     countAddresses();
@@ -61,7 +62,7 @@ public class AddressBookController {
                     keepGoing = false;
                     break;
                 default:
-                    con.print("That is an invalid entry.");//this was a bad idea: assertion error or evgen throw new Exception();
+                    con.print("That is an invalid entry.");//this was a bad idea: assertion error or even throw new Exception() would be better....
             }
             myAddressBook.writeToAddresses();
 
@@ -76,7 +77,7 @@ public class AddressBookController {
         con.print("---------");
         con.print("1. Add Address");
         con.print("2. Delete Address");
-        con.print("3. Find Address");
+        con.print("3. Search Addresses");
         con.print("4. Count Addresses in Book");
         con.print("5. List All Addresses");
         con.print("6. Exit");
@@ -110,52 +111,92 @@ public class AddressBookController {
 
     }
 
-    public void removeAddress() {
+    public void removeAddress() throws FileNotFoundException {
+        Address requestedId = null;
+        int idNumber = con.readInt("Please enter the ID of the person you would like to remove.");
 //NOTE: this method needs to catch exceptions -- because it throws a Null pointer exception if you enter an ID (et al) and it cannot find that item.
 
         try {
-            int idNumber = con.readInt("Please enter the ID of the person you would like to remove.");
 
             //if you're using a reference via a method chain as below, just do it once, and store it as a variable, otherwise you're querying the database multiple times needlessly
-            Address requestedId = myAddressBook.getAddress(idNumber);
-            
-            int response = con.readInt("Are you sure you want to remove " + requestedId.getLastName() + " " + requestedId.getLastName() + "? \n"
-                    + "Enter 1 for yes, 2 for No.");                        //later: use the method chaining above to pass these values in to allow user to remove an address by lastname or another getter/setteer parameter
-            if (response == 1) {
-                myAddressBook.removeAddress(idNumber);
-                con.print("Address successfully removed.");
-            } else {
-                System.out.println("Okay, fine then.");
-            }
+            requestedId = myAddressBook.getAddress(idNumber);
+
         } catch (FileNotFoundException e) {
-            System.out.println("Your requested address was not found.");
+    
+            System.out.println("The addresss book was not found.");
 
         }
+        
+        if(requestedId==null){
+           System.out.println("An address with that ID was not found.  Go back to main menu to display, or search by another method.");
+           return;  //for a method, if return type is void, you can exit a method from anywhere, with "return"
+        }
+       
+        int response = con.readInt("Are you sure you want to remove " + requestedId.getFirstName() + " " + requestedId.getLastName() + "? \n"
+                + "Enter 1 for yes, 2 for No.");                        //later: use the method chaining above to pass these values in to allow user to remove an address by lastname or another getter/setteer parameter
+        if (response == 1) {
+            myAddressBook.removeAddress(requestedId.getIdNumber());
+            con.print("Address successfully removed.");
+        } else {
+            System.out.println("Okay, fine then.");
+        }
+        
+        
+        
 
+    } //FIX try catch and File IO/FileNot found stuff
+
+    public void searchMenu() {
+        con.print("Search Menu");
+        con.print("---------");
+        con.print("1. Search By Last Name");
+        con.print("2. Search By City");
+        con.print("3. Search By State");
+        con.print("4. Search By Zip");
+        con.print("5. Exit Search");
     }
 
-    private void findAddress() {
+    public void searchAddresses() {
+        searchMenu();
+
+        int searchChoice = con.readInt("Which method would you like to search by?");
+
+        switch (searchChoice) {
+            case 1:
+                searchByName();
+                break;
+            case 2:
+                searchByCity();
+                break;
+            case 3:
+                searchByState();
+                break;
+            case 4:
+                searchByZip();
+                break;
+            case 5:
+                System.out.println("Exiting the system...");
+                break;
+            default:
+            //assertion error or throw exception
+
+        }
+    }
+
+    private void searchByName() {
         String name = con.readString("Please enter the last name of the person you would like to find");
 
-        ArrayList<Address> currentBook = myAddressBook.getAllAddresses();
+        List<Address> currentBook = myAddressBook.nameSearch(name);
 
-        boolean foundAddress = false;
+        //boolean foundAddress = false;
 
-        for (Address currentAddress : currentBook) {
-            if (currentAddress.getLastName().equals(name)) {
-                foundAddress = true;
-
-                System.out.println("\n" + Integer.toString(currentAddress.getIdNumber()) + "|" + currentAddress.getFirstName() + " " + currentAddress.getLastName() + "\n"
-                        + currentAddress.getStreet() + "\n"
-                        + currentAddress.getCity() + " " + currentAddress.getState() + " " + Integer.toString(currentAddress.getZipCode()) + "\n");
-
-            }//end if
-
-        }//end for loop
-
-        if (foundAddress == false) {
+        if (!currentBook.isEmpty()) {
+            //foundAddress = true;
+            displayFormatter(currentBook);
+        } else {
             con.print("No such address found with that ID.");
         }
+
         con.print("Please hit enter to continue.");
     } //end method
 
@@ -179,4 +220,80 @@ public class AddressBookController {
 
     }
 
-}
+    private void searchByCity() {
+        String city = con.readString("Enter the city: ");
+
+        //call lambda in DAO to get all addresses by city   
+        List<Address> allInCity = myAddressBook.citySearch(city);
+
+        //swap with displayFormatter method on resulting list
+        displayFormatter(allInCity);
+    }
+
+    private void searchByState() {
+        String state = con.readString("Enter the state. This will return a list of addresses by city: ");
+
+        Map<String, List<Address>> citiesInState = myAddressBook.stateSearch(state);
+
+        //we will not want a master list here, but the sublists by city, and then will need to loop through those in the controller
+        System.out.println("Address for the state of " + state + " include: \n");
+
+        for (String cityName : citiesInState.keySet())//can use keySet because the method above returned a hashmap or hashset  
+        {
+            con.print("Addresses in " +cityName + ": " );
+            System.out.println("-----------------------");
+            displayFormatter(citiesInState.get(cityName));
+            System.out.println("");
+
+        }
+
+    }
+
+    private void searchByZip() {
+        int zip = con.readInt("Enter the zip code you would like to search: "); //will eventually need to pass into DAOImpl function call (refactor)
+
+        //lambda to get all addresses by city
+        List<Address> allInZip = myAddressBook.zipSearch(zip);
+
+        //add boolean or try/catch for zip not found  
+        displayFormatter(allInZip);
+    }
+
+    public void displayFormatter(List<Address> allXinList) {
+        for (Address a : allXinList) {
+            System.out.println("\n" + Integer.toString(a.getIdNumber()) + "|" + a.getFirstName() + " " + a.getLastName() + "\n"
+                    + a.getStreet() + "\n"
+                    + a.getCity() + " " + a.getState() + " " + Integer.toString(a.getZipCode()));
+        }
+
+    }//end formatter
+
+}//end class
+
+/* OLD FIND adddress by LastName
+
+ private void findAddressByLastName() {
+ String name = con.readString("Please enter the last name of the person you would like to find");
+
+ ArrayList<Address> currentBook = myAddressBook.getAllAddresses();
+
+ boolean foundAddress = false;
+
+ for (Address currentAddress : currentBook) {
+ if (currentAddress.getLastName().equals(name)) {
+ foundAddress = true;
+
+ System.out.println("\n" + Integer.toString(currentAddress.getIdNumber()) + "|" + currentAddress.getFirstName() + " " + currentAddress.getLastName() + "\n"
+ + currentAddress.getStreet() + "\n"
+ + currentAddress.getCity() + " " + currentAddress.getState() + " " + Integer.toString(currentAddress.getZipCode()));
+
+ }//end if
+
+ }//end for loop
+
+ if (foundAddress == false) {
+ con.print("No such address found with that ID.");
+ }
+ con.print("Please hit enter to continue.");
+ } //end method
+ */

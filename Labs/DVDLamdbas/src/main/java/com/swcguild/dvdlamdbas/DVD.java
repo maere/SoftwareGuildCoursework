@@ -1,0 +1,108 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.swcguild.dvdlamdbas;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author apprentice
+ */
+public class DVD {
+    public int id;//later we can make this an integer and do the casting and parsing--for now it's a STring
+    String title;
+    //String releaseDate;
+    LocalDate releaseDate;
+    String mpaaRating;
+    String director;
+    String studio;
+    String userReview; //later we will make into an ArrayList<String> 
+    
+    static int counter = 0; //we want this to be available to DVDLibrary class
+    
+   
+    //constructor
+   DVD() {
+        this.id = ++counter; //every time we make a DVD we increment the counter
+    }
+
+    /*
+    public void setId(Integer id) {
+        this.id = id;
+    }
+   */ 
+   
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+    
+    //this will return the number of years on a DVD object if you call this as a getter
+    public long getDVDage(){ //copying his date method for DVDLibrary
+                             //Period is a date based amount with years, months, and days--all three fields are present but may be set to 0 ... can be negative
+                             //LocalDate is an interface for a date without a timezone in the ISO-8601 calendar system -- can't use == or might cause issues
+    Period timePeriod = releaseDate.until(LocalDate.now());
+       return timePeriod.getYears();
+        
+    }
+    
+    public int getDVDageDays(){
+        return Period.between(LocalDate.now(), releaseDate).getDays();
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getMpaaRating() {
+        return mpaaRating;
+    }
+
+    public void setMpaaRating(String mpaaRating) {
+        this.mpaaRating = mpaaRating;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getStudio() {
+        return studio;
+    }
+
+    public void setStudio(String studio) {
+        this.studio = studio;
+    }
+
+    public String getUserReview() {
+        return userReview;
+    }
+
+    public void setUserReview(String userReview) {
+        this.userReview = userReview;
+    }
+    
+    
+    
+    
+}
