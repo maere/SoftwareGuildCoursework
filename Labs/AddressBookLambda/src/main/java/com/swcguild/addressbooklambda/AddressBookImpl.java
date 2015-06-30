@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.addresslab;
+package com.swcguild.addressbooklambda;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,21 +12,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  *
- * @author apprentice -- DAO
+ * @author apprentice
  */
-public class AddressBook {
-
-    //fields (class level variables)
+public class AddressBookImpl implements AddressBookAPI{
+ //8. AddressBookImpl class that implements the AddressBook interface -
+//you must use Lambdas, Streams, and Aggregates in your implementation.
+    
     //to store our addresses
     public static final String ADDRESSES_FILE = "addresses.txt";
     public static final String DELIMITER = "::";
@@ -37,14 +34,10 @@ public class AddressBook {
     //constructor
     HashMap<Integer, Address> addressMap = new HashMap<>();
 
-    //this is only use to create a unique ID, NOT to keep track of records
-    //static int counter; //is all one of these fields for all address books we may want to make
-    //ArrayList<String> stringList = new ArrayList<>(); 
-    //we need to use the HashMap to count records, to figure out where to inserrt the 
-    //next record or where to pull the from
-    //read and write data methods
+
+    @Override
     public void loadAddresses() throws FileNotFoundException {
-        Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
+          Scanner sc = new Scanner(new BufferedReader(new FileReader(ADDRESSES_FILE)));
         Integer highestId = 0; //always need to initialize!!
         String currentLine;
         String[] currentTokens;
@@ -74,17 +67,51 @@ public class AddressBook {
         sc.close();
     }
 
-    public void writeToAddresses() throws IOException {
+    @Override
+    public Address getAddress(int idNumber) {
+        
+        return addressMap.get(idNumber);
+        //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addAddressToBook(Address addressObject) throws IOException {
+    idNumber++;
+    addressObject.setIdNumber(idNumber);
+        
+    addressMap.put (idNumber, addressObject); //Object is in the HashMap, but has not yet been written to the file
+   
+    }
+
+    @Override
+    public void removeAddress(int idNumber) {
+         addressMap.remove(idNumber); //from the hash
+    }
+
+    @Override
+    public ArrayList<Address> getAllAddresses() {
+          Set<Integer> keys = addressMap.keySet();
+
+        ArrayList addressArray = new ArrayList<>();
+
+        for (Integer k : keys) {
+            //k.toString();  -- this just converts the uniqueID to a string
+            addressArray.add(addressMap.get(k));
+        }
+
+        return addressArray;  //this is a object arrayLIst of all the addresses   
+    }
+
+    @Override
+ 
+        public void writeToAddresses() throws IOException {
         PrintWriter out = new PrintWriter(new FileWriter(ADDRESSES_FILE));
 
         //this is the ArrayList we get from all the objects we just pulled from our hash
-        ArrayList<Address> addressKeys = this.getAllAddresses();
-        //do we need to use the keyArray instead?  
+        ArrayList<Address> addressKeys = this.getAllAddresses(); 
 
         for (Address currentAddress : addressKeys)//this is a bunch of objects (the values)
         {
-
-            //String strI = Integer.toString(i);
             String strId = Integer.toString(currentAddress.getIdNumber());
 
             out.println(strId + DELIMITER
@@ -100,45 +127,7 @@ public class AddressBook {
         //and close
         out.close();
 
-    }
+    }//end write method
 
-    //getters and setters
-    public Address getAddress(int idNumber) {
-        return addressMap.get(idNumber);
-    }
-    //methods
-
-    //adds to HASH
-    public void addAddressToBook(Address addressObject) throws IOException {
-    idNumber++;
-    addressObject.setIdNumber(idNumber);
-        
-    addressMap.put (idNumber, addressObject);
-    //now id/Object is in the HashMap, but has not yet been written to the file
-    //addressObject.setIdNumber(idNumber);
-
-}
-
-    public void removeAddress(int idNumber) {
-        addressMap.remove(idNumber); ///.remove(idNumber, addressObject);
-        //return addressObject;
-
-    }
-
-    //get address from the hash
-    //get all addresses from hash
-    ArrayList<Address> getAllAddresses() {
-
-        Set<Integer> keys = addressMap.keySet();
-
-        ArrayList addressArray = new ArrayList<>();
-
-        for (Integer k : keys) {
-            //k.toString();  -- this just converts the uniqueID to a string
-            addressArray.add(addressMap.get(k));
-        }
-
-        return addressArray;  //this is a object arrayLIst of all the addresses   
-    }
-
-    }
+    
+}//end class

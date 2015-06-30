@@ -139,11 +139,12 @@ public class App {
                 .collect(Collectors.joining(","));
         System.out.println(allServers);
         
-        //ilya's example for collection of servers by Map<string, list>
+//ilya's example for collection of servers by Map<string, list>
         Map<String, List<Server>> groupedServers = 
                 servers.stream()
-                .collect(Collectors.groupingBy(Server::getMake)); //grouping by returns a hashmap
-        for (String svrMake : groupedServers.keySet())   //string in mapo is get make = bc he chose at
+                .collect(Collectors.groupingBy(Server::getMake)); //groupingBy returns a hashmap
+        for (String svrMake : groupedServers.keySet())//can use keySet because the method above returned a hashmap or hashset  
+                                                    //string in this map is getMake = bc he chose this  when calling groupingby
                 
         {
             System.out.println("server make: " + svrMake);
@@ -154,7 +155,10 @@ public class App {
         
         }
         
-       
+ /*
+   Collectors.groupingBy(T, Map<key, List>)Returns a Collector implementing a "group by" operation on input elements of type T, 
+   grouping elements according to a classification function, and returning the results in a Map.
+*/      
     }//end psvm
     
 }//end class

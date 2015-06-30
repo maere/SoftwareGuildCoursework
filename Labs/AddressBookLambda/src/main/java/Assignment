@@ -1,0 +1,57 @@
+Objective:
+The objective of this lab is change the implementation of the first version of AddressBook to take
+advantage of the new Lambda, Stream, and Aggregate features of Java 8.
+
+Requirements:
+
+In this lab you will add the following features to your address book:
+
+//1. Your address book must be able to handle multiple address entries with the same last
+name.
+--
+
+//2. ***Searching by last name must return some sort of Collection or array of Address objects.***
+
+//5. The user must be able to search addresses by Zipcode
+//3. The user must be able to search addresses by City
+
+//4. The user must be able to search addresses by State
+
+    //a. When searching by state, the results must be sorted into separate data
+    structures by City (City is Key, ArrayList is object--see example)
+
+
+--
+
+//6. You must use a HashMap to hold the Address objects.
+
+//7. You must create an Interface for the AddressBook API (i.e. your DAO) that contains all of
+the methods specified here and in AddressBook Version 1.
+
+//8. You must create an AddressBookImpl class that implements the AddressBook interface -
+you must use Lambdas, Streams, and Aggregates in your implementation.
+----------------------------------------------------------------------
+Fixes & nice to haves:
+---------------------
+1 - try catch if the addresses.txt file doesn't exist and create one to write to....
+2 - addressBookImpl - if there is a file but there are no entries, when it tries to load the file and 
+write the first integer at 0, will get a number format exception--there is nothing there.
+"Exception in thread "main" java.lang.NumberFormatException: For input string: """
+
+/*
+try {
+
+            testBook.loadOrderFile(date);
+            //System.out.println("Orders for " + date + " loaded successfully.");
+
+    } catch (FileNotFoundException e) 
+            {
+            date = (date.isEmpty()) ? systemDate : date;
+            //file not found--will write a new file
+            fileName = "Orders_" + date + ".txt";
+            newDateFile(date);
+
+            System.out.println("No file found for this date. Any orders created in this session \n "
+                    + "will generate a new order file named: " + fileName + ".");
+            }
+*/

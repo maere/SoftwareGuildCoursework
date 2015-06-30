@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.addresslab;
+package com.swcguild.addressbooklambda;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,19 +16,23 @@ import java.util.HashMap;
  */
 public class AddressBookController {
 
-    //add a console object to take input from user
     private ConsoleIO con = new ConsoleIO();
-    private AddressBook myAddressBook = new AddressBook();
-    //String name;
-    //static int idNumber;
+    private AddressBookImpl myAddressBook = new AddressBookImpl();
 
-    //constructor
+    //constructor -- default
     //methods
     public void run() throws IOException, Exception {
         boolean keepGoing = true;
         int choice = 0;
+        
+        try{
+            myAddressBook.loadAddresses(); //single source of truth, so we need to find out where it's at when we begin
+        }catch (FileNotFoundException e){
+            System.out.println("This book has not yet been created. Would you like to create a book?");
+            //change to ConsoleIO y/n and create addresses.txt file...
+        }
 
-        myAddressBook.loadAddresses(); //commented out becuase now we will call load addresses yeachg 
+        
 
         while (keepGoing) {
             mainMenu();
@@ -100,27 +105,31 @@ public class AddressBookController {
 
         //enter info into hashmap
         myAddressBook.addAddressToBook(currentAddress); //in this method we ask the roster object/class
-        //to do some data retrieval/removal...for us on behalf of the user
-        //report back the user a confirmation.
-        con.readString("Student successfully created. Please hit enter to continue.");
-                                    //we communicate back ot the user
 
-        //ask if they want to go to the main menu or exit
+        con.readString("Student successfully created. Please hit enter to continue.");
+
     }
 
     public void removeAddress() {
-//NOTE: this method needs to catch exceptions -- because it throws a Null pointer exception if you enter an ID and it cannot find that item.
-        int idNumber = con.readInt("Please enter the ID of the person you would like to remove.");
+//NOTE: this method needs to catch exceptions -- because it throws a Null pointer exception if you enter an ID (et al) and it cannot find that item.
 
-        //if you're using a reference via a method chain as below, just do it once, and store it as a variable, 
-        //otherwise your'e querying the database multiple times needleyssly
-        int response = con.readInt("Are you sure you want to remove " + myAddressBook.getAddress(idNumber).getFirstName() + " " + myAddressBook.getAddress(idNumber).getLastName() + "? \n"
-                + "Enter 1 for yes, 2 for No."); //later: use the method chaining above to pass these values in to allow user to remove an address by lastname or another getter/setteer parameter
-        if (response == 1) {
-            myAddressBook.removeAddress(idNumber);
-            con.print("Address successfully removed.");
-        } else {
-            System.out.println("Okay, fine then.");
+        try {
+            int idNumber = con.readInt("Please enter the ID of the person you would like to remove.");
+
+            //if you're using a reference via a method chain as below, just do it once, and store it as a variable, otherwise you're querying the database multiple times needlessly
+            Address requestedId = myAddressBook.getAddress(idNumber);
+            
+            int response = con.readInt("Are you sure you want to remove " + requestedId.getLastName() + " " + requestedId.getLastName() + "? \n"
+                    + "Enter 1 for yes, 2 for No.");                        //later: use the method chaining above to pass these values in to allow user to remove an address by lastname or another getter/setteer parameter
+            if (response == 1) {
+                myAddressBook.removeAddress(idNumber);
+                con.print("Address successfully removed.");
+            } else {
+                System.out.println("Okay, fine then.");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Your requested address was not found.");
+
         }
 
     }
@@ -150,9 +159,7 @@ public class AddressBookController {
         con.print("Please hit enter to continue.");
     } //end method
 
-    
-    //countAddresses();
-private void countAddresses() {
+    private void countAddresses() {
 
         //int total = 0;
         ArrayList<Address> a = myAddressBook.getAllAddresses();
@@ -171,67 +178,5 @@ private void countAddresses() {
         }
 
     }
-    
+
 }
-
-        //findAddress(String lastName);
-//    private void findAddress() {
-////old method pulled up by ID:   
-//int idNumber = con.readInt("Please enter the idNumber of the person you would like to find.");
-//Address currentAddress = myAddressBook.getAddress(idNumber);
-////we're changing to int
-//        if (currentAddress != null) {
-//            con.print(currentAddress.getFirstName());
-//            con.print(currentAddress.getLastName());
-//            con.print(currentAddress.getStreet());
-//            con.print(currentAddress.getCity());
-//            con.print(currentAddress.getState());
-//               //int zippy = currentAddress.getZipCode();
-//            //String zip = zippy.toString();
-//            //con.print(currentAddress.getZipCode());
-//        } else {
-//            con.print("No such address found with that ID.");
-//        }
-//        con.print("Please hit enter to continue.");
-//    
-//    }//end method
-
-
-//end class
-
-    //private void listAddresses() {
-//String[] allAddresses = myAddressBook.getAllAddresses():
-//}
-/*
- private void findAddress() {
- String name = con.readString("Please enter the last name of the person you would like to find");
-
- ArrayList<Address> currentBook = myAddressBook.getAllAddresses();
-
- for (Address a : currentBook) {
-
- String currentAddress
- = Integer.toString(a.getIdNumber()) + a.getFirstName() + a.getLastName() + a.getStreet() + a.getState() + Integer.toString(a.getZipCode());
-
- if (currentAddress != null) {
-
- if (a.getLastName().equals(name)) {
- con.print(Integer.toString(a.getIdNumber()));
- con.print(a.getFirstName());
- con.print(a.getLastName());
- con.print(a.getStreet());
- con.print(a.getState());
- con.print(Integer.toString(a.getZipCode()));
- } else {
- con.print("No such address found with that ID.");
- }
- }
-
- }
-
- con.print("Please hit enter to continue.");
- }//end method
-
-
-
- */
