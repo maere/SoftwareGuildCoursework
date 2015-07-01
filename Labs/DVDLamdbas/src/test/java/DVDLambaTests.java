@@ -42,11 +42,11 @@ public class DVDLambaTests {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    @Test
-    public void testDVDageDays() {
-        DVDLibraryFileImpl testObject = new DVDLibraryFileImpl();
-        int result = testObject.getDVD(5).getDVDageDays();
-        Assert.assertEquals(16425, result);
-        
-    }
+//    @Test
+//    public void testDVDageDays() {
+//        DVDLibraryFileImpl testObject = new DVDLibraryFileImpl();
+//        int result = testObject.getDVD(5).getDVDageDays();
+//        Assert.assertEquals(16425, result);
+//        
+//    }
 }

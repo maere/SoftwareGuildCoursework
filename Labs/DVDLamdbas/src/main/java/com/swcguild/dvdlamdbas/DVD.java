@@ -8,12 +8,13 @@ package com.swcguild.dvdlamdbas;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  *
  * @author apprentice
  */
-public class DVD {
+public class DVD implements Comparable<DVD>{
     public int id;//later we can make this an integer and do the casting and parsing--for now it's a STring
     String title;
     //String releaseDate;
@@ -62,9 +63,9 @@ public class DVD {
         
     }
     
-    public int getDVDageDays(){
-        return Period.between(LocalDate.now(), releaseDate).getDays();
-    }
+//    public int getDVDageDays(){
+//        return Period.between(LocalDate.now(), releaseDate).getDays();
+//    }
 
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
@@ -102,7 +103,69 @@ public class DVD {
         this.userReview = userReview;
     }
     
+public int compareTo(DVD compareDVD) {
+ 
+		LocalDate compareDate = ((DVD) compareDVD).getReleaseDate(); 
+                                    //in this date/string/int parsing scenario higher numbers are more recent, lower numbers older dates
+                int currentDate = Integer.parseInt(this.releaseDate.toString());
+                int nextDate = Integer.parseInt(compareDate.toString());
+		//ascending order
+		//return this.releaseDate - compareDate;
+ 
+		//descending order
+		//return compareQuantity - this.quantity;
+                return nextDate - currentDate;
+ 
+	}	    
     
     
+public static Comparator<DVD> releaseDateComparator  = new Comparator<DVD>() {
+ 
+            
+	    public int compare(DVD d1, DVD d2) {
+               
+              LocalDate release1 = d1.getReleaseDate();
+              LocalDate release2 = d2.getReleaseDate();
+//	      String fruitName1 = fruit1.getFruitName().toUpperCase();
+//	      String fruitName2 = fruit2.getFruitName().toUpperCase();
+// 
+//	      //ascending order
+	      return release1.compareTo(release2); //oldest date will be first. will return the date
+ 
+	      //descending order
+	      //return fruitName2.compareTo(fruitName1);
+	    }
+ 
+	};
     
 }
+/*
+public int compareTo(Fruit compareFruit) {
+ 
+		int compareQuantity = ((Fruit) compareFruit).getQuantity(); 
+ 
+		//ascending order
+		return this.quantity - compareQuantity;
+ 
+		//descending order
+		//return compareQuantity - this.quantity;
+ 
+	}
+
+public static Comparator<Fruit> FruitNameComparator 
+                          = new Comparator<Fruit>() {
+ 
+	    public int compare(Fruit fruit1, Fruit fruit2) {
+ 
+	      String fruitName1 = fruit1.getFruitName().toUpperCase();
+	      String fruitName2 = fruit2.getFruitName().toUpperCase();
+ 
+	      //ascending order
+	      return fruitName1.compareTo(fruitName2);
+ 
+	      //descending order
+	      //return fruitName2.compareTo(fruitName1);
+	    }
+ 
+	};
+*/

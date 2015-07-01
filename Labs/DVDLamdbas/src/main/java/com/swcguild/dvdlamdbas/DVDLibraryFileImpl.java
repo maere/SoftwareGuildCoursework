@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,11 +38,10 @@ public class DVDLibraryFileImpl implements DVDLibrary {
     //private DVD id;
 
     //constructor--defaults
-   
     @Override
     public void addToLibrary(DVD dvd) throws FileNotFoundException {
 
-          //counter(); //make a call to a new class we created to increment each time we add an object to the library
+        //counter(); //make a call to a new class we created to increment each time we add an object to the library
         //we will need to go look at the value of the counter in the DATA STORE before
         //we increment here--out counter will actually always need to reset to the last
         //record +1 (so ArrayList.size() + 1;
@@ -78,13 +78,13 @@ public class DVDLibraryFileImpl implements DVDLibrary {
             currentDVD.getId();
             currentDVD.setTitle(currentTokens[1]); //we pass the appropriate token into the setter as the parameter value
 /*            
-The main date-time classes provide two methods - one for formatting, format(DateTimeFormatter formatter), 
-and one for parsing, parse(CharSequence text, DateTimeFormatter formatter).
-For example:
-      String text = date.toString(formatter);
-      LocalDate date = LocalDate.parse(text, formatter);
- */    
-            
+             The main date-time classes provide two methods - one for formatting, format(DateTimeFormatter formatter), 
+             and one for parsing, parse(CharSequence text, DateTimeFormatter formatter).
+             For example:
+             String text = date.toString(formatter);
+             LocalDate date = LocalDate.parse(text, formatter);
+             */
+
             LocalDate toDate = LocalDate.parse(currentTokens[2], DateTimeFormatter.BASIC_ISO_DATE); //20111203 - YYYYmmDD
             currentDVD.setReleaseDate(toDate);
             currentDVD.setMpaaRating(currentTokens[3]);
@@ -108,7 +108,7 @@ For example:
         for (DVD currDVD : dvdCollection.values()) {
 
             String strId = Integer.toString(currDVD.getId());
-   
+
             out.println(
                     strId + DELIMITER
                     + currDVD.getTitle() + DELIMITER
@@ -127,7 +127,7 @@ For example:
     @Override
     public List<DVD> listAllDVDs() {
 
-       List<DVD> dvdList =  new ArrayList<DVD>(dvdCollection.values());
+        List<DVD> dvdList = new ArrayList<DVD>(dvdCollection.values());
         return dvdList;
 
         /* getting an array list from a collectoin
@@ -137,8 +137,6 @@ For example:
          }
          */
     }
-    
- 
 
     @Override
     public void removeDVD(Integer id) {
@@ -155,66 +153,70 @@ For example:
     public int getDVDCount() {
         return listAllDVDs().size();
     }
-    
-      
+
     @Override
-    public List<DVD> ageSearch(long age){
-        
+    public List<DVD> ageSearch(long age) {
+
         List<DVD> titlesByAge = dvdCollection.values().stream()
-                .filter(d -> d.getDVDage()<=age).collect(Collectors.toList());
+                .filter(d -> d.getDVDage() <= age).collect(Collectors.toList());
         return titlesByAge;
     }
-    
+
     @Override
-    public double averageAge(){
-        
-       double avgForColl = dvdCollection.values().stream().mapToLong(d ->d.getDVDage()).average().getAsDouble();
-       return avgForColl;
+    public double averageAge() {
+
+        double avgForColl = dvdCollection.values().stream().mapToLong(d -> d.getDVDage()).average().getAsDouble();
+        return avgForColl;
     }
-    
+
     @Override
-    public DVD newestDVD(){
-        
+    public DVD newestDVD() {
+
       return dvdCollection
                 .values()
                 .stream()
                 .sorted()
-                .min((dvd1, dvd2) -> dvd1.getReleaseDate().compareTo(dvd2.getReleaseDate()));
+                .max((dvd1, dvd2) -> dvd1.getReleaseDate().compareTo(dvd2.getReleaseDate())).get();
     }
-    
+
     @Override
-    public DVD oldestDVD(){
-       
-    }
-    
-    @Override
-    public List<DVD> ratingSearch(String mpaaRating){
-    List<DVD> titlesByRating = dvdCollection.values()
-                  .stream()
-                  .filter(d -> d.getMpaaRating().equalsIgnoreCase(mpaaRating)).collect(Collectors.toList());
-     return titlesByRating;
-    
-    }
-    
-    @Override
-    public void directorSearch(String director){};
-    
-    @Override
-    public List<DVD> studioSearch(String studio){
+    public DVD oldestDVD() {
+        //return listAllDVDs().stream().min((d1, d2) -> d1.getReleaseDate().compareTo(d2.getReleaseDate())).get(); --- this way threw an error--why?
+        return dvdCollection.values().stream().sorted().min((dvd1, dvd2) -> dvd1.getReleaseDate().compareTo(dvd2.getReleaseDate())).get();
         
-     List<DVD> titlesByStudio = dvdCollection.values()
-                  .stream()
-                  .filter(d -> d.getStudio().equalsIgnoreCase(studio)).collect(Collectors.toList());
-     return titlesByStudio;
     }
-    
-  
+
     @Override
-    public void AvgNumNotes(){};
+    public List<DVD> ratingSearch(String mpaaRating) {
+        List<DVD> titlesByRating = dvdCollection.values()
+                .stream()
+                .filter(d -> d.getMpaaRating().equalsIgnoreCase(mpaaRating)).collect(Collectors.toList());
+        return titlesByRating;
+
+    }
+
+    @Override
+    public void directorSearch(String director) {
+    }
+
+    ;
+    
+    @Override
+    public List<DVD> studioSearch(String studio) {
+
+        List<DVD> titlesByStudio = dvdCollection.values()
+                .stream()
+                .filter(d -> d.getStudio().equalsIgnoreCase(studio)).collect(Collectors.toList());
+        return titlesByStudio;
+    }
+
+    @Override
+    public void AvgNumNotes() {
+    }
+;
 
     //getters and setters
-    //may not actually need
-
+//may not actually need
 //    @Override
 //    public HashMap<Integer, DVD> getDvdCollection() {
 //        return dvdCollection;
@@ -224,5 +226,18 @@ For example:
 //    public void setDvdCollection(HashMap<Integer, DVD> dvdCollection) {
 //        this.dvdCollection = dvdCollection;
 //    }
-
 }
+/*
+        //Optional<DVD> collect = dvdCollection.values().stream().collect(Collectors.minBy(DVD.releaseDateComparator));
+        //listAllDVDs().sort(dvdList, DVD.releaseDateComparator);
+//        DVD oldest;
+        //dvdCollection.values().stream().sorted(Comparator.comparing(DVD d) -> d.)
+//        return this.listAllDVDs().sort
+//        (Comparator.comparing((DVD o) -> o.getReleaseDate()).compare(oldest, oldest);
+//                
+//                .people.sort(
+//                Comparator.comparing((Person p) -> p.lastName)
+//                .thenComparing(p -> p.firstName));
+//        people.forEach(System.out::println);
+        //return collect
+*/

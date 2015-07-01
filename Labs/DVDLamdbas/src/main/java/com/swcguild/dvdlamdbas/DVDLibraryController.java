@@ -180,10 +180,10 @@ public class DVDLibraryController {
                 findAvgAge();
                 break;
             case 8:
-                //searchOldest();
+                searchOldest();
                 break;
             case 9:
-                //searchNewest();
+                searchNewest();
                 break;
 
             case 10:
@@ -214,16 +214,16 @@ public class DVDLibraryController {
         System.out.println("The average age of DVD releases in your collection is: " + average);
     }
 
-//    public void searchNewest() {
-//        String newest = myDVDcoll.newestDVD();
-//        System.out.println("The newest DVD in your collection is: " + newest);
-//    }
-//
-//    public void searchOldest() {
-//        String oldest = myDVDcoll.oldestDVD();
-//        myDVDcoll.oldestDVD();
-//         System.out.println("The oldest DVD in your collection is: " + oldest);
-//    }
+    public void searchNewest() {
+        DVD newest = myDVDcoll.newestDVD();
+        System.out.println("The newest DVD in your collection is: " + newest.getTitle() + " released on " + newest.getReleaseDate());
+    }
+
+    public void searchOldest() {
+        DVD oldest = myDVDcoll.oldestDVD();
+        
+         System.out.println("The oldest DVD in your collection is: " + oldest.getTitle() + " released on " + oldest.getReleaseDate());
+    }
 
     public void searchByRating() {
 
