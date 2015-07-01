@@ -174,7 +174,7 @@ public class DVDLibraryController {
                 searchByStudio();
                 break;
             case 6:
-                //findAvgNumberNotes();
+                //findAvgNumberNotes(); aka Ratings
                 break;
             case 7:
                 findAvgAge();
@@ -238,6 +238,11 @@ public class DVDLibraryController {
     }
 
     public void searchByDirector() {
+ //3. Find all the movies by a given director
+   // a. When searching by director, the movies should be sorted into separate data structures by MPAA rating
+
+        
+        
     }
 
     //4. [list all] find all the movies released by a particular studio
