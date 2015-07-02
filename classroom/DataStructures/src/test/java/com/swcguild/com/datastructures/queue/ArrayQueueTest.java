@@ -152,7 +152,7 @@ public class ArrayQueueTest {
     }
 
     @Test
-    public void testAdd10Subtract6() {
+    public void testHeadMovedto0() {
         System.out.println("If add 10 items, and remove none, does the head reset to 0?");
         ArrayQueue instance = new ArrayQueue();
         Object item1 = "hello1";
@@ -182,8 +182,48 @@ public class ArrayQueueTest {
     }
 
     @Test
-    public void isSlotOneNullifWeDQhalf() {
-        System.out.println("If we get to 10 adds, and 6 minuses, does it reset?");
+    public void doesItResize10minus8() {
+        System.out.println("");
+        ArrayQueue instance = new ArrayQueue();
+        Object item1 = "hello1";
+        Object item2 = "hello2";
+        Object item3 = "hello3";
+        Object item4 = "hello4";
+        Object item5 = "hello5";
+        Object item6 = "hello6";
+        Object item7 = "hello7";
+        Object item8 = "hello8";
+        Object item9 = "hello9";
+        Object item10 = "hello10";
+//enque10
+        instance.enqueue(item1);
+        instance.enqueue(item2);
+        instance.enqueue(item3);
+        instance.enqueue(item4);
+        instance.enqueue(item5);
+        instance.enqueue(item6);
+        instance.enqueue(item7);
+        instance.enqueue(item8);
+        instance.enqueue(item9);
+        instance.enqueue(item10);
+//dequen 9        
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+
+        int result = instance.getItemsLength();
+        Assert.assertEquals(10, result);
+
+    }
+
+    @Test
+    public void doesResize2() {
+        System.out.println("If we get to 10 adds, and only 4 minuses does it resize?");
         ArrayQueue instance = new ArrayQueue();
         Object item1 = "hello1";
         Object item2 = "hello2";
@@ -201,20 +241,87 @@ public class ArrayQueueTest {
         instance.enqueue(item3);
         instance.enqueue(item4);
         instance.enqueue(item5);
-        //instance.dequeue();
         instance.enqueue(item6);
-        //instance.dequeue();
+
+        instance.dequeue();
         instance.enqueue(item7);
-        //instance.dequeue();
+
+        instance.dequeue();
         instance.enqueue(item8);
-        //instance.dequeue();
+
+        instance.dequeue();
         instance.enqueue(item9);
-        //instance.dequeue();
+
+        instance.dequeue();
         instance.enqueue(item10);
-                                // instance.dequeue();
+
+        int result = instance.getItemsLength();
+        Assert.assertEquals(10, result);
+
+    }
+
+    @Test
+    public void headValueAt8minus7() {
+        System.out.println("");
+        ArrayQueue instance = new ArrayQueue();
+        Object item1 = "hello1";
+        Object item2 = "hello2";
+        Object item3 = "hello3";
+        Object item4 = "hello4";
+        Object item5 = "hello5";
+        Object item6 = "hello6";
+        Object item7 = "hello7";
+        Object item8 = "hello8";
+
+//enque10
+        instance.enqueue(item1);
+        instance.enqueue(item2);
+        instance.enqueue(item3);
+        instance.enqueue(item4);
+        instance.enqueue(item5);
+        instance.enqueue(item6);
+        instance.enqueue(item7);
+        instance.enqueue(item8);
+
+//dequen 9        
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();
+        instance.dequeue();//7th
 
         int result = instance.getHead();
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(7, result);
+
+        int tailResult = instance.getTail();
+        Assert.assertEquals(8, tailResult);
+        
+        int arrayResult = instance.getItemsLength();
+        Assert.assertEquals(5, arrayResult);
+
+    }
+
+    @Test
+    public void add20DQ25percent() {
+        System.out.println("");
+        ArrayQueue instance = new ArrayQueue();
+
+        for (int i = 0; i < 20; i++) {
+            Object item = "hello" +i;
+            instance.enqueue(item);
+        }
+
+        for (int i=0; i<5; i++){
+           instance.dequeue();
+        }
+
+        int result = instance.getHead();
+        Assert.assertEquals(5, result);
+
+        int tailResult = instance.getTail();
+        Assert.assertEquals(20, tailResult);
 
     }
 

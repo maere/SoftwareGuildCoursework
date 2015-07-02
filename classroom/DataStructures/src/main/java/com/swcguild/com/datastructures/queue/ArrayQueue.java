@@ -31,17 +31,23 @@ public class ArrayQueue implements Queue {
 
     }
 
-    @Override
+    @Override //add item at tail
     public void enqueue(Object item) {
         //Insert object o at the rear of the queue - Input: Object; Output: none 
-        //add item at tail
+        
+//we are pushing into queue, so when we are pushing we need to make sure:
+        //there is space to put it in..if not resize                                                items[9] is 10 items & items.length = 10
+        //where to put it? put it at tail (items[0], or items[DEFAULT_INITIAL_SIZE -1] unless:   items[tail] is == to items.length-1, 
+        //if it is equal to the size of the array-1, we are going to need to make the array BIGGER and THEN increment tail & then push it in
+                                                  //*then* increment the size of the tail & numItems
 
-        if (numItems >= items.length) {
+        if (numItems == items.length-1) { //10 items, 9 slots filled...
+            
             resize(2 * items.length);
         }
-        items[tail] = item;
-        tail++;
-        numItems++;
+        items[tail] = item; //push the item into the tail slot
+        tail++;  //increment tail value
+        numItems++; //increment  items which we are tracking
 
     }
 
@@ -51,26 +57,38 @@ public class ArrayQueue implements Queue {
     public Object dequeue() {
 
         if (numItems == 0) {
-            return null; //if it's empty can'tdequeue
+            return null; //if it's empty can't dequeue
         }
 
-        Object item = items[head];
-        items[head] = null; //can we do head--?
+        Object item = items[head]; //returns the value of item at the head of the queue
+        items[head] = null; //we empty out that spot -- one empty spot at the front -- or 10 empty spots
+        
+//        if(items.length - numItems <= items.length/2){ 
+//            
+//            head = 0;
+//            tail = numItems; //or number items -1?
+//            resize(items.length/2);
+//        }
+//        
+//        numItems--;
+//        
+//         return item;
 
-        if (head == items.length - 1) {
-            head = 0;
+        if (head == items.length-1) { //added 10, at spot 9, no empties!!
+            head = 0;  //reset head to 0
+                                    //we don't need to reset tail here or resize unless we are ***shrinking*****
         } else {
-            head++;
+            head++; //if not just increment the head....
         }
         numItems--;
+        
 
-        if (numItems < items.length / 2) //this not neededed: numItems >0 && 
+        if (numItems < items.length / 4) //this not neededed: numItems >0 && 
         {
-            resize(items.length * 2);
+            resize(items.length/2);
         }
 
         return item;
-
     }
 
     //we create a new method to do the resize
@@ -78,11 +96,14 @@ public class ArrayQueue implements Queue {
 //         head = 0;//reset head and reset tail -- down to other end
 //         tail = head+numItems;
 
-        Object[] temp = new Object[newSize]; //while we're copying things over, both things exist...so we're using up 2x the memory
+        Object[] tempArray = new Object[newSize]; //while we're copying things over, both things exist...so we're using up 2x the memory
+        
+        //change to while (!isEmpty())
         for (int i = 0; i < numItems; i++) {
-            temp[i] = items[i];
+            tempArray[i] = items[i]; //dequeue instead of using this.
+            //force head to 0 and tail to however many elements we pulled -- head = 0, tail = numItems;
         }
-        items = temp;
+        items = tempArray; //resets items to our new, bigger array--if it's smaller, we have a problem, bc this will throw off the numbering
     }
 
     @Override
@@ -99,7 +120,6 @@ public class ArrayQueue implements Queue {
 
     //@Override
     public int getHead() {
-
         return head;
     }
 
@@ -109,6 +129,9 @@ public class ArrayQueue implements Queue {
 
     public int getItemsLength() {
         return items.length;
+    }
+    public int getTail(){
+    return tail;
     }
 
     @Override
