@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
@@ -194,12 +195,34 @@ public class DVDLibraryFileImpl implements DVDLibrary {
         return titlesByRating;
 
     }
-
-    @Override
-    public void directorSearch(String director) {
+     //we will not want a master list here, but the sublists by rating, and then will need to loop through those in the controller
+    public Map<String, List<DVD>> ratingGrouping(List<DVD> thisList){ //decided to let it take a list as paramater
+        //List<DVD> byRatingList = listAllDVDs(); 
+        
+        Map<String, List<DVD>> byRatingMap;
+        byRatingMap = 
+                thisList.stream().collect(Collectors.groupingBy(DVD::getMpaaRating));
+                                                        //this returns a HashmPa of DVDs by rating
+        return byRatingMap;
     }
 
-    ;
+    @Override
+    public List<DVD> directorSearch(String director){
+       List<DVD> listByDirector = dvdCollection.values().stream().filter(d ->d.getDirector().equalsIgnoreCase(director)).collect(Collectors.toList());
+       
+               return listByDirector;
+    
+    }
+//    public Map<String, List<DVD>> directorSearch(String director) {
+//        
+//        Map<String, List<DVD>> directorMap = 
+//                dvdCollection.values()
+//              .stream().collect(Collectors.groupingBy(DVD::getDirector));
+//                                                        //this should return a director and their DVD list
+//        return directorMap;
+//    }
+
+    
     
     @Override
     public List<DVD> studioSearch(String studio) {

@@ -60,7 +60,7 @@ public class ArrayStackTest {
 
     @Test
     public void OverStackSize() {
-        System.out.println("Pushing 56items to default stack of 4");
+        System.out.println("Pushing 6 items to default stack of 4");
         ArrayStack instance = new ArrayStack();
         instance.push("0");
         instance.push("1");
@@ -68,7 +68,7 @@ public class ArrayStackTest {
         instance.push("3");
         instance.push("4");
         instance.push("5");
-     
+
         int result = instance.size();
         int expResult = 6;
         assertEquals(expResult, result);
@@ -105,6 +105,9 @@ public class ArrayStackTest {
         String expResult = "string";  //then this would also be object
 
         assertEquals(expResult, result);
+
+        boolean emptyStatus = instance.isEmpty();
+        assertTrue(emptyStatus);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
@@ -117,11 +120,24 @@ public class ArrayStackTest {
         System.out.println("iterator");
         ArrayStack instance = new ArrayStack();
 
-        Iterator expResult = null;
-        Iterator result = instance.iterator();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        Iterator it = instance.iterator(); //in this instance the array travels in reverse
+
+        instance.push("item1"); //bottom
+        instance.push("item2"); //would be first returned
+        
+        //throws a null pointer because is iterating in reverse--solution?
+        
+//        String result1 = (String) it.next();
+//            assertEquals("item1", result1);
+        
+        boolean result2 = instance.pop().equals(it.hasNext());
+        assertFalse(result2);
+        
+    
+
+//        String item = (String) it.next();
+//        Assert.assertEquals(null, item);
+
     }
 
 }

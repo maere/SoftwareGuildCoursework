@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -39,7 +40,9 @@ public interface DVDLibrary {
     public DVD oldestDVD();
     
     public List<DVD> ratingSearch(String mpaaRating);
-    public void directorSearch(String director);
+    //changed to List for director--made a new method to group ratings in a HashMap instead
+    public List<DVD> directorSearch(String director);
+    //public Map<String, List<DVD>> directorSearch(String director);
     public List<DVD> studioSearch(String studio);
    
     public void AvgNumNotes();

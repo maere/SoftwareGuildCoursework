@@ -14,8 +14,8 @@ public class PBD_NestLoops {
 
 	public static void main( String[] args )
 	{
-            // this is #1 - I'll call it "CN" - Which variable changes faster? Is it the variable controlled by the outer loop (c) or the variable controlled by the inner loop (n)? 
-                 //n changes faster
+// this is #1 - I'll call it "CN" - Which variable changes faster? Is it the variable controlled by the outer loop (c) or the variable controlled by the inner loop (n)? 
+                 //n changes faster--the inner loop
             
 //Change the order of the loops so that the "c" loop is on the inside and the "n" loop is on the outside. 
 //How does the output change?  

@@ -75,16 +75,16 @@ public class ArrayStack implements Stack {
     }
 
     @Override //made this -- OUR iterator needs to use the iteratrion method we defined below....so when iteration (e.g. for/each) is called
-    public Iterator iterator() {
-        return new ReverseArrayIterator(); //returning a variable of Type Iterator....
-                                    //so something on the outside doesn't know about ReverseArrayIterator....just knows the type
-                                        //and that it can execute hasNext and next()
+    public Iterator iterator() {   //returning a variable of Type Iterator....
+        return new ReverseArrayIterator();
+                                 //so something on the outside doesn't know about ReverseArrayIterator....
+                                //just knows the type, and that it can execute hasNext and next()
     }
 
     //-- we'll use an inner class & it's also private ------
                                         //is better to do as an inner class vs. in the package when we will never ever use it anywhere else
     private class ReverseArrayIterator implements Iterator {
-        //this will allow us to walk through the array backwards
+                //this will allow us to walk through the array backwards
         
         private int i = numItems; //this line is why we have to have a private class...we want to tell the inner class about what's going on outside
                                 //Iterator needs to have access to the inner elements of what it's iterating through
@@ -94,12 +94,12 @@ public class ArrayStack implements Stack {
 
         @Override
         public boolean hasNext() {
-           return i>0;
+           return i>0;        //bc walks thru backwards
         }
 
         @Override
         public Object next() {
-           return items[--i];//
+           return items[--i];//  our iterator will give the previous [i] in the array!
         }
         //if we comment out all the popping, we can now use this method!
         

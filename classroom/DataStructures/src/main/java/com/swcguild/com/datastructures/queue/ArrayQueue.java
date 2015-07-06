@@ -134,12 +134,36 @@ public class ArrayQueue implements Queue {
     return tail;
     }
 
+    /*
+    @Override  //our method for Iterable....
+    public Iterator iterator() {
+         return new LinkedListIterator();   
+        
+    }
+    */
+    
     @Override
     public Iterator iterator() {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ArrayQueueIterator();
     }
-//    private class myIteratorMethod(){
-//    
-//    }
-}
+ 
+    private class ArrayQueueIterator implements Iterator{
+        private int i = numItems; 
+
+        @Override
+        public boolean hasNext() {
+            return (numItems!=0); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public Object next() {
+            return items[head]!=null; //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        
+    }
+
+       
+    }
+
+

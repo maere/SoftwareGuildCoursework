@@ -143,6 +143,7 @@ public class App {
         Map<String, List<Server>> groupedServers = 
                 servers.stream()
                 .collect(Collectors.groupingBy(Server::getMake)); //groupingBy returns a hashmap, we set the String to result of getMake()
+        
         for (String svrMake : groupedServers.keySet())//can use keySet because the method above returned a hashmap or hashset  
                                                     //string in this map is getMake = bc he chose this  when calling groupingby
                 

@@ -58,13 +58,20 @@ public class LinkedListNodeImpl<T> implements LinkedList<T> { //after you type i
 
     }
 
-    @Override //inserts a node of object T, at index X
+    @Override //inserts a node of object T, at index X -- original implementation is "insert after node"  -- but we might want to change the ccode
+                                                //to inserting AT the location...but the LinkedList convention is that we insert after the index we call, not at the index we call
     public void insert(int index, T item) {
-        //
+        //                      //if this is the last item....
         if (index == numItems - 1) {
             append(item);
 
-        } else {
+//        } else if(index==0){//we added this code after running our tests, bc when we ran it, it didn't insert at the right place, 
+//                            //so we add this special case for if we are trying to insert at index 0
+//            prepend(item);
+        }
+        
+                //this case deals with any other type of node floating out in space
+        else {
             Node nodeAtIndex = getNode(index);
 
             Node newNode = new Node();
@@ -120,17 +127,17 @@ public class LinkedListNodeImpl<T> implements LinkedList<T> { //after you type i
     public T remove(int index) {
         T retNode = null; //while we remove, we will also return the object of type T in the node
         
-        if (index == 0) { //if there is only one item
+        if (index == 0) { //if it's the first item....in the list
             retNode = first.item;
             first = first.next;
 
-        } else {
+        } else {  //if it's the middle item in the list
             Node nodeBefore = getNode(index -1);
             retNode = nodeBefore.next.item; //this goes to the previous node bc it points to the node we want to remove--we get the item obj and store it here
             nodeBefore.next = nodeBefore.next.next; //the node before the node we care for, neeeds to point to the node AFTER the one we care for
             
-            if(index==numItems-1){
-                last = nodeBefore;
+            if(index==numItems-1){  //if it's the last item in the list, need to reassign the value of last for the linked list
+                last = nodeBefore; //
             }
         }                       //on line 130: reassigning the value of .next on nodeBefore by accessing the value two nodes down...
                                 //...leaves the guy in the middle out, it becomes null, and the reference isn't needed anymore

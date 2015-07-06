@@ -9,8 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -82,8 +85,16 @@ public class DVDLibraryController {
         //skipping id -- but will ask for input and set our property values equal to the input
         String title = con.readString("Please enter your title: ");
         String strReleaseDate = con.readString("Please enter your release date (YYYYMMDD): "); //change date property
-        
-        LocalDate releaseDate = LocalDate.parse(strReleaseDate, DateTimeFormatter.BASIC_ISO_DATE); //
+
+        LocalDate releaseDate = null; //
+        try {
+            releaseDate = LocalDate.parse(strReleaseDate, DateTimeFormatter.BASIC_ISO_DATE); //
+        } catch (DateTimeParseException e) {
+            System.out.println("Your date was incorrectly formatted or doesn't fit the date format.  "
+                    + "Please check your entry and try again.");
+
+        }
+
         String mpaaRating = con.readString("Enter the MPAA rating: ");
         String director = con.readString("Enter the director: ");
         String studio = con.readString("Enter the studio: ");
@@ -168,7 +179,7 @@ public class DVDLibraryController {
                 searchByRating();
                 break;
             case 4:
-                //searchByDirector();
+                searchByDirector();
                 break;
             case 5:
                 searchByStudio();
@@ -198,12 +209,12 @@ public class DVDLibraryController {
 
     public void searchByRelease() {
         //1. Find all movies released in the last N years -- search by release year
-        long nYears = con.readLong("This function will return only movies from the past \"n\" years."
+        long nYears = con.readLong("This function will return only movies from the past \"n\" years. \n"
                 + "Enter a number to get movies from  \"n\"  years ago until now:");
 
         List<DVD> selectedYears = myDVDcoll.ageSearch(nYears); //calls the method from the DAO which returns a list from an Age search
 
-        System.out.println("Here are the titles for the releases from the past " + nYears + ": \n------------------");
+        System.out.println("Here are the titles for the releases from the past " + nYears + " years: \n------------------");
 
         printToScreen(selectedYears);
 
@@ -221,8 +232,8 @@ public class DVDLibraryController {
 
     public void searchOldest() {
         DVD oldest = myDVDcoll.oldestDVD();
-        
-         System.out.println("The oldest DVD in your collection is: " + oldest.getTitle() + " released on " + oldest.getReleaseDate());
+
+        System.out.println("The oldest DVD in your collection is: " + oldest.getTitle() + " released on " + oldest.getReleaseDate());
     }
 
     public void searchByRating() {
@@ -236,13 +247,38 @@ public class DVDLibraryController {
         printToScreen(movieRatings);
 
     }
+//3. Find all the movies by a given director
 
     public void searchByDirector() {
- //3. Find all the movies by a given director
-   // a. When searching by director, the movies should be sorted into separate data structures by MPAA rating
+        // a. When searching by director, the movies should be sorted into separate data structures by MPAA rating
+        String director = con.readString("Enter the name of the director you would like to search by: ");
 
-        
-        
+        //changed to a list....Map<String, List<DVD>> directorMap = myDVDcoll.directorSearch(director);
+        List<DVD> directorsList = myDVDcoll.directorSearch(director);
+
+        //get ratings by grouping (call)
+        Map<String, List<DVD>> ratingsMap = myDVDcoll.ratingGrouping(directorsList);
+        Set<String> ratings = ratingsMap.keySet();
+
+        for (String rating : ratings) {
+            System.out.println("-----------------------");
+            List<DVD> ratingGroup = ratingsMap.get(rating);
+            System.out.println("Under " + rating + " ratings:");
+            
+            for (DVD dvd : ratingGroup) {
+                if (dvd.getDirector().equals(director)) {
+                    System.out.println(dvd.getMpaaRating() + " | " + dvd.getTitle() + "| " 
+                             + dvd.getReleaseDate() + "\n");
+                }
+
+            }
+
+        }
+//        for (DVD title : directorsList) {
+//        }
+        //get the mpaa lists for the director wtih the passed name,
+                 //one by one, and print out the titles from the director found in that set
+    
     }
 
     //4. [list all] find all the movies released by a particular studio
@@ -269,9 +305,10 @@ public class DVDLibraryController {
 
         List<DVD> orderlyList = myDVDcoll.listAllDVDs(); //indexed Array list containing 
         //all DVD objects
-        for (int i = 0; i < orderlyList.size(); i++) {
-            System.out.println("Title #:" + orderlyList.get(i).getId() + "  " + orderlyList.get(i).getTitle());
-        }
+        dvdDisplayFormatter(orderlyList);
+//        for (int i = 0; i < orderlyList.size(); i++) {
+//            System.out.println("Title #:" + orderlyList.get(i).getId() + "  " + orderlyList.get(i).getTitle());
+//        }
 
     }
 
@@ -333,6 +370,17 @@ public class DVDLibraryController {
         }
 
     }//end edit method
+
+    public void dvdDisplayFormatter(List<DVD> allXinList) {
+        for (DVD d : allXinList) {
+            System.out.println("\n" + Integer.toString(d.getId()) + "|" + d.getTitle() + "\n"
+                    + "Directed by: " + d.getDirector() + "\n"
+                    + "Rated: " + d.getMpaaRating()
+                    + " Studio: " + d.getStudio()
+                    + " Release Date:  " + d.getReleaseDate() + "\n" + "User Review:" + d.getUserReview());
+        }
+
+    }
 
 }///end class
 

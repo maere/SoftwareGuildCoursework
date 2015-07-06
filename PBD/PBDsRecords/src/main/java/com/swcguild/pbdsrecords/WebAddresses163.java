@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.swcguild.pbdsrecords;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
@@ -25,17 +26,17 @@ class Address           // apparently you can create a class inside of another f
  * @author apprentice
  */
 public class WebAddresses163 {
-    public static void main(String[] args) 
+    public static void main(String[] args) throws IOException 
             
 	{
 			//we store the URL to this file as a variable & create a URL object
             
             URL addys;
-        try {
+        //try {
             addys = new URL("http://cs.leanderisd.org/txt/fake-addresses.txt");
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(WebAddresses163.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(WebAddresses163.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 			//we instantiate a scanner & assign to fin and then pass in a stream to 
 			//pick up the info at the URL
                 //addys = new URL("http://cs.leanderisd.org/txt/fake-addresses.txt");

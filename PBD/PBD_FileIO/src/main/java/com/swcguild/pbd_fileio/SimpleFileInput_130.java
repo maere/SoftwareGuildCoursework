@@ -20,6 +20,7 @@ public class SimpleFileInput_130 {
         Scanner sc = new Scanner(new BufferedReader(new FileReader("name.txt")));
         
         while(sc.hasNextLine()){
+            
             String current = sc.nextLine();
             System.out.println(current);
         

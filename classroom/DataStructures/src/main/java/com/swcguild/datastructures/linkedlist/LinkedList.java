@@ -11,6 +11,7 @@ package com.swcguild.datastructures.linkedlist;
  */
 public interface LinkedList<T> extends Iterable{ //T is the generic Type -- will get decided at compile time
                 //will also have it extend iterable
+                //could also write LinkedList<T extends String> above and our implementation would have to use object of the string class
     
     void append(T item); //
     T get(int index);

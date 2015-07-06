@@ -22,7 +22,6 @@ public class HighScore_129 {
     public static void main(String[] args) throws IOException {
         
         Scanner scan = new Scanner(System.in);
-        
         System.out.println("Please enter your score: ");
         int userScore = scan.nextInt();
         String strScore = Integer.toString(userScore);

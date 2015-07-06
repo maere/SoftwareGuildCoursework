@@ -328,14 +328,28 @@ public class ArrayQueueTest {
     /**
      * Test of iterator method, of class ArrayQueue.
      */
-//    @Test
-//    public void testIterator() {
-//        System.out.println("iterator");
-//        ArrayQueue instance = new ArrayQueue();
-//        Iterator expResult = null;
-//        Iterator result = instance.iterator();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testIterator() {
+        System.out.println("iterator");
+        ArrayQueue instance = new ArrayQueue();
+        //Iterator expResult = null;
+        
+        Iterator it = instance.iterator();
+        assertFalse(it.hasNext());
+        
+        instance.enqueue("ticket1");
+        instance.enqueue("ticket2");
+       
+        
+        Object result = instance.iterator().next();
+        String strResult = result.toString();
+        boolean nextResult = it.hasNext();
+        boolean thirdResult = it.hasNext();
+        
+        Assert.assertEquals("ticket1", strResult);
+        Assert.assertTrue(nextResult);
+        Assert.assertFalse(thirdResult);
+        
+   
+    }
 }
