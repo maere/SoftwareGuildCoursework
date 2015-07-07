@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one DvdLibraryDaoMemImpl--because it's the memory implementation
     
-    
+    static int counter = 0;
     private HashMap<Integer, Dvd> dvdCollection = new HashMap<>(); //if this is private, you need to make a getter and setter for it to be available
                         //outside of class--even in an instance
 
@@ -30,11 +30,13 @@ public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one
     public void setDvdCollection(HashMap<Integer, Dvd> dvdCollection) {
         this.dvdCollection = dvdCollection;
     }
-    public static final String DELIMITER = "::";
+    
 
     @Override
     public void add(Dvd dvd) {
-         dvdCollection.put(dvd.getId(), dvd);
+        ++counter;
+        dvd.setId(counter); //will recognize this because is part of the DTO--we are setting on the object
+         dvdCollection.put(dvd.getId(), dvd); // here we are getting the id we just set when we add to the collection so that the HashMap is keeping track
     }
 
     @Override

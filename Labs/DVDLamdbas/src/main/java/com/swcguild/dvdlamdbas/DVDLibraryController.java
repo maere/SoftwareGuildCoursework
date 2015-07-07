@@ -34,35 +34,49 @@ public class DVDLibraryController {
     //methods---------------------------------------
     public void run() throws FileNotFoundException, IOException {
 
-        //load data   -------------- FIX: need to check for dvd.txt file, and if it's not there, create one
-        myDVDcoll.loadDVDdata();
-        //present menu  
-        this.mainMenu();
+        boolean keepGoing = true;
+        int userChoice;
 
-        userChoice = con.readInt("Select an option from the menu.");
+        try {
+            myDVDcoll.loadDVDdata();//load data   -------------- 
+        } catch (FileNotFoundException e) {
+            System.out.println("File does not yet exist. Making an empty collection for you...");
+            myDVDcoll.writeToDVDdata();
 
-        switch (userChoice) {
-            case 1:
-                this.createDVD();
-                break;
-            case 2:
-                this.deleteDVD();
-                break;
-            case 3:
-                this.searchMenu(); //changed to searchMenu(); from search choice
-                break;
-            case 4:
-                this.printAllDVDs();
-                break;
-            case 5:
-                this.editDVD();
-                break;
-            case 6:
-                System.out.println("Exiting application now.");
-                break;
+        }
 
-            default:
-                throw new AssertionError();
+        while (keepGoing) {
+            //present menu  
+            this.mainMenu();
+
+            userChoice = con.readInt("Select an option from the menu.");
+
+            switch (userChoice) {
+                case 1:
+                    this.createDVD();
+                    break;
+                case 2:
+                    this.deleteDVD();
+                    break;
+                case 3:
+                    this.searchMenu(); //changed to searchMenu(); from search choice
+                    break;
+                case 4:
+                    this.printAllDVDs();
+                    break;
+                case 5:
+                    this.editDVD();
+                    break;
+                case 6:
+                    System.out.println("Exiting application now.");
+                    keepGoing = false;
+                    break;
+
+                default:
+                    throw new AssertionError();
+
+            }
+
         }
 
         myDVDcoll.writeToDVDdata();
@@ -92,7 +106,6 @@ public class DVDLibraryController {
         } catch (DateTimeParseException e) {
             System.out.println("Your date was incorrectly formatted or doesn't fit the date format.  "
                     + "Please check your entry and try again.");
-
         }
 
         String mpaaRating = con.readString("Enter the MPAA rating: ");
@@ -265,11 +278,11 @@ public class DVDLibraryController {
             System.out.println("-----------------------");
             List<DVD> ratingGroup = ratingsMap.get(rating);
             System.out.println("Under " + rating + " ratings:");
-            
+
             for (DVD dvd : ratingGroup) {
                 if (dvd.getDirector().equals(director)) {
-                    System.out.println(dvd.getMpaaRating() + " | " + dvd.getTitle() + "| " 
-                             + dvd.getReleaseDate() + "\n");
+                    System.out.println(dvd.getMpaaRating() + " | " + dvd.getTitle() + "| "
+                            + dvd.getReleaseDate() + "\n");
                 }
 
             }
@@ -278,8 +291,8 @@ public class DVDLibraryController {
 //        for (DVD title : directorsList) {
 //        }
         //get the mpaa lists for the director wtih the passed name,
-                 //one by one, and print out the titles from the director found in that set
-    
+        //one by one, and print out the titles from the director found in that set
+
     }
 
     //4. [list all] find all the movies released by a particular studio
