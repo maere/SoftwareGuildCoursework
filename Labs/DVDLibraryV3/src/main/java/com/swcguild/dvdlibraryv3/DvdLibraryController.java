@@ -328,8 +328,8 @@ public class DvdLibraryController {
             System.out.println("\n" + Integer.toString(d.getId()) + " | " + d.getTitle() + "\n"
                     + "Directed by: " + d.getDirector() + "\n"
                     + "Rated: " + d.getMpaaRating() + "\n"
-                    + " Studio: " + d.getStudio() + "\n"
-                    + " Release Date:  " + d.getReleaseDate() + "\n" + "User Review:" + d.getNote());
+                    + "Studio: " + d.getStudio() + "\n"
+                    + "Release Date: " + d.getReleaseDate() + "\n" + "User Review:" + d.getNote() +"\n");
         }
     }
 

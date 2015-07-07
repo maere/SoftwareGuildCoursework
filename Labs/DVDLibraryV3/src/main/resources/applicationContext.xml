@@ -17,8 +17,9 @@
     
     <!-- Bean definitions go here-full class path and package name! -->
     <!-- these are the classes we want to hook into our app: the interface we wrote to and the consoleIO-->
-    <bean id="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.DvdLibraryDaoImpl"/> 
+    <bean id="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.DvdLibraryDaoDKImpl"/> 
     <bean id="consoleIO" class="com.swcguild.dvdlibraryv3.ConsoleIO" />
+    
     <!--For future implementations, will need to comment out above, and use this bean:
     <bean id ="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.myClassFriendsImpl"> </bean>-->
     

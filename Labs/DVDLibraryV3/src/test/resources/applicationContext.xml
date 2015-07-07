@@ -15,11 +15,24 @@
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
     
+   
     <!-- Bean definitions go here-full class path and package name! -->
-  <bean id ="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.DvdLibraryDaoImpl"> </bean>
-      <!--<bean id ="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.myClassFriendsImpl"> </bean>-->
-  <!--<bean id="controller" class="com.swcguild.dvdlibraryv3.DvdLibraryController"></bean>   
-  <bean id="dao" class=""></bean> -->
+    <!-- these are the classes we want to hook into our app: the interface we wrote to and the consoleIO-->
+    <bean id="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.DvdLibraryDaoDKImpl"/> 
+    <bean id="consoleIO" class="com.swcguild.dvdlibraryv3.ConsoleIO" />
+    
+    <!--For future implementations, will need to comment out above, and use this bean:
+    <bean id ="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.myClassFriendsImpl"> </bean>-->
+    
+    <!--our controller bean definition needs to include the constructor ars so the classes above will get injected into the controller-->
+    <bean id="controller" class="com.swcguild.dvdlibraryv3.DvdLibraryController"> 
+         <!--in order for the controller to inject the dao into itself, the bean is passed as a constructor arg -->
+        <constructor-arg ref="dvdLibraryDao"/> 
+        <constructor-arg ref="consoleIO" /> 
+        
+       
+    </bean>
+  
                                 
 </beans>
     <!-- what we have done is given our class a context -->

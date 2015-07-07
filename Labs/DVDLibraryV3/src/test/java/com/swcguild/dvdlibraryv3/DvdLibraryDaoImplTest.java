@@ -53,14 +53,14 @@ public class DvdLibraryDaoImplTest {
     /**
      * Test of add method, of class DvdLibraryDaoImpl.
      */
-    @Test 
-        public void addGetRemove(){
-            //set
-            //act
-            //assert
-    
-    }
-    
+//    @Test 
+//        public void addGetRemove(){
+//            //set
+//            //act
+//            //assert
+//    
+//    }
+//    
             @Test
     public void testAdd() {
         System.out.println("add");
@@ -80,20 +80,37 @@ public class DvdLibraryDaoImplTest {
      * Test of remove method, of class DvdLibraryDaoImpl.
      */
     @Test
-    public void testRemove() {
-        System.out.println("remove");
+    public void testRemove1() {
+        System.out.println("remove one of two");
 
-        Dvd dvd1 = new Dvd();
-        dvd1.setTitle("TestDVD1"); //this is 
+        //DvdLibraryDaoImpl instance = new DvdLibraryDaoImpl();
+        
         dvd1.setId(0);
+        dvd1.setTitle("TestDVD1"); //this is 
+        dao.add(dvd1);
+        
+        dvd2.setId(1);
+        dvd2.setTitle("TestDVD2"); //this is 
+        dao.add(dvd2);
+        dao.remove(1);
 
-        DvdLibraryDaoImpl instance = new DvdLibraryDaoImpl();
-        instance.add(dvd1);
-        instance.remove(0);
+        int result = dao.listAll().size();
+        Assert.assertEquals(1, result);
+    }
+    
+    public void testRemoveLast(){
+        System.out.println("remove last remaining");
 
-        boolean result = instance.getDvdCollection().isEmpty();
+        //DvdLibraryDaoImpl instance = new DvdLibraryDaoImpl();
+        
+        dvd1.setId(0);
+        dvd1.setTitle("TestDVD1"); //this is 
+        dao.add(dvd1);
+        
+        dao.remove(0);
+
+        boolean result = dao.listAll().isEmpty();
         Assert.assertTrue(result);
-
     }
 
     /**
@@ -127,10 +144,11 @@ public class DvdLibraryDaoImplTest {
         dvd1.setTitle("Apples are Free");
         dvd1.setId(0);
         dao.add(dvd1);
+        
 
-        dvd2.setTitle("Babies are Cute");
-        dvd2.setId(1);
-        dao.add(dvd2);
+//        dvd2.setTitle("Babies are Cute");
+//        dao.add(dvd2);
+//        dvd2.setId(1);
         
         Dvd first = dao.getById(0);
         String result = first.getTitle();
@@ -155,7 +173,7 @@ public class DvdLibraryDaoImplTest {
     
         //List<Dvd> testList = dao.listAll();
         
-        String title = "Apples";
+        String title = "Apples are Free";
         
         List<Dvd> result = dao.getByTitle(title); //should return a list of titles, this title has one match
                                                 //list size shoudl equal one or string shoudl match
