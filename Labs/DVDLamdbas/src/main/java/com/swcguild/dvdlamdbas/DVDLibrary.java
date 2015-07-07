@@ -44,6 +44,8 @@ public interface DVDLibrary {
     public List<DVD> directorSearch(String director);
     //public Map<String, List<DVD>> directorSearch(String director);
     public List<DVD> studioSearch(String studio);
+    
+    public List<String> notes(String userReview);
    
     public void AvgNumNotes();
 

@@ -158,6 +158,7 @@ public class DVDLibraryController {
                 + "3. List By MPAA Rating \n"
                 + "4. Find By Director \n"
                 + "5. Find By Studio \n"
+                //need to have add a new note to DVD method -- which adds to the ArrayList
                 + "6. Find Average Number of Ratings \n"
                 + "7. Find Average Age of Release for DVDs in Collection \n"
                 + "8. Find Oldest DVD \n"

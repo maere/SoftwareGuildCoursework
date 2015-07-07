@@ -23,13 +23,6 @@ public class DVDLambaTests {
     public DVDLambaTests() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
@@ -49,4 +42,12 @@ public class DVDLambaTests {
 //        Assert.assertEquals(16425, result);
 //        
 //    }
+    
+    @Test
+    public void testDVDageDays() {
+        DVDLibraryFileImpl testObject = new DVDLibraryFileImpl();
+        int result = testObject.getDVD(5).getDVDageDays();
+        Assert.assertEquals(16425, result);
+
+    }
 }

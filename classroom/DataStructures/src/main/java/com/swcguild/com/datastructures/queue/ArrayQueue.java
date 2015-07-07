@@ -157,7 +157,9 @@ public class ArrayQueue implements Queue {
 
         @Override
         public Object next() {
-            return items[head]!=null; //To change body of generated methods, choose Tools | Templates.
+            //return items[head]!=null; //To change body of generated methods, choose Tools | Templates.
+            //or is it items[head -1]?
+            return items[head];
         }
         
         

@@ -119,24 +119,26 @@ public class ArrayStackTest {
     public void testIterator() {
         System.out.println("iterator");
         ArrayStack instance = new ArrayStack();
+        
+        
+        instance.push("item1"); //bottom
+        //instance.push("item2"); //would be first returned
 
+ //the reason this wasn't working is iterator only works on the state of the stack at the time it is consctureded--can't push after making it...
         Iterator it = instance.iterator(); //in this instance the array travels in reverse
 
-        instance.push("item1"); //bottom
-        instance.push("item2"); //would be first returned
         
         //throws a null pointer because is iterating in reverse--solution?
         
-//        String result1 = (String) it.next();
-//            assertEquals("item1", result1);
+        String result1 = (String) it.next();
+            assertEquals("item1", result1);
         
-        boolean result2 = instance.pop().equals(it.hasNext());
-        assertFalse(result2);
+//        boolean result2 = instance.pop().equals(it.hasNext());
+//        assertFalse(result2);
         
     
-
-//        String item = (String) it.next();
-//        Assert.assertEquals(null, item);
+        boolean result = it.hasNext();
+        Assert.assertFalse(result);
 
     }
 

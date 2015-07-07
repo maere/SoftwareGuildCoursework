@@ -85,7 +85,8 @@ public class ArrayStack implements Stack {
                                         //is better to do as an inner class vs. in the package when we will never ever use it anywhere else
     private class ReverseArrayIterator implements Iterator {
                 //this will allow us to walk through the array backwards
-        
+
+//we only look at this number during construction of the iterator    
         private int i = numItems; //this line is why we have to have a private class...we want to tell the inner class about what's going on outside
                                 //Iterator needs to have access to the inner elements of what it's iterating through
 

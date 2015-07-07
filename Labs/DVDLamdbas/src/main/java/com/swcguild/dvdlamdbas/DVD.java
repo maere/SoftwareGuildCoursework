@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,7 @@ public class DVD implements Comparable<DVD>{
     String director;
     String studio;
     String userReview; //later we will make into an ArrayList<String> 
+    List<String> reviews;
     
     static int counter = 0; //we want this to be available to DVDLibrary class
     
@@ -44,6 +46,14 @@ public class DVD implements Comparable<DVD>{
 
     public String getTitle() {
         return title;
+    }
+
+    public List<String> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<String> reviews) {
+        this.reviews = reviews;
     }
 
     public void setTitle(String title) {
@@ -95,6 +105,9 @@ public class DVD implements Comparable<DVD>{
         this.studio = studio;
     }
 
+   //setUserReview will need a special setter/getter for the ArrayList--will need to return the list, no?
+    //will also need to push to this
+    
     public String getUserReview() {
         return userReview;
     }

@@ -4,3 +4,5 @@
 7::Sam::Duke::456 West Market st.::Akron::OH::44352
 8::Dan::Kottke::51 Webster St.::Palo Alto::CA::94301
 9::Fray::Schilling::497 Bikeway Lane::Davis::CA::95600
+10::Silly ::Sally::123 Elm::Rocky River::OH::44116
+11::Joe::Smith::4500 45th Ave. ::Oakland::CA::94619

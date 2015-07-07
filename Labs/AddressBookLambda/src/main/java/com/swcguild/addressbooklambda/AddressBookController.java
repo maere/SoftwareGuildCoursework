@@ -107,7 +107,7 @@ public class AddressBookController {
         //enter info into hashmap
         myAddressBook.addAddressToBook(currentAddress); //in this method we ask the roster object/class
 
-        con.readString("Student successfully created. Please hit enter to continue.");
+        con.readString("Address successfully created. Please hit enter to continue.");
 
     }
 
@@ -175,7 +175,7 @@ public class AddressBookController {
                 searchByZip();
                 break;
             case 5:
-                System.out.println("Exiting the system...");
+                System.out.println("Exiting...");
                 break;
             default:
             //assertion error or throw exception

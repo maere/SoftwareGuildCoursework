@@ -233,10 +233,26 @@ public class DVDLibraryFileImpl implements DVDLibrary {
         return titlesByStudio;
     }
 
-    @Override
+    @Override //this method will need to change to return calculation based on ArrayList
     public void AvgNumNotes() {
     }
-;
+    
+    @Override
+     public List<String> notes(String userReview){return null;
+}
+}
+
+    //@Override
+//    public List<String> notes(String userReview) {
+//        //adds note to our Array of notes
+//        
+//        //and returns array 
+//        //or do these need ot be two different one?
+//        List notesList = dvdCollection.values().stream(). //finishe
+//        //To change body of generated methods, choose Tools | Templates.
+//    return notesList;
+//    }
+//}
 
     //getters and setters
 //may not actually need
@@ -249,7 +265,7 @@ public class DVDLibraryFileImpl implements DVDLibrary {
 //    public void setDvdCollection(HashMap<Integer, DVD> dvdCollection) {
 //        this.dvdCollection = dvdCollection;
 //    }
-}
+
 /*
         //Optional<DVD> collect = dvdCollection.values().stream().collect(Collectors.minBy(DVD.releaseDateComparator));
         //listAllDVDs().sort(dvdList, DVD.releaseDateComparator);
