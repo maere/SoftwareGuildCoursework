@@ -8,7 +8,10 @@ package com.swcguild.olympian;
 /**
  *
  * @author apprentice
- */
+ */          //ski jumper is also a type of impl, tho not to interface...it just uses the event class, so we need as a field--
+                //in this case we want the ski jumper to compete...so they need to have an event to compete in...
+                    //so this skiJumper class has a compositional rel to the Event class..will implement it's METHODS
+                                                                    
 public class SkiJumper {
     private Event event;
     

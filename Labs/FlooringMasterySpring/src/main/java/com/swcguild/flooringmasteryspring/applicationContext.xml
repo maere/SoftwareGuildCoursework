@@ -16,20 +16,47 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
     
     <!-- Bean definitions go here-full class path and package name! -->
-    <!-- these are the classes we want to hook into our app: the interface we wrote to and the consoleIO-->
-    <bean id="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.DvdLibraryDaoDKImpl"/> 
-    <bean id="consoleIO" class="com.swcguild.dvdlibraryv3.ConsoleIO" />
+    <!-- these are the classes we want to hook into our app: the impls of the interface we wrote to and the consoleIO-->
+    <bean id="orderBookDao" class="" /> 
+    <bean id="materialsDao" class=""/> 
+    <bean id="taxesDao" class="" /> <!--path to our implemntation-->
+    <bean id="orderFactory" class="" />
     
-    <!--For future implementations, will need to comment out above, and use this bean:
-    <bean id ="dvdLibraryDao" class="com.swcguild.dvdlibraryv3.myClassFriendsImpl"> </bean>-->
+    <bean id="ConsoleIO" class=""/>
     
     <!--our controller bean definition needs to include the constructor ars so the classes above will get injected into the controller-->
-    <bean id="controls" class="com.swcguild.dvdlibraryv3.DvdLibraryController"> 
+    <bean id="controller" class=""> 
          <!--in order for the controller to inject the dao into itself, the bean is passed as a constructor arg -->
-        <constructor-arg ref="dvdLibraryDao"/> 
-        <constructor-arg ref="consoleIO" /> 
-  
+        <constructor-arg ref="orderBookDao"/> 
+        <constructor-arg ref="" />
+        <constructor-arg ref="" />
+        <constructor-arg ref="ConsoleIO" /> 
+     
     </bean>
+    
+     <!--need to add our aspect beans that we can use in our aspect definitions-->
+    <bean id="auditor" class="com.swcguild.flooringmasteryspring.Auditor"></bean>
+    <bean id="timerAspect" class="com.swcguild.flooringmasteryspring.TimerAspect"></bean>
+    
+    <!--put in AOP call and config-these are our advice breakdowns-->
+    <aop:config>
+        <aop:aspect ref="auditor"> 
+          
+            <aop:after method="writeEntryToFile" pointcut="" />
+            <!--will we need multiple beans, one for each method, or can we add multiple point cuts to one with commas? -->
+        <!--<aop:before method="inspectEquipment" pointcut="execution(* com.swcguild.olympian.Event.compete(..))" />-->
+            
+        </aop:aspect>
+        
+        <aop:aspect ref="timerAspect">
+            <aop:around method="logToConsole" pointcut="" />
+        </aop:aspect>
+        
+    </aop:config>
+  <!--any class that implements events, when the compete method gets called, the Inspect Equipment 
+            from olympic offical will be called before that ... the pointcut is where it gets executed-->
+    
+    
   
                                 
 </beans>

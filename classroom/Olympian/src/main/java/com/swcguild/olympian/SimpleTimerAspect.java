@@ -23,7 +23,7 @@ public class SimpleTimerAspect {
             System.out.println(jp.getSignature().getName() + " took " + (end-start) + " ms");
             System.out.println("----------------");
         } catch(Throwable ex)  { //we always catch a type of exception -- catch takes a paramter!
-                System.out.println("Exeption in Simple TimerAspect.timeMethod");
+                System.out.println("Exception in Simple TimerAspect.timeMethod");
         }
         return ret;
     }

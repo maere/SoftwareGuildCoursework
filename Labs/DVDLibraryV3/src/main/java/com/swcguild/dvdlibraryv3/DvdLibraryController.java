@@ -135,7 +135,7 @@ public class DvdLibraryController {
         int searchChoice = con.readInt("Choose a search option from the menu (1-10): \n"
                 + "1. Search By Id \n"
                 //                                          + "2. Search By Year of Release \n"
-                + "2. Search By Title"
+                + "2. Search By Title \n"
                 + "3. List By MPAA Rating \n"
                 //+ "4. Find By Director \n"
                 + "4. Find By Studio \n"

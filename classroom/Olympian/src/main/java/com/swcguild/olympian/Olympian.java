@@ -8,8 +8,8 @@ package com.swcguild.olympian;
 /**
  *
  * @author apprentice
- */
-public class Olympian {
+ */                 // this is not really an impl, but acts like one--it uses the class Event...bc it needs it to construct an olympian--it needs it in the constructor
+public class Olympian { 
     private Event event; // this is what allows aggregation--we make the related interface/class available in our class as a field--will be constructed by Spring
                     //with the old way, we would have had to included the class as a field or in our constructor explicitly (e.g. DAO new instnace)
     private String country = "USA";  //default value

@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.olympian;
+package com.swcguild.flooringmasterylab.dao;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 /**
  *
  * @author apprentice
  */
-public interface Event { //this is a DAO
-    public String compete();
+public interface Taxes {
+    
+    public HashMap loadTaxes() throws FileNotFoundException;
     
 }
