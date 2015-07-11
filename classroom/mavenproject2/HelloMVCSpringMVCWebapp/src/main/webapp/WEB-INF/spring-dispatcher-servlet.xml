@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+                            http://www.springframework.org/schema/context  
+                            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                            http://www.springframework.org/schema/mvc
+                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- Uncomment this to move to annotation driven configuration -->
+    <mvc:annotation-driven /><!--we can make a choice between annotation and config -->
+    <context:component-scan base-package="com.swcguild.hellomvcspringmvcwebapp" />       
+                                <!--this is where the router will look for everythign to resolve -->
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <!-- this is where spring is going to look to resolve which view to use-->
+        <property name="prefix">
+            <value>/jsp/</value> <!--"Spring, go look in this folder for our jsps -->
+        </property>
+       
+        <property name="suffix">
+            <value>.jsp</value><!--all of our files will have .jsp file extensions -->
+        </property>
+    </bean>
+    
+ </beans>

@@ -60,12 +60,13 @@ doesn't exist elsewhere yet-->
         <aop:aspect ref="olympicOfficial"> 
           
             <aop:before method="inspectEquipment" pointcut="execution(* com.swcguild.olympian.Event.compete(..))" />
-          
+          <!-- before/after aspects don't have to return anything-->
             <aop:after method="testForPED" pointcut="execution(* com.swcguild.olympian.SkiJumpEvent.compete(..))" />
         </aop:aspect>
         
         <aop:aspect ref="simpleTimerAspect">
             <aop:around method="timeMethod" pointcut="execution(* com.swcguild.olympian.SkiJumpEvent.compete(..))" />
+        <!--around aspects need to return something-->
         </aop:aspect>
         
     </aop:config>

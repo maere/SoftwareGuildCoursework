@@ -5,6 +5,7 @@
  */
 package com.swcguild.flooringmasterylab;
 
+import java.io.IOException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,15 +14,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author apprentice
  */
 public class App {
-    
-    //need to instantiate the ctx and pass in applicationContext.xml
+    public static void main(String[] args) throws IOException {
+          //need to instantiate the ctx and pass in applicationContext.xml
     ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
     
     //instantiate instance of entry class via get bean
-    OrderController control = ctx.getBean("controller", OrderController.class);
+    OrderController controls = ctx.getBean("controller", OrderController.class);
     
     //call method in interface on object
-     //control.run();
+     controls.run();
+    }
+  
     
 }
 

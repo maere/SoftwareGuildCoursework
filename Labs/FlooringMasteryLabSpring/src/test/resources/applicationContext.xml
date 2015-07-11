@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!--  -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+    
+    <!-- Bean definitions go here-full class path and package name! -->
+    <!-- these are the classes we want to hook into our app: the impls of the interface we wrote to and the consoleIO-->
+    
+    <bean id="orderBookDao" class="com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl" /> 
+    <bean id="ConsoleIO" class="com.swcguild.flooringmasterylab.ConsoleIO"/>
+
+    <bean id="materialsDao" class="com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl"/> 
+    <bean id="taxesDao" class="com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl" /> <!--path to our implemntation-->
+    
+    <bean id="orderFactory" class="com.swcguild.flooringmasterylab.operations.OrderFactory">
+        <constructor-arg ref="materialsDao"/><!--I think order factory relies on tax & materials dao two-->
+        <constructor-arg ref="taxesDao"/>
+    </bean>
+
+
+    <!--our controller bean definition needs to include the constructor ars so the classes above will get injected into the controller-->
+    <bean id="controller" class="com.swcguild.flooringmasterylab.OrderController" > 
+        <!--in order for the controller to inject the dao into itself, the bean is passed as a constructor arg -->
+        <constructor-arg ref="orderBookDao"/> 
+        <constructor-arg ref="orderFactory" />
+        <!--<constructor-arg ref="ConsoleIO" />  //where does order fit in? the DTO? -->
+        
+         <!--might not need these next two because they were already injected into the orderFactor that we are injecting into our controller--> 
+        <constructor-arg ref="materialsDao" /> 
+        <constructor-arg ref="taxesDao" /> 
+    </bean>
+    
+    <!--need to add our aspect beans that we can use in our aspect definitions-->
+    <bean id="auditor" class="com.swcguild.flooringmasterylab.Auditor"></bean>
+    <bean id="timerAspect" class="com.swcguild.flooringmasterylab.TimerAspect"></bean>
+    
+    <!--put in AOP call and config-these are our advice breakdowns-->
+    <aop:config>
+        <aop:aspect ref="auditor"> 
+          
+            <aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.writeOrderFile(..))" />
+            
+            <!--<aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.addOrder(..))" />
+            <aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.editOrder(..))" />
+            <aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.removeOrder(..))" />
+            <!-->
+                                 <!--example: <aop:before method="inspectEquipment" pointcut="execution(* com.swcguild.olympian.Event.compete(..))" />-->
+            
+        </aop:aspect>
+        
+        <aop:aspect ref="timerAspect">
+              <!--Read the Products from file, Read the sales tax entries from file, Read the orders for a given date from file, Write the orders for a given date from file-->
+            <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl.loadTaxes(..))" />
+            <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl.loadMatCosts(..))" />
+            
+            <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.loadOrderFile(..))" />
+            <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.saveOrdersByDate(..))" />
+        </aop:aspect>
+        
+    </aop:config>
+    
+    <!--any class that implements events, when the compete method gets called, the Inspect Equipment 
+    from olympic offical will be called before that ... the pointcut is where it gets executed-->
+
+                                
+</beans>
+
+<!-- what we have done is given our class a context -->
+<!--no paramters we are passing to the event   -->
+<!-- event instantiations  these all do something different when we call compete-->
+<!-- we do all the joining through the configuration  -->
+<!-- we do config first, then make sure it matches in app where we instantiate the bean -->
+<!--  this is a way for this to get passed...becuase the constructor takes an argument ...so we have to pass it one-->
+
+
+
+
+<!--
+    <bean id="canadianSpeedSkater" class="com.swcguild.olympian.Olympian">
+        <constructor-arg ref="speedSkating"/>
+    // passing "speedSkating" to Olympian as the event constructor, which it requires 
+        <property name="country" value="Canada"></property>
+    //we are assigning props to the Olympan, changing the default 
+    </bean>    
+-->
+<!--we want one of these in our test file and one in another context  -->
+<!--  -->

@@ -138,7 +138,7 @@ public class OrderController {
 
     private String bootUp() throws FileNotFoundException, IOException /*throws IOException*/ {
 
-        daoBook = new OrderBookDAOFileImpl(); //if it gets cranky will pull this
+        //daoBook = new OrderBookDAOFileImpl(); //if it gets cranky will pull this
 
         //read config file
         mode = daoBook.readConfig();

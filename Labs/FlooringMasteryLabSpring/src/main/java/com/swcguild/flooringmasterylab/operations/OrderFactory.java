@@ -6,8 +6,10 @@
 package com.swcguild.flooringmasterylab.operations;
 
 //import static com.swcguild.flooringmasterylab.Order.counter;
+import com.swcguild.flooringmasterylab.dao.Materials;
 import com.swcguild.flooringmasterylab.dto.Order;
 import com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl;
+import com.swcguild.flooringmasterylab.dao.Taxes;
 import com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -24,15 +26,31 @@ public class OrderFactory {
     HashMap<String, Double> taxMap;
     HashMap<String, double []> materialsMap;
     
-    MaterialsDAOFileImpl matObjRef = new MaterialsDAOFileImpl();
-    TaxesDAOFileImpl taxObjRef = new TaxesDAOFileImpl();
+    private Materials daoMaterials;//MaterialsDAOFileImpl matObjRef = new MaterialsDAOFileImpl();
+    private Taxes daoTaxes;//TaxesDAOFileImpl taxObjRef = new TaxesDAOFileImpl();
+
+//    MaterialsDAOFileImpl matObjRef = new MaterialsDAOFileImpl();
+//    TaxesDAOFileImpl taxObjRef = new TaxesDAOFileImpl();
+    
+    public OrderFactory(Materials daoMaterials, Taxes daoTaxes){
+        
+        this.daoMaterials = daoMaterials;
+        this.daoTaxes = daoTaxes;
+        
+        try {
+            taxMap = daoTaxes.loadTaxes();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(OrderFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
     
    
     //constructor--default
     public OrderFactory() {
         try {
-            matObjRef.loadMatCosts();
-             taxMap = taxObjRef.loadTaxes();
+            daoMaterials.loadMatCosts();
+             taxMap = daoTaxes.loadTaxes();
              
         } catch (FileNotFoundException ex) {
             Logger.getLogger(OrderFactory.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,8 +69,8 @@ public class OrderFactory {
         //double [] tempArray = new double [2];
         //tempArray =  matObjRef.materialsMap.get(flooringType);
         //double [] tempArray = materialsMap.get(flooringType);
-        double materialCostSqFt = matObjRef.getMaterial(flooringType)[0]; //.get(flooringType)[0];
-        double laborCostSqFt = matObjRef.getMaterial(flooringType)[1];
+        double materialCostSqFt = daoMaterials.getMaterial(flooringType)[0]; //.get(flooringType)[0];
+        double laborCostSqFt = daoMaterials.getMaterial(flooringType)[1];
 
         //need to get tax rate data according to state
         double taxRate = taxMap.get(state);
@@ -83,8 +101,8 @@ public class OrderFactory {
         
         area = object.getArea();
         
-        double materialCostSqFt = matObjRef.getMaterial(object.getFlooringType())[0]; //.get(flooringType)[0];
-        double laborCostSqFt = matObjRef.getMaterial(object.getFlooringType())[1];
+        double materialCostSqFt = daoMaterials.getMaterial(object.getFlooringType())[0]; //.get(flooringType)[0];
+        double laborCostSqFt = daoMaterials.getMaterial(object.getFlooringType())[1];
 
         //need to get tax rate data according to state
         double taxRate = taxMap.get(object.getState());

@@ -17,6 +17,17 @@ import java.util.Scanner;
  * @author apprentice
  */
 public class MaterialsDAOFileImpl implements Materials {
+    
+    public MaterialsDAOFileImpl(){
+        try{
+            loadMatCosts();
+           
+        }
+        catch(Exception e){
+        
+        }
+                
+    }
 
     final String PRODUCT_FILE = "Products.txt";
     //whenever we make our fields, we make them private and then we will know if we didn't put in the getters and setters we needed

@@ -41,9 +41,12 @@ public class OrderBookDAOFileImpl implements OrderBook {
     
     private String mode;
     private int globalId;
+    
+    private Order order;
 
     //constructor
     public OrderBookDAOFileImpl() {
+        
 
     }
 

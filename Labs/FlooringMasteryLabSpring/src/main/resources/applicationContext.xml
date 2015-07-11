@@ -17,7 +17,7 @@
     
     <!-- Bean definitions go here-full class path and package name! -->
     <!-- these are the classes we want to hook into our app: the impls of the interface we wrote to and the consoleIO-->
-    <
+    
     <bean id="orderBookDao" class="com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl" /> 
     <bean id="ConsoleIO" class="com.swcguild.flooringmasterylab.ConsoleIO"/>
 
@@ -31,16 +31,20 @@
 
 
     <!--our controller bean definition needs to include the constructor ars so the classes above will get injected into the controller-->
-    <bean id="controller" class="com.swcguild.flooringmasterylab.OrderController" /> 
+    <bean id="controller" class="com.swcguild.flooringmasterylab.OrderController" > 
         <!--in order for the controller to inject the dao into itself, the bean is passed as a constructor arg -->
         <constructor-arg ref="orderBookDao"/> 
-       <constructor-arg ref="orderFactory" />
-        <constructor-arg ref="ConsoleIO" /> <!--where does order fit in? the DTO? -->
+        <constructor-arg ref="orderFactory" />
+        <!--<constructor-arg ref="ConsoleIO" />  //where does order fit in? the DTO? -->
         
-         <!--might not need these next two because they were already injected into the orderFactor that we are injecting into our controller
+         <!--might not need these next two because they were already injected into the orderFactor that we are injecting into our controller--> 
         <constructor-arg ref="materialsDao" /> 
-        <constructor-arg ref="taxesDao" />-->  
+        <constructor-arg ref="taxesDao" /> 
     </bean>
+    
+    <!--DON'T EVER INSTANTIATE ANYTHING CALLED "TEST" INSIDE YOUR MAIN .XML FILE LIKE: <bean id="testClass" class="com.swcguild.flooringmasterylab.DAOUnitTest">
+         <constructor-arg ref="orderBookDao" />
+    </bean>-->
     
     <!--need to add our aspect beans that we can use in our aspect definitions-->
     <bean id="auditor" class="com.swcguild.flooringmasterylab.Auditor"></bean>
@@ -50,7 +54,8 @@
     <aop:config>
         <aop:aspect ref="auditor"> 
           
-            <aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.....saveWork(..))" />
+            <aop:after method="logAdviceNow" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.writeOrderFile(..))" />
+            <aop:after method="logPutOrders" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.putOrders(..))" />
             
             <!--<aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.addOrder(..))" />
             <aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.editOrder(..))" />
@@ -62,8 +67,9 @@
         
         <aop:aspect ref="timerAspect">
               <!--Read the Products from file, Read the sales tax entries from file, Read the orders for a given date from file, Write the orders for a given date from file-->
-            <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.TaxesDAOFileImple.loadTaxes(..))" />
+            <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.TaxesDAOFileImpl.loadTaxes(..))" />
             <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.MaterialsDAOFileImpl.loadMatCosts(..))" />
+            
             <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.loadOrderFile(..))" />
             <aop:around method="logToConsole" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.saveOrdersByDate(..))" />
         </aop:aspect>
