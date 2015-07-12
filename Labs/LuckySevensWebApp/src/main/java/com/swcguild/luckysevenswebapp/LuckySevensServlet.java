@@ -33,6 +33,12 @@ public class LuckySevensServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //tried to do try catch, was a problem...
+//        if(){
+//            response.sendError(sc, "");
+//        }
+//        else{
+        
         //declare LuckySevens object
         LuckySevensRefactored game;
         
@@ -61,9 +67,10 @@ public class LuckySevensServlet extends HttpServlet {
         request.setAttribute("rolls", rolls); 
         request.setAttribute("highDollar", highDollar); 
         
+        
             RequestDispatcher rd = request.getRequestDispatcher("response.jsp");
             rd.forward(request, response); //this dispatcher dude just keeps forwarding messages
-            
+    }
     }
         
         //pass back the 

@@ -15,7 +15,7 @@
         <h1>Player Results</h1>
                                     <!--don't put anything in between the link tags bc will route to error -->
         <a href="LuckySevensServlet"></a><!--the stuff below is sent from the value of the RSVP java servlet class -->
-       
+        <a href="index.jsp">Go back & Play Again</a>
         <!-- this is EL, expression language - the $ and {} for replacements etc.-->
         
         <p>
