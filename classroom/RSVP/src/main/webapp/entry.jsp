@@ -55,23 +55,25 @@
                 <h1>I'm having a party and you are invited!</h1>
                 Can you attend?</br>
 
-                <form action="RSVPServlet" method="post">
+                <form action="RSVPServlet" method="post"><!-- action selections the RSVP servlet class to handle requst -->
                 <!-- this will resolve into the URL and stands for the URL we are going to post to -->
                 
                 Yes<input type="radio" name="myAnswer" value="Yes" checked />
-                No <input type="radio" name="myAnswer" value="No" />
+                No <input type="radio" name="myAnswer" value="No" /><!--the two possible options for values we are sending  -->
 
                 Reason (if not attending) <br />
                 <select name="myReason">
-                        <option value="Out of town">Out of Town</option> <!-- this is the value taht gets sent to the server-->
+                <!-- this is the *value* that gets sent to the server-->
+                
+                        <option value="Out of town">Out of Town</option> 
                         <option value="Schedule conflict">Schedule conflict</option>
                         <option value="You suck.">I don't like you</option>
                 </select></br>
                 
-
+                <!--this will also possibly be included whte post -->
                         Notes: <br />
-                        <input type="text" name="myNotes" /><br />
-                        <input type="submit" value="RSVP" />
+                        <input type="text" name="myNotes" /><br /><!--the text value of myNotes is what will be sent -->
+                        <input type="submit" value="RSVP" /> <!--this is what the submit button says on it -->
                 </form>
             </div>
 

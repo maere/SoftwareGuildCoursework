@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Go to entry.jsp page</h1>
+        <a href="entry.jsp">Click me to check out this site. </a>
     </body>
 </html>

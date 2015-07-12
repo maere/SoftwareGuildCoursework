@@ -13,12 +13,12 @@
     </head>
     <body>
         <h1>Response</h1>
-        <a href="RSVPServlet">Home</a>
+        <a href="RSVPServlet">Home</a><!--the stuff below is sent from the value of the RSVP java servlet class -->
        
-        <!-- this is EL-->
-        Your answer was ${param.myAnswer}</br><!--  param is the parameter we are passing -->
-        ${message} <!-- -->
-        
+        <!-- this is EL, expression language - the $ and {} for replacements etc.-->
+        Your answer was ${param.myAnswer}</br><!--  param is the parameter the user posted for myAnswer -->
+        ${message} <!--this is the message we are returning from the if statement in RSVPServlet -->
+        <!--this syntax is basic substitution in webpage -->
         
         
     </body>

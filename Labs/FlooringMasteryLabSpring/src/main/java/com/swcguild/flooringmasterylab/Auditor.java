@@ -64,7 +64,7 @@ public class Auditor { //advice is going to be around --becuase its' the only on
         //System.out.println(sdf.format(cal.getTime()));
 //        
       
-        String logMessage = "At " + sdf.format(cal.getTime())+ "a change was made: " ; //+ order.getId()
+        String logMessage = sdf.format(cal.getTime()) + " a change was made on order number " ; //+ order.getId()
 
         PrintWriter out = new PrintWriter(new FileWriter(filename));
 
@@ -97,11 +97,18 @@ public class Auditor { //advice is going to be around --becuase its' the only on
 //        writeEntryToFile( (Order) order[0]);
         
         Object[] signatureArgs = jp.getArgs();
+        int orderNum;
         
-        for (Object signatureArg: signatureArgs) {
-        System.out.println("Arg: " +  (Order) signatureArg); // signatureArg.
-        }
+        Order anOrder = (Order) signatureArgs[0];
         
+//        for (Object signatureArg: signatureArgs) {
+//        Order anOrder = (Order) signatureArg; // signatureArg.
+//        orderNum = anOrder.getId();
+//            //System.out.println("Order number: " + orderNum + "was changed.");
+//        }
+        //could  have it return a value  and try to pass that elsewhere
+        orderNum = anOrder.getId();
+        System.out.println("Order# " + orderNum + " was added.");
         
     }
 

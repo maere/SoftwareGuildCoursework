@@ -36,17 +36,20 @@ public class ContactListServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    // this Servlet is our controller -- just handles gets and posts and hooks it up to our view (jsp page) and 
+    // this Servlet is our controller -- just handles gets and posts and hooks it up to our view (jsp page) 
+    //we have to write a method of HOW to process the request that doGet and doPost call for our particular apopp 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        ContactsDAO dao = new ContactsDAOMockImpl(); //MockImpl gets instantiated here...this is how things get hooked up
+        ContactsDAO dao = new ContactsDAOMockImpl(); //MockImpl gets instantiated here...
+                                                    //this is how things get hooked up
                                                     //later we will use DI to do this...
         
         List<Contact> list = dao.getContacts();
         
-        request.setAttribute("contactList", list);//we assign a string value to the parameter for the list object so we can pass it to the jsp file to grab
-        RequestDispatcher rd = request.getRequestDispatcher("contactList.jsp");
+        request.setAttribute("contactList", list);//we assign a string value to the parameter for 
+                                                 //the list object so we can pass it to the jsp file to grab
+        RequestDispatcher rd = request.getRequestDispatcher("contactList.jsp"); //this stuff will get sent to contactList.jsp
         rd.forward(request, response);
     }
 

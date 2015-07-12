@@ -14,11 +14,13 @@
     </head>
     <body>
         <h1>Contact List</h1>          
-        <c:forEach var="contact" items="${contactList}"><!--we use c, bc that is the prefix we identified above -->
-                                                    <!--var contact is the random variable we assign in a for each loop to hold the object temporarily -->
+        <!--we use c, b/c that is the prefix we identified above in our tag lib-->
+        <c:forEach var="contact" items="${contactList}"> <!--the param we passed was the contactList object we created in our servlet -->
+                <!--var contact is the random variable we assign in a for each loop to hold the object temporarily -->
+        <!--iterate to output the view -->
         <c:out value="${contact.name} |" ><br/></c:out>
         <c:out value="${contact.phone} |" ><br/></c:out>
-        <c:out value="${contact.email}" ><br/></c:out><!--this is all JSTL -->
+        <c:out value="${contact.email}" ><br/></c:out><!--this is all JSTL, the funky bold stuff-->
         <br/>
         </c:forEach>
     </body>

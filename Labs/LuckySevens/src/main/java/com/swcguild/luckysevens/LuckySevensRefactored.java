@@ -192,33 +192,5 @@ public class LuckySevensRefactored {
      */
 } //end of class
 
-//our methods for our class
-//userDollarInput
-//why errors?
-/*
- public int singleRoll()
- {
- Random rGen = new Random();
- return = 1 + rGen.nextInt(6);
- }
- */
 
-/*public int randomDiceRoll(int roll){
- //Each round the program rolls a virtual pair (2) of dice for the user    
- Random rGen = new Random();
- die1 = rGen.nextInt(6) + 1;
- die2 = rGen.nextInt(6) + 1;
-                
- int[] rollArray;
- int totalRoll = die1 + die2;
- rollArray[0] = die1;
- rollArray[1] = die2;
- rollArray[2] = roll;
- return rollArray;
-
-
- }*/
-//MaxRolls
-//MaxMoney
-
-//Finalresult
+ 

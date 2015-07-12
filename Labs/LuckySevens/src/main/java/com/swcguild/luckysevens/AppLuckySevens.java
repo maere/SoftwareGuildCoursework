@@ -14,6 +14,7 @@ public class AppLuckySevens {
         LuckySevensRefactored testRun = new LuckySevensRefactored(0,0, 0,500);
         //I am calling non-static methods from a static thing
         int moneyTest = testRun.getPlayerMoney();
+        
         System.out.println(moneyTest);
         
       

@@ -55,7 +55,7 @@
         <aop:aspect ref="auditor"> 
           
             <aop:after method="logAdviceNow" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.writeOrderFile(..))" />
-            <aop:after method="logPutOrders" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.putOrders(..))" />
+            <aop:around method="logPutOrders" pointcut="execution(* com.swcguild.flooringmasterylab.dao.OrderBookDAOFileImpl.putOrders(..))" />
             
             <!--<aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.addOrder(..))" />
             <aop:after method="writeEntryToFile" pointcut="execution(* com.swcguild.flooringmasterylab.OrderController.editOrder(..))" />

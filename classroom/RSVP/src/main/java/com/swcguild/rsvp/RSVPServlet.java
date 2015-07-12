@@ -61,8 +61,9 @@ public class RSVPServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             RequestDispatcher rd = request.getRequestDispatcher("entry.jsp"); 
-             rd.forward(request, response);//we are customizing--got rid of the default: processRequest(request, response);
+             RequestDispatcher rd = request.getRequestDispatcher("entry.jsp"); //
+             rd.forward(request, response);//we are customizing--got rid of the default: 
+             //processRequest(request, response);
     }
 
     /**
@@ -76,24 +77,28 @@ public class RSVPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //the stuff that comes back from the post
-            String myAnswer = request.getParameter("myAnswer");
-            String myReason = request.getParameter("myReason");
+        
+        //the stuff that comes back from the post--there are three values we are looking for--user may submit all or none
+            String myAnswer = request.getParameter("myAnswer");//the request will always be an available object
+            
+            String myReason = request.getParameter("myReason");//we try to match the request to the parameter passed
             String myNotes = request.getParameter("myNotes");//processRequest(request, response);
     
     //<!--our response -->
-            String message = "";
+            String message = ""; //instanitate bc we set in loop but want it available outside loop
             if ("No".equals(myAnswer)){
             message = "Sorry you can't make it.";
             }
             else {
             message = "Can't wait to see you";
-            }
+            }   //now we have a value for our message that we will pass into our reponse
             
-           // go to the Jsp which dsiplays our response called response.jsp -- will take in the param "myAnswer"
-            request.setAttribute("message", message); //the message we put in squiggly brackets in our jsp == to this mnessage
+           // go to the Jsp which dsiplays our response called "response.jsp" -- will take in the param "myAnswer"
+            request.setAttribute("message", message); // message we put in brackets in our jsp is  == to this first "message"
+                                    //set the message attribute in the jsp to this message object
+            
             RequestDispatcher rd = request.getRequestDispatcher("response.jsp");
-            rd.forward(request, response);
+            rd.forward(request, response); //this dispatcher dude just keeps forwarding messages
             
     }
 
