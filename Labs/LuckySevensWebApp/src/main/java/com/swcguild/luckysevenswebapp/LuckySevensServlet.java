@@ -7,6 +7,7 @@ package com.swcguild.luckysevenswebapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.BindException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,48 +33,57 @@ public class LuckySevensServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //tried to do try catch, was a problem...
-//        if(){
-//            response.sendError(sc, "");
-//        }
-//        else{
-        
+          
         //declare LuckySevens object
-        LuckySevensRefactored game;
+        LuckySevensRefactored game;   
+        /*
+        Order of ops in the app runner:
+        getPlayerMoney();
+        playOn();
+        outOfMoney();
+        playerReport();
+        */
         
-        //get amount of money for bet
+        //get amount of money for bet--replaces getPlayerMoney
         String playerMoneyString = request.getParameter("playerBet");
-        int playerMoney = Integer.parseInt(playerMoneyString);
+        Integer playerMoney = Integer.parseInt(playerMoneyString);
+        
+        if(!(playerMoney>0 && playerMoney instanceof Integer)){
+            System.out.println("There has been an error with your input.");
+        }
         
         //instantiate & initialize 
         game = new LuckySevensRefactored(0,0,0,playerMoney);
         
-        //call the getPlayerMoney method on object
-        //int result =
-                game.playOn();
-                
+         //start the game
+        game.getPlayerMoney(playerMoney);
+        game.playOn();
+        game.outOfMoney();
+       //playerReport() is replaced by the View--will need to set up variable for that
     
+        
         //return the resulting parameter(s) to the program
-        int rolls= game.getRollsCounter(); //this worked
-                
+        int rolls= game.getRollsCounter(); //this worked               
+  
+        int peak = game.getPeakRolls(); //this isn't registering on the view
         //int peak = game.getPeakRolls(); //tried moving Peak&Max into the playOn loop as void methods that checked  values
+        
         int highDollar = game.getMaxMoney();
-        int peak = game.getPeakRolls();
+        
         
         // go to the Jsp which isiplays our response called "response.jsp" -- will take in the param "myAnswer"
         //request.setAttribute("message", result); // message we put in brackets in our jsp is  == to this first "message"
-        request.setAttribute("peak", peak);                
-        request.setAttribute("rolls", rolls); 
-        request.setAttribute("highDollar", highDollar); 
+        request.setAttribute("AppPeak", peak);                
+        request.setAttribute("AppRolls", rolls); 
+        request.setAttribute("AppHighDollar", highDollar); 
         
         
             RequestDispatcher rd = request.getRequestDispatcher("response.jsp");
             rd.forward(request, response); //this dispatcher dude just keeps forwarding messages
-    }
+    
     }
         
-        //pass back the 
+ 
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

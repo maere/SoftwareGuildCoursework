@@ -59,18 +59,23 @@ public class LuckySevensRefactored {
     // loop construct to keep playing until the money is gone.
     public boolean playOn() {
 
+ 
         while (playerMoney > 0) {
-            //our dice roll was here.... so int variable = randomDiceRoll(int myRoll);   
+
+                //our dice roll was here.... so:  int variable = randomDiceRoll(int myRoll);   
             this.rollDice();
-                 //Each round the program rolls a virtual pair (2) of dice for the user  
-     
-                 //4. The program keeps track of how many rolls were taken before the money ran out
-            //rollsCounter++;
-            this.moneyTracker();   
-            this.maxDollars(); //moved these into play out for web app
-            this.maxRolls(); 
-        }
+                //4. The program keeps track of how many rolls were taken before the money ran out
+                //rollsCounter++;
+            
+            this.moneyTracker();
+                 //- If the sum of the 2 dice is equal to 7, the play wins $4; else the play loses $1
+            
+        }   //look to adjust maxDollars and maxRolls at the end of each loop
+            this.maxDollars();
+            this.maxRolls();
+        
         return true;
+            
     }
 
     //Refactored: If the sum of the 2 dice is equal to 7, the play wins $4; else the play loses $1
@@ -110,13 +115,13 @@ public class LuckySevensRefactored {
     }
 
   
-//    public String playerReport() {
-//        
-//        String playResult = "You are broke after " + rollsCounter + " rolls." + "\n" +
-//        "You should have quit after " + peakRolls + " rolls when you had $" + maxMoney;
-//        
-//        return playResult;
-//    }
+    public String playerReport() {
+        
+        String playResult = "You are broke after " + rollsCounter + " rolls." + "\n" +
+        "You should have quit after " + peakRolls + " rolls when you had $" + maxMoney;
+        
+        return playResult;
+    }
 
     //getters and setters
     public int getDie1() {

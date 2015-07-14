@@ -12,14 +12,14 @@ package com.swcguild.refactorintoobjects;
 public class AppRunRefactors {
     public static void main(String[] args) {
 //Interest Calculator
-        //InterestCalcRf carLoan = new InterestCalcRf();
-        //carLoan.run();
-        
+        InterestCalcRf carLoan = new InterestCalcRf();
+        carLoan.run();
+//        
 //Factorizer
             //intantiate object
         //FactorizerRf myFactor = new FactorizerRf();
             //run functions on the object of FactorizerRf class
-        //myFactor.FactorizerRun(); -- null pointer exception
+        //myFactor.FactorizerRun(); //null pointer exception
         
 //Lucky Sevens
         //LuckySevensRf newLuckyGame = new LuckySevensRf();
@@ -28,19 +28,19 @@ public class AppRunRefactors {
 //RPS -- is in a separate Project -- uploaded an named as such
         
 //Blackjack
-        BlackjackRf newBJgame = new BlackjackRf();
-        //run functions on the object
-        
-        //inital draws
-        newBJgame.cardDraw("player");
-        newBJgame.cardDraw("dealer");
-        newBJgame.initialDrawsResults();
-        newBJgame.playOn();
-        newBJgame.playerHit();
-        newBJgame.checkPlayer();
-        newBJgame.checkGameTotals();
-               
-                
+//        BlackjackRf newBJgame = new BlackjackRf();
+//        //run functions on the object
+//        
+//        //inital draws
+//        newBJgame.cardDraw("player");
+//        newBJgame.cardDraw("dealer");
+//        newBJgame.initialDrawsResults();
+//        newBJgame.playOn();
+//        newBJgame.playerHit();
+//        newBJgame.checkPlayer();
+//        newBJgame.checkGameTotals();
+//               
+//                
                 
 
     }

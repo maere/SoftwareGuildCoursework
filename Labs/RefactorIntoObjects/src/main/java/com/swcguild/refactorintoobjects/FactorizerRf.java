@@ -27,7 +27,7 @@ public class FactorizerRf {
          // This program must ask the user the number for which he/she wants to factor.
         sc = new Scanner(System.in);
         //only need params in constructor if I want to change them when I "new" it up/instantiate 
-        this.number = number;
+        //this.number = number;
         //this.sum = sum;  -- these last two are not needed
         //this.numFact = numFact;
 }
@@ -37,8 +37,9 @@ public class FactorizerRf {
         queryNum(); //returns number and changes the value in our object
     //prints results based on the factors stored in the array 
         confirmNumResults();
-        printResult(); //array is the result of testing numbers as factors of the given number
         gatherResultsArray();
+        printResult(); //array is the result of testing numbers as factors of the given number
+        
         //test for perfect numbers
         perfectNums();
     }
@@ -88,7 +89,7 @@ public class FactorizerRf {
          */
         
         //System.out.println("There are " + numFact + " factors for your number " + number);  
-        System.out.println("There are " + factorArray[2] + " factors for your number " + number);  
+        System.out.println("There were " + factorArray[2] + " factors for your number " + number);  
         //return sum;
     }
     

@@ -1,0 +1,20 @@
+Ask the user to enter in a width, 
+length and the 
+cost per 1 unit of flooring. 
+
+Have the program calculate how much it would cost to cover the area specified with the flooring.  
+sqFoot * material costperSqft = cost of Material
+
+Also have the program calculate how much labor costs would be given that 
+the average flooring team can only put in 20 square feet of flooring per hour 
+at a cost of $86.00/hr with a 15 minute billing increment. 
+
+matType, matCost, laborCost
+Carpet,2.25,2.10
+Laminate,1.75,2.10
+Tile,3.50,4.15
+Wood,5.15,4.75
+
+need total square feet, 
+calculate number hours of labor needed (totalsqFeet/20 == number of hours needed for job in QuarterHours NumHrs/4 w. no remainder)
+calculate 86/4 = 21.50 per each quarterHr
