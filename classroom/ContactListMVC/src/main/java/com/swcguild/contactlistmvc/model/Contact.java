@@ -6,6 +6,8 @@
 package com.swcguild.contactlistmvc.model;
 
 import java.util.Objects;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -14,10 +16,25 @@ import java.util.Objects;
 public class Contact {
     //fields
     private int contactId;
+    
+    @NotEmpty(message="You must supply a value for First Name")    //the annotation goes with the field we want to validate--we must have a name
+    @Length(max=20, message="First name must be no more than 50 characters in length")
     private String firstName;
+    
+    @NotEmpty(message="You must supply a value for Last Name")    //the annotation goes with the field we want to validate--we must have a name
+    @Length(max=30, message="Last name must be no more than 50 characters in length")
     private String lastName;
+    
+    @NotEmpty(message="You must supply a value for Company")    //the annotation goes with the field we want to validate--we must have a name
+    @Length(max=50, message="Company name must be no more than 50 characters in length")
     private String company;
+    
+    @NotEmpty(message="You must supply a value for the phone")    //the annotation goes with the field we want to validate--we must have a name
+    @Length(max=10, message="Phone number is 10 digits with no dashes, dots or other characters.")
     private String phone;
+    
+    @NotEmpty(message="You must supply a value for the email")    //the annotation goes with the field we want to validate--we must have a name
+    @Length(max=50, message="Email address must be no more than 50 characters in length")
     private String email;
 
     @Override

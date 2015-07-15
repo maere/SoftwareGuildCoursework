@@ -38,21 +38,26 @@
                     <label for="add-first-name" class="col-md-4 control-label">First Name:</label>
                     <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
                         <sf:input type="text" class="form-control" id="add-first-name" path="firstName" placeholder="First Name"></sf:input>
-                        </div>
+                     <!--now we will put in all of our errors in the view, and we will need indicate all of the "paths" - why is the param called a path?-->   
+                        <sf:errors path="firstName" cssclass="error"></sf:errors>
+                        
+                    </div>
                     </div>
 
                     <div class="form-group">
                         <label for="add-last-name" class="col-md-4 control-label">Last Name:</label>
                         <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
                         <sf:input type="text" class="form-control" id="add-last-name" path="lastName" placeholder="Last Name"></sf:input>
-                        </div>
+                        <sf:errors path="lastName" cssclass="error"></sf:errors>
+                    </div>
                     </div>
 
                     <div class="form-group">
                         <label for="add-company" class="col-md-4 control-label">Company:</label>
                         <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
                         <sf:input type="text" class="form-control" id="add-company" path="company" placeholder="Company"></sf:input>
-                        </div>
+                       <sf:errors path="company" cssclass="error"></sf:errors>
+                    </div>
                     </div>
 
               
@@ -60,6 +65,7 @@
                         <label for="add-email" class="col-md-4 control-label">Email:</label>
                         <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
                         <sf:input type="text" class="form-control" id="add-email" path="email" placeholder="Email"></sf:input>
+                        <sf:errors path="email" cssclass="error"></sf:errors>
                         </div>
                     </div>
 
@@ -67,7 +73,8 @@
                         <label for="add-phone" class="col-md-4 control-label">Phone:</label>
                         <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
                         <sf:input type="text" class="form-control" id="add-phone" path="phone" placeholder="Phone"></sf:input>
- <!--!!!!!! DO NOT FORGET THIS!!! we forgot to add an id to this -- should be a hidden field-- but can go anywhere bc it will not display-->                      
+                        <sf:errors path="phone" cssclass="error"></sf:errors>
+   <!--!!!!!! DO NOT FORGET THIS!!! we forgot to add an id to this -- should be a hidden field-- but can go anywhere bc it will not display-->                      
                         <sf:hidden path="contactId"/>
                         </div>
                     </div>

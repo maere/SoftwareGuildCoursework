@@ -21,9 +21,9 @@
 
             <!--all must be cast from strings-->
             Enter the value of your meal or service: <!-- float-->
-            <input type="number" name="amountOfService" /><br/>
+            <input type="number" step=".01" name="amountOfService" /><br/>
             <br/>
-            What percentage would you like to tip? <!-- int -->
+            What percentage would you like to tip? (enter as a whole number) <!-- int -->
             <input type="input" name="tipPercentage" /><br/>
             <br/>
             

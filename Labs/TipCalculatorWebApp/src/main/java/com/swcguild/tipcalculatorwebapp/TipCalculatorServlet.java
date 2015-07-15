@@ -32,23 +32,28 @@ public class TipCalculatorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //get parameters from the request
-        request.getParameter("amountOfService");
-        request.getParameter("tipPercentage");
-                
+        String strService = request.getParameter("amountOfService");
+        double service = Double.parseDouble(strService);
+        
+        String strTip = request.getParameter("tipPercentage");
+        double percentage = Double.parseDouble(strTip); 
+
         //make object to run calculations
-        TipCalculator calcObj = new TipCalculator();//should it require params for constructor--yes
+        TipCalculator calcObj = new TipCalculator(service, percentage);//should it require params for constructor--yes
+        double currentTip = calcObj.calculateTip();
+        
         
         //set attributes 
-        //request.setAttribute("number", strNumber); //depending on what comes back from the calculations
+        request.setAttribute("tip", currentTip);
+        //request.setAttribute("", total);
         
+        //request.setAttribute("number", strNumber); //depending on what comes back from the calculations
         //dispatch a response to the jsp
         RequestDispatcher rd = request.getRequestDispatcher("response.jsp");
         rd.forward(request, response);
-        
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

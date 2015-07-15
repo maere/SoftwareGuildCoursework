@@ -13,6 +13,21 @@
     </head>
     <body>
         <h1>Tip Calc Result</h1>
-        <!--Then print out the subtotal along with the total plus tip (grand total).  -->
+        Your service costing ${param.amountOfService} when tipping ${param.tipPercentage}% would require:
+        <br />
+        <br />
+        Tip: $ ${tip}
+        <br />
+        Total: $ ${param.amountOfService+tip}
+        
+        
     </body>
 </html>
+<!--Then print out the subtotal along with the total plus tip (grand total). 
+        Output: 
+        Amount: $10.00 
+        Tip %: 15 
+        Tip:     $1.50 
+        Total:  $11.50 
+        
+        -->

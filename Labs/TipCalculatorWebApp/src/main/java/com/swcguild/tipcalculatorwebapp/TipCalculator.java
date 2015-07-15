@@ -12,9 +12,10 @@ package com.swcguild.tipcalculatorwebapp;
 public class TipCalculator {
     
     double costOfService;
-    int percentage;
+    double percentage;
+    double total;
     
-    public TipCalculator(double costOfService, int percentage){
+    public TipCalculator(double costOfService, double percentage){
         this.costOfService = costOfService;
         this.percentage = percentage;
     }
@@ -22,7 +23,10 @@ public class TipCalculator {
     
     //calculate tip method here
     public double calculateTip(){
-    
+        
+        double tip = (costOfService*(percentage/100));
+        total = tip+costOfService;
+        return tip;
     }
     
     

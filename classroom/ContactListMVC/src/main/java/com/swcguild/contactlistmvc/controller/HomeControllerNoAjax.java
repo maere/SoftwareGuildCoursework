@@ -11,8 +11,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -100,10 +102,19 @@ public class HomeControllerNoAjax {
     }
     
      @RequestMapping(value = "/editContactNoAjax", method = RequestMethod.POST)
-    public String editContactNoAjax(@ModelAttribute("contact") Contact contact) { //is always only one model, but the model itself coudl be complex
+    public String editContactNoAjax(@Valid @ModelAttribute("contact") Contact contact, 
+                                    BindingResult result) { //is always only one model, but the model itself coudl be complex
                             //this is the modelattribute="contact" that we passed in request the editContactForm.jsp
                             //it does reflection--I have a think that is goign to be named a certain way and I will match one-to-one and put the value in
-         dao.updateContact(contact);
+        
+        if(result.hasErrors()){
+                            //we indicate that this is the method the validation applies to, and we also have but @annotations in our DTO on the fields to call out the fields we are validating
+            return "editContactFormNoAjax";
+                //we go back to this view again after it displays errors
+                //now will go mess with our view (editContactFormNoAjax)
+        }
+        
+        dao.updateContact(contact);
          return "redirect:displayContactListNoAjax";
     }
     
