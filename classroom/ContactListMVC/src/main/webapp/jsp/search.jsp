@@ -27,6 +27,7 @@
                 
                     <li class="active" role="presentation"><a href="${pageContext.request.contextPath}/search">Search</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/stats">Stats</a></li>
+                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayContactListNoAjax">Contact List (No Ajax)</a></li>
                 </ul>    
             </div>
                 

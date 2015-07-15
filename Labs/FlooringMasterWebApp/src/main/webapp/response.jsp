@@ -12,18 +12,22 @@
         <title>Flooring Calculations</title>
     </head>
     <body>
-        <h1>Results</h1>
-
-        <h4>Your materials cost for that flooring job is:</h4>
-        ${matCosts}
+        <h1>Flooring Order Estimate</h1>
+        <hr>                    <!--use param.attribute when it is sohmething that was passed into the servlet via the form -->
+        For a ${param.length} x ${param.width} room, with a material cost of ${param.costPerSqFt} per square foot:
+        <br>
+        <ul>
+            <li>Your materials cost for this flooring job is: ${currentMatCost}.</li>
         <br />
 
-        <h4>Your labor cost for installing the flooring in that room is:</h4>
-        ${labor}
-       
+        <li>Your labor cost for installing the flooring in this room is: ${currentLaborCost}.</li> 
+        <br/>
+        <li>Your total cost for the job is ${orderTotal} and would take ${timeToComplete} hours to complete.</li><!-- hours/4...x -->
+        <br />
+            
+        </ul>
         
-        <h4>and would take ${quarterHours*4} hours to complete.</h4>
-        <br />
+    
 
     </body>
 </html>

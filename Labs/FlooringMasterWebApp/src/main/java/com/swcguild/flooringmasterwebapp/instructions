@@ -1,0 +1,82 @@
+Ask the user to enter in a width - width
+length and the -lenght
+
+------
+
+area
+cost per 1 unit of flooring. costPerSqFt
+
+method:
+calculate area
+
+method:
+Have the program calculate how much it would cost to cover the area specified with the flooring.  
+matTotalCost = costPerSqFoot * area;
+
+method:
+
+float laborRate=86.00;
+int laborIncrement=4
+
+float currentRate =  (laborRate/laborIncrement)   eg. 86/4 = (21.50 per each quarterHr)
+
+float hours = area/20
+
+laborCost = Math.floor(hours/laborIncrement)*currentRate (?)
+
+totalCost = matTotalCost+laborCost;
+
+-----------
+
+divide that by 4 to get chargableUnitsOfLabor and use Math.floor(chargealbeUnits) - multiply this x LaborRate/4
+in QuarterHours NumHrs/4 w. no remainder)
+
+Also have the program calculate how much labor costs would be given that 
+the average flooring team can only put in 20 square feet of flooring per hour 
+at a cost of $86.00/hr with a 15 minute billing increment. 
+
+matType, matCost, laborCost
+Carpet,2.25,2.10
+Laminate,1.75,2.10
+Tile,3.50,4.15
+Wood,5.15,4.75
+
+
+
+need total square feet, 
+calculate number hours of labor needed (totalsqFeet/20 == number of hours needed for job)
+
+laborRate=86;
+laborIncrement=4
+variable currentRate =  (laborRate/laborIncrement)   (21.50 per each quarterHr)
+
+
+divide that by 4 to get chargableUnitsOfLabor and use Math.floor(chargealbeUnits) - multiply this x LaborRate/4
+in QuarterHours NumHrs/4 w. no remainder)
+
+
+Pat said should use hours and divide by 4--in case you want to chagne later
+Ilya said to do ceiling, and not Floor for rounding method.
+
+
+public class Test{ 
+
+   public static void main(String args[]){
+      double d = -100.675;
+      float f = -90;    
+	 
+      System.out.println(Math.floor(d));
+      System.out.println(Math.floor(f)); 
+
+      System.out.println(Math.ceil(d));
+      System.out.println(Math.ceil(f));
+   }
+}
+
+This produces the following result:
+
+-101.0
+-90.0
+
+-100.0
+-90.0

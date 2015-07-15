@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.interestcalculatorwebapp;
+package com.swcguild.flooringmasterwebapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author apprentice
  */
-@WebServlet(name = "InterestCalcServlet", urlPatterns = {"/InterestCalcServlet"})
-public class InterestCalcServlet extends HttpServlet {
+@WebServlet(name = "FlooringMasterMiniServlet", urlPatterns = {"/FlooringMasterMiniServlet"})
+public class FlooringMasterMiniServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,35 +32,37 @@ public class InterestCalcServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //declare object of the class
-        InterestCalcRf calculatorObj;
-      
-        //this is the input sent from the user/use request  object (the params submitted) to work with 
-        String strMoney = request.getParameter("moneyInvested");
-        String strYears = request.getParameter("yearsInvested");
-        String strRate =  request.getParameter("interestRate");
-        
-        float currentBalance = Float.parseFloat(strMoney);
-        int years = Integer.parseInt(strYears);
-        float intRate = Float.parseFloat(strRate);
-        
-        //instantiate object & set the initial params to run the method(s)
-        calculatorObj = new InterestCalcRf(currentBalance, years, intRate);
-    
-        List<FiscalYear> list = calculatorObj.EOY(); //would be easiest to get this to return an arrayList of objects with data for each year
-                            //pushed into the object on each iteration
-        
-        request.setAttribute("list",list);
-        //"The year number is: " + yearCounter);                             
-        //print outs are handled in the view
-                    //with an Object, can just send back the list or 
        
-        //return the params to the jsp, where you can // print out results in a for each loop
-        RequestDispatcher rd = request.getRequestDispatcher("response.jsp");
-        rd.forward(request, response); //this dispatcher will just keeps forwarding messages 
-
+        FlooringMasterMini app;
+        //get parameters from the request object & parse from strings
+        String strLength = request.getParameter("length");
+        Double length = Double.parseDouble(strLength);
         
+        String strWidth = request.getParameter("width");
+        Double width = Double.parseDouble(strWidth);
+        
+        String strCostPerSqFt = request.getParameter("costPerSqFt");
+        Double costPerSqFt = Double.parseDouble(strCostPerSqFt);
+        
+        //app has needs these values
+        app = new FlooringMasterMini(length, width, costPerSqFt);
+        
+        double roomArea = app.calculateArea(length, width);
+        double currentMatCost = app.calculateMaterials(roomArea, costPerSqFt);
+        double currentLaborCost = app.calculateLaborRate();
+        double orderTotal = app.calcOrderTotal(currentLaborCost, currentMatCost);
+        double timeToComplete = roomArea/20;
+        
+        //set attributes for the response using "attributeName", servletVar
+        request.setAttribute("currentMatCost", currentMatCost);
+        request.setAttribute("currentLaborCost", currentLaborCost);
+        request.setAttribute("roomArea", roomArea);
+        request.setAttribute("orderTotal", orderTotal);
+        request.setAttribute("timeToComplete", timeToComplete);
+        
+        //send back the response via a dispatcher object
+        RequestDispatcher rd = request.getRequestDispatcher("response.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +77,7 @@ public class InterestCalcServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response); //want to execute request dispatcher here.. instead of above
+        processRequest(request, response);
     }
 
     /**
