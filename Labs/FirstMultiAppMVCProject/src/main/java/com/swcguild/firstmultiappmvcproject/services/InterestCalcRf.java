@@ -59,15 +59,18 @@ public class InterestCalcRf {
         for (int yearCounter = 0; yearCounter <= years - 1; yearCounter++) {
             
             currentYear = new FiscalYear();
+             
 
             currentYear.setYear(yearCounter+1);
             currentYear.setCurrentBalance(currentBalance);
-            yearInterest = accruedInterest(); 
+            float interest = accruedInterest(); 
             
-            yearly = currentBalance; 
-            endPrinciple = yearly + yearInterest;
+            //yearly = currentBalance; 
+            //endPrinciple = currentBalance + yearInterest;
             
-            currentYear.setYearInterest(yearInterest);
+            currentYear.setYearInterest(interest);
+            
+            //endPrinciple = yearly + interest;
             currentYear.setEndPrinciple(endPrinciple);
 
             resultsList.add(currentYear);
@@ -85,6 +88,7 @@ public class InterestCalcRf {
 
         float quartInterest;
         yearInterest = 0;
+       
 
         for (int i = 1; i <= compoundInterval; i++) { //Q, M, D
 
@@ -97,7 +101,7 @@ public class InterestCalcRf {
             currentBalance = currentBalance * (1 + (compound / 100));
 
         }
-        endPrinciple = yearly + yearInterest;//interestAccrued = yearInterest;
+        endPrinciple = currentBalance + yearInterest;//interestAccrued = yearInterest;
 
         //returns intersestAccrued over a year
         return yearInterest;//return interestAccrued;

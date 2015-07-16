@@ -11,17 +11,26 @@ package com.swcguild.firstmultiappmvcproject.model;
  */
 public class FiscalYear {
     private int year;
+    private float startPrinciple;
     private float currentBalance;
     private float endPrinciple;
     private float yearInterest; //this will get set on the object when running acrruedInterest
     
     public FiscalYear(){
-     
+     this.startPrinciple = currentBalance;
     
     }
 
     public int getYear() {
         return year;
+    }
+
+    public float getStartPrinciple() {
+        return startPrinciple;
+    }
+
+    public void setStartPrinciple(float startPrinciple) {
+        this.startPrinciple = startPrinciple;
     }
 
     public void setYear(int year) {
