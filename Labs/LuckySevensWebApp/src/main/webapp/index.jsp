@@ -27,11 +27,10 @@
                         Enter an integer value (whole number): <br />
                         <input type="text" name="playerBet" /><br /><!--the text value of myNotes is what will be sent -->
                         <br />
-                        <input type="submit" value="Let's play!" /> <!--this is what the submit button says on it -->
-                        
+                        <input type="submit" value="Let's play!" /> <!--this is what the submit button says on it -->   
                 </form>
             </div>
         
-        
+         </div>
     </body>
 </html>

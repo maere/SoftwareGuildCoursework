@@ -25,15 +25,15 @@
                     How much money will you be investing? <!-- float-->
                     <input type="text" name="moneyInvested" />
                     <br/>
- <br/>
+                    <br/>
                     How many years will you invest? <!-- int -->
                     <input type="text" name="yearsInvested" />
                     <br/>
- <br/>
+                    <br/>
                     What is your annual interest rate? <!-- float-->
                     <input type="text" name="interestRate" />
                     <br/>
- <br/>
+                    <br/>
                     <!--the text value of name="" is what will be sent to server -->
                     <br/>
                     <input type="submit" value="Calculate Interest" /> <!--this is what the submit button says on it -->

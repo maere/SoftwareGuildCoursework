@@ -47,10 +47,10 @@ public class LuckySevensServlet extends HttpServlet {
         //get amount of money for bet--replaces getPlayerMoney
         String playerMoneyString = request.getParameter("playerBet");
         Integer playerMoney = Integer.parseInt(playerMoneyString);
-        
-        if(!(playerMoney>0 && playerMoney instanceof Integer)){
-            System.out.println("There has been an error with your input.");
-        }
+//        
+//        if(!(playerMoney>0 && playerMoney instanceof Integer)){
+//            System.out.println("There has been an error with your input.");
+//        }
         
         //instantiate & initialize 
         game = new LuckySevensRefactored(0,0,0,playerMoney);
@@ -58,7 +58,7 @@ public class LuckySevensServlet extends HttpServlet {
          //start the game
         game.getPlayerMoney(playerMoney);
         game.playOn();
-        game.outOfMoney();
+        //game.outOfMoney();
        //playerReport() is replaced by the View--will need to set up variable for that
     
         

@@ -23,7 +23,7 @@
       <!--  $-{message} - this is the message we are returning from the LuckySevensServlet -->
         </p>
         <p>
-        You are broke after  ${Approlls} rolls. </br>
+        You are broke after ${AppRolls} rolls. </br>
         
         You should have quit after ${AppPeak} rolls when you had ${AppHighDollar} dollars.
         </p>
