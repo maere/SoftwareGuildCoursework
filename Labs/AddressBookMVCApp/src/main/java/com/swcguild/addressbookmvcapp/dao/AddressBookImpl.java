@@ -33,7 +33,7 @@ public class AddressBookImpl implements AddressBookAPI{
     public static final String DELIMITER = "::";
 
     static int idNumber;
-    Address addressObject;
+    //Address addressObject;
 
     //constructor
     HashMap<Integer, Address> addressMap = new HashMap<>();

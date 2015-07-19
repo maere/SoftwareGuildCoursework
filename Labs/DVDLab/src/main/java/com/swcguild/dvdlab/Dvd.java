@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author apprentice
  */
-public class DVD {
+public class Dvd {
     public int id;//later we can make this an integer and do the casting and parsing--for now it's a STring
     String title;
     String releaseDate;
@@ -24,9 +24,10 @@ public class DVD {
     
    
     //constructor
-   DVD() {
+   Dvd() {
         this.id = ++counter; //every time we make a DVD we increment the counter
-    }
+    
+   }
 
     /*
     public void setId(Integer id) {
@@ -34,6 +35,10 @@ public class DVD {
     }
    */ 
    
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

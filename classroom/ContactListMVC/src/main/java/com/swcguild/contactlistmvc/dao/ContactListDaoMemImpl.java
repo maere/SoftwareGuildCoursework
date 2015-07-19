@@ -41,17 +41,48 @@ public class ContactListDaoMemImpl implements ContactListDao {
 
     @Override
     public void updateContact(Contact contact) {
-         contactMap.put(contact.getContactId(), contact);//To change body of generated methods, choose Tools | Templates.
+         contactMap.put(contact.getContactId(), contact);
     }
 
     @Override
     public List<Contact> getAllContacts() {
          Collection<Contact> c = contactMap.values();//To change body of generated methods, choose Tools | Templates.
          return new ArrayList(c); //does this just "magically" get created?
+         
+        //we are passing the collection in (c is the collection of values that results from calling values on the collection)
+        //we are allowed, when we construct an array list, to pass in a collection and it will convert those object into an array list of objects of that type (it's smart enough to do this)
+    
+         //------------------JSON test -------------------
+//        Contact contact1 = new Contact();
+//        
+//        contact1.setFirstName("Bill");
+//        contact1.setLastName("Gates");
+//        contact1.setCompany("Microsoft");
+//        contact1.setPhone("555-1212");
+//        contact1.setEmail("my@email.com");
+//        
+//       
+//        Contact contact2 = new Contact();
+//        
+//        contact2.setFirstName("Justin");
+//        contact2.setLastName("");
+//        contact2.setCompany("oracle");
+//        contact2.setPhone("555-1212");
+//        contact2.setEmail("my@email.com");
+//        
+//        List<Contact> list = new ArrayList<>();
+//        list.add(contact2);
+//        list.add(contact1);
+//        
+//        return list;
+        
     }
 
     @Override
     public Contact getContactById(int contactId) {
+      
+        
+        //temporarioly overloading to test our REST methods
         return contactMap.get(contactId); //To change body of generated methods, choose Tools | Templates.
     }
 

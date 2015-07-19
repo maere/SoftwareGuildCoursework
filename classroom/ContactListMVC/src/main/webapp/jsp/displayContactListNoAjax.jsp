@@ -36,8 +36,8 @@
                     <a href="displayNewContactFormNoAjax">Add a Contact</a><!--haven't buuilt the form yet...this is a placeholder -->
                     <hr>
                     <c:forEach var="contact" items="${contactList}">
-                        <!--links for list and edit, and URLs which will allow us to do that - need to build URLs in the following manner 
-<!--this will be an actual URL  var name -->
+ <!--links for list and edit, and URLs which will allow us to do that - need to build URLs in the following manner 
+                    <!--this will be an actual URL  var name -->
                 <s:url value="deleteContactNoAjax" var="deleteContact_url"><!--won't be produced on the screen, but used by other elements -->
                     <s:param name="contactId" value="${contact.contactId}"></s:param><!-- -->
                 </s:url>  
@@ -46,9 +46,9 @@
                         <s:param name="contactId" value="${contact.contactId}"></s:param>
                     </s:url>
                     
+                    <!--strings are in single quotes in HTML, and params are in "" --><!--CEO will get rendered if the contact's last name is Doe -->
+                    <c:if test="${contact.lastName=='Doe'}">CEO<br /></c:if>
                     
-                    <c:if test="${contact.lastName=='Doe'}">CEO<br /></c:if><!--strings are in single quotes in HTML, and params are in "" -->
-                                                <!--CEO will get rendered if the contact's last name is Doe -->
                     Name: ${contact.firstName} ${contact.lastName} | <!--will add one space, but not multiple -->
                     <a href="${deleteContact_url}">Delete</a> |
                     <a href="${editContact_url}">Edit</a><br/>

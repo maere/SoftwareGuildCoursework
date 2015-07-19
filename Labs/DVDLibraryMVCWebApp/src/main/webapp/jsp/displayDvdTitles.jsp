@@ -19,47 +19,68 @@
     <body>
 
         <div class="container">
-<!-- header -->
+            <!-- header -->
             <div class="page-header">
                 <h3 class="text-center">DVD Library</h3>
                 <h4 class="text-center"></h4>
-              
+
             </div>
-<!-- tabbed nav links -->
+            <!-- tabbed nav links -->
             <div class="navbar">
                 <ul class="nav nav-tabs">
                     <!-- Generally don't want to point to a .jsp,  -->
                     <!--<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home.jsp">Home</a></li>-->
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li><!--so now the home path will resolve to an endpoint in our controller -->
-                                                                    <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li><!--so now the home path will resolve to an endpoint in our controller -->
+                    <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/addDvdForm">Add Title</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdTitles">List</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayDvdTitles">List</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/searchDvdCollection">Search</a></li>
 
                 </ul>    
             </div>
 
-<!-- main part of page -->
+            <!-- main part of page -->
             <div>
                 <div class="starter-template">
-                     <div class="form-group">
-                            <div class="col-md-8">
-                        
-                                Welcome to the DVD Library. This app allows you to catalog your personal DVD collection.<br>
-                                Make a selection from the menu above to start.
-                        </br>
+                    <div class="form-group">
+                        <div class="col-md-8">
 
-                       
-                            </div>
+                            <c:forEach var="Dvd" items="${dvdList}">
+
+                                <s:url value="deleteDvd" var="deleteDvd_url"><!--won't be produced on the screen, but used by other elements -->
+                                    <s:param name="id" value="${Dvd.id}"></s:param><!-- -->
+                                </s:url>  
+
+                                <s:url value="displayEditDvdForm" var="editDvd_url"><!-- the value gets substituted in the link below as a param, 
+                                    using editDvd_url to pass in the corresponding value to the href-->
+                                    <s:param name="id" value="${Dvd.id}"></s:param>
+                                </s:url>
+
+                                Id: ${Dvd.id} | <a href="${deleteDvd_url}">Delete</a> |  <a href="${editDvd_url}">Edit</a><br/>
+                                
+                                Title: ${Dvd.title}<br/>
+                                Release Date: ${Dvd.releaseDate}<br/>
+                                MPAA Rating: ${Dvd.mpaaRating}<br/>
+                                Director: ${Dvd.director}<br/>
+                                Studio: ${Dvd.studio}<br/>
+
+                                <hr/>                                    
+
+                            </c:forEach> 
+                            <hr/>  
+                            <p>If you don't see anything on this page it is because you haven't yet added DVDs to your collection.
+                                Select "Add Title" from the menu to start.</p> 
+
                         </div>
-                    
+                    </div>
+
                 </div>
 
             </div>
 
 
-<!--footer-->
+            <!--footer-->
             <footer class="footer">
                 <div class="container text-center"> 
                     <p class="text-muted"><br/>

@@ -34,6 +34,7 @@
             <!-- we are using the spring library because Spring will help us pre-populate these fields with our current Data -->
             <sf:form class="form-horizontal" role="form" modelAttribute="contact" 
                      action="editContactNoAjax" method="post">   <!--abovve is how we tell it the name of the model we are using -->                   
+                
                 <div class="form-group">
                     <label for="add-first-name" class="col-md-4 control-label">First Name:</label>
                     <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       

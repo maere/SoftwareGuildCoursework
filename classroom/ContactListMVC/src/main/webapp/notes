@@ -1,0 +1,51 @@
+Old way of doing things:
+
+/displayContact?contactId=42 
+
+REST doesnt' use the question marks, or passs params in the URL
+
+REST equivalent:
+/contact/42
+
+For our project the urls will be like:
+-------------------------
+
+
+Display a Contact
+Verb: GET
+/contact/{contactId}
+
+(our method is getContact in the controller)
+------------------
+
+Create a contact
+Verb: POST
+/contact
+
+Request: JSON object containing the contact data
+Response: JSON object containing the contact data
+
+(we're doing this just to verify and display properly)
+
+----------------------------------
+
+Delete a Contact
+Verb:DELETE
+/contact/{contactId}
+(so is same as url to display, but the verb is different this is DELETE, that was GET
+
+---------------------------------
+
+Update a Contact
+Verb: PUT
+/contact/${contactId}
+Request: JSON object that contains the contact info
+Response: nonee (tho might want a success msg)
+
+------------------------
+
+Get a List of all the Contacts
+Verb: GET
+/contacts       (don't need to say more than that bc that's what we want--all the contacts)
+Request: nothing
+Response: JSON array that contains all the info for every contact in the system

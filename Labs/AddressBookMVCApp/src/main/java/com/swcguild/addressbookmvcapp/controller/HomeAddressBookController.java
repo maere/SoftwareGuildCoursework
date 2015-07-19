@@ -42,10 +42,10 @@ public class HomeAddressBookController {
         return "displayAddressConfirmation";
     }
 
-    @RequestMapping(value = "/displayAllAddresses", method = RequestMethod.GET)
-    public String displayListOfAddresses() {
-        return "displayAllAddresses";
-    }
+//    @RequestMapping(value = "/displayAllAddresses", method = RequestMethod.GET)
+//    public String displayListOfAddresses() {
+//        return "displayAllAddresses";
+//    }
 
     @RequestMapping(value = "/editAddressForm", method = RequestMethod.GET)
     public String displayEditAddressForm() {
@@ -95,10 +95,13 @@ public class HomeAddressBookController {
 
     }
     
-     @RequestMapping(value = "/displayAllAddresses", method = RequestMethod.GET)
+    @RequestMapping(value = "/displayAllAddresses", method = RequestMethod.GET)
     public String listAllAddresses(Model model) throws IOException { //the model is the middleman-woman -- it's not the user asking for this, it's our own program. which is why we pass in the model not the request.
-        ArrayList<Address> list = dao.getAllAddresses();
-        model.addAttribute("list", list);
+        
+        List<Address> addressList = dao.getAllAddresses();
+        
+        model.addAttribute("addressList", addressList);
+        
         return "displayAllAddresses";
         
 //        <s:url value="deleteAddress" var="deleteAddress_url"><!--won't be produced on the screen, but used by other elements -->

@@ -30,12 +30,12 @@
                 <ul class="nav nav-tabs">
                     <!-- Generally don't want to point to a .jsp,  -->
                     <!--<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home.jsp">Home</a></li>-->
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/home">Home</a></li><!--so now the home path will resolve to an endpoint in our controller -->
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li><!--so now the home path will resolve to an endpoint in our controller -->
                                                                     <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/addDvdForm">Add Title</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdTitles">List</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchDvdCollection">Search</a></li>
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/searchDvdCollection">Search</a></li>
 
                 </ul>    
             </div>
@@ -46,8 +46,7 @@
                      <div class="form-group">
                             <div class="col-md-8">
                         
-                                Welcome to the DVD Library. This app allows you to catalog your personal DVD collection.<br>
-                                Make a selection from the menu above to start.
+                        Welcome to the DVD Library
                         </br>
 
                        

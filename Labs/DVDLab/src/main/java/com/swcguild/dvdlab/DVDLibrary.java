@@ -5,7 +5,7 @@
  */
 package com.swcguild.dvdlab;
 
-import static com.swcguild.dvdlab.DVD.counter;
+import static com.swcguild.dvdlab.Dvd.counter;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,19 +24,19 @@ import java.util.Set;
 public class DVDLibrary {
 
     //fields- add class variables and instantiate non-native data structures
-    private HashMap<Integer, DVD> dvdCollection = new HashMap<>();
+    private HashMap<Integer, Dvd> dvdCollection = new HashMap<>();
   
     public static final String DVDS_FILE = "dvds.txt";
     public static final String DELIMITER = "::";
     
-    ArrayList<DVD> dvdList;
-    private DVD id;
+    ArrayList<Dvd> dvdList;
+    private Dvd id;
 
     //constructor
     //defaults
     
     //methods
-    public void addToLibrary(DVD dvd) throws FileNotFoundException {
+    public void addToLibrary(Dvd dvd) throws FileNotFoundException {
         
           //counter(); //make a call to a new class we created to increment each time we add an object to the library
                                         //we will need to go look at the value of the counter in the DATA STORE before
@@ -68,7 +68,7 @@ public class DVDLibrary {
             currentTokens = currentLine.split(DELIMITER); //on each loop we set token array = the results of splitting the line by the delimter
 
             //now that we have an array of tokens, we need to create on object to hold them
-            DVD currentDVD = new DVD();
+            Dvd currentDVD = new Dvd();
 
             //we set each property of the DVD object using the setters and the values sitting in the array
             //currentDVD.setId(Integer.parseInt(currentTokens[0])); 
@@ -94,7 +94,7 @@ public class DVDLibrary {
         //instantiate object designed to print stuff to a text file
         PrintWriter out = new PrintWriter(new FileWriter(DVDS_FILE));
         
-        for (DVD currDVD: dvdCollection.values()){
+        for (Dvd currDVD: dvdCollection.values()){
             
             String strId = Integer.toString(currDVD.getId());
             
@@ -113,9 +113,9 @@ public class DVDLibrary {
       
     }
 
-    public ArrayList<DVD> listAllDVDs() {
+    public ArrayList<Dvd> listAllDVDs() {
        
-           dvdList = new ArrayList<DVD>(dvdCollection.values());
+           dvdList = new ArrayList<Dvd>(dvdCollection.values());
            return dvdList;
   
         /* getting an array list from a collectoin
@@ -131,7 +131,7 @@ public class DVDLibrary {
         dvdCollection.remove(id);
     }
 
-    public DVD getDVD(Integer id) {
+    public Dvd getDVD(Integer id) {
         return dvdCollection.get(id);
         
     }
@@ -141,11 +141,11 @@ public class DVDLibrary {
     }
 //getters and setters
     //may note actually need
-     public HashMap<Integer, DVD> getDvdCollection() {
+     public HashMap<Integer, Dvd> getDvdCollection() {
         return dvdCollection;
     }
 
-    public void setDvdCollection(HashMap<Integer, DVD> dvdCollection) {
+    public void setDvdCollection(HashMap<Integer, Dvd> dvdCollection) {
         this.dvdCollection = dvdCollection;
     }
     

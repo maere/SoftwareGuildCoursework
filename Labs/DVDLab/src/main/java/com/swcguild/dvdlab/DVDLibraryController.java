@@ -86,7 +86,7 @@ public class DVDLibraryController {
         String userReview = con.readString("Please enter your review for this film.");
 
         //need to instantiate a dVD object
-        DVD currentDVD = new DVD();
+        Dvd currentDVD = new Dvd();
 
         //setting the object's properties
         currentDVD.setTitle(title);
@@ -109,7 +109,7 @@ public class DVDLibraryController {
 
     public void searchDVDs() {
 
-        ArrayList<DVD> orderlyList = myDVDcoll.listAllDVDs();
+        ArrayList<Dvd> orderlyList = myDVDcoll.listAllDVDs();
 
         String titleString = con.readString("Enter the first word or two of the title you would like to search for.\n"
                 + "(Example: \"Spinal\" or \"Spinal Tap\" \n");
@@ -119,7 +119,7 @@ public class DVDLibraryController {
         
         for (int i = 0; i < orderlyList.size(); i++) {
 
-            DVD currentDVD = orderlyList.get(i);
+            Dvd currentDVD = orderlyList.get(i);
             String currentTitle = orderlyList.get(i).title;
             
                 if (currentTitle.contains(titleString)) {
@@ -147,7 +147,7 @@ public class DVDLibraryController {
 
     public void printAllDVDs() {
 
-        ArrayList<DVD> orderlyList = myDVDcoll.listAllDVDs(); //indexed Array list containing 
+        ArrayList<Dvd> orderlyList = myDVDcoll.listAllDVDs(); //indexed Array list containing 
         //all DVD objects
         for (int i = 0; i < orderlyList.size(); i++) {
             System.out.println("Title #:" + orderlyList.get(i).id
@@ -160,7 +160,7 @@ public class DVDLibraryController {
         int id = con.readInt("To edit a DVD record enter the ID of the record you would like to edit: \n\n"
                 + "(If you are unsure of what you have in your collection you can exit this menu \nand choose 4 in the Main Menu to list all your DVDs.)");
 
-        DVD liveDVD = myDVDcoll.getDVD(id);
+        Dvd liveDVD = myDVDcoll.getDVD(id);
         if (liveDVD != null) {
             int editChoice = con.readInt("Your title" + liveDVD.getTitle() + " was located. \n"
                     + "Enter the number for the information you would you like to edit. \n"

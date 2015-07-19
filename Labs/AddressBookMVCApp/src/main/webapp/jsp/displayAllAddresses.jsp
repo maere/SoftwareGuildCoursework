@@ -42,13 +42,13 @@
             <div class="row row-eq-height">
                 <div class="col-md-6">
                     <div class="col-md-10">
-                        <c:forEach var="address" items ="list"> 
-                            ${address.firstName} ${address.lastName}<br />
-                            ${address.street} <br />
-                            ${address.city} ${address.state} ${address.zipCode} <br />
-                            
-                            <hr />
-
+                        <c:forEach var="address" items ="addressList">                         
+                            <c:out value="${address.firstName}"></c:out>
+                            <c:out value="${address.lastName}"></c:out>
+                            <c:out value="${address.street}"></c:out> <br/>
+                             <c:out value="${address.city}"></c:out>
+                              <c:out value="${address.state}"></c:out>
+                               <c:out value="${address.zipCode}"> </c:out>            
                         </c:forEach>
 
                     </div>

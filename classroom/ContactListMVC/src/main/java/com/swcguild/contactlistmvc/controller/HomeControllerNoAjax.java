@@ -37,10 +37,13 @@ public class HomeControllerNoAjax {
     
     @RequestMapping(value = "/displayContactListNoAjax", method = RequestMethod.GET)
     public String displayContactListNoAjax(Model model) { //Type available in spring
+        
         //the reference to the model is the param we pass in
         List<Contact> cList = dao.getAllContacts();
+        
         //next we are going to add an attribute to our model
         model.addAttribute("contactList", cList); //this is how we are returning our element to our view 
+        
         //(yesterday we used a map, today we are using a model) 
         //but the model gets used outside, in our view   
         return "displayContactListNoAjax";
