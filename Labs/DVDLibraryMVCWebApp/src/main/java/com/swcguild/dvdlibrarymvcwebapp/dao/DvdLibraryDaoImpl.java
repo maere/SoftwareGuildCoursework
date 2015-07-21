@@ -7,7 +7,8 @@ package com.swcguild.dvdlibrarymvcwebapp.dao;
 
 import com.swcguild.dvdlibrary.dao.DvdLibraryDao;
 import com.swcguild.dvdlibrary.dto.Dvd;
-import com.swcguild.dvdlibrarymvcwebapp.model.SearchTerms;
+import com.swcguild.dvdlibrary.dto.SearchTerms;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,9 +40,10 @@ public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one
     @Override
     public void add(Dvd dvd) {
         
+    dvd.setId(counter);
         counter++;
-        dvd.setId(counter); //will recognize this because is part of the DTO--we are setting on the object
-       // }
+         //will recognize this because is part of the DTO--we are setting on the object
+        // }
         dvdCollection.put(dvd.getId(), dvd); // here we are getting the id we just set when we add to the collection so that the HashMap is keeping track
     }
 
@@ -65,21 +67,22 @@ public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one
     public Dvd getById(int id) {
         return dvdCollection.get(id);
     }
-    
-    public void updateContact(Dvd dvd) {
-         dvdCollection.put(dvd.getId(), dvd);
-         
+
+    @Override
+    public void update(Dvd dvd) {
+        dvdCollection.put(dvd.getId(), dvd);
+
     }
-    
-    ///@Override // can't need to override bc it's not in my Dao //need to reconfigure dao interface to add put and search or just revert to an earlier commit or pull an earlier commit
-    public List<Dvd> searchDvds (Map<SearchTerms, String> criteria){ //the paramater is a map made up an enum as the key, and (series of)strings as the value
-    
+
+    //@Override // can't need to override bc it's not in my Dao //need to reconfigure dao interface to add put and search or just revert to an earlier commit or pull an earlier commit
+    public List<Dvd> searchDvds(Map<SearchTerms, String> criteria) { //the paramater is a map made up an enum as the key, and (series of)strings as the value
+
         String titleSearchCriteria = criteria.get(SearchTerms.TITLE);
         String ratingSearchCriteria = criteria.get(SearchTerms.RATING);
         //String strReleaseSearchCriteria = criteria.get(SearchTerms.RELEASE_DATE);
         String directorSearchCriteria = criteria.get(SearchTerms.DIRECTOR);
         String studioSearchCriteria = criteria.get(SearchTerms.STUDIO);
-        
+
 //        LocalDate releaseDate = null; //
 //        try {
 //            releaseDate = LocalDate.parse(strReleaseDate, DateTimeFormatter.BASIC_ISO_DATE); //
@@ -88,41 +91,42 @@ public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one
 //                    + "Please check your entry and try again.");
 //
 //        }
-        
         //declare -- assign as second step
         Predicate<Dvd> titleMatches;
         Predicate<Dvd> ratingMatches;
         Predicate<Dvd> releaseMatches;
         Predicate<Dvd> directorMatches;
         Predicate<Dvd> studioMatches;
-        
+
         //placeholder predicate for empty matches -- is "c" for criterion?
-        Predicate<Dvd> truePredicate = (c) -> {return true;};
-        
+        Predicate<Dvd> truePredicate = (c) -> {
+            return true;
+        };
+
         //assign values to the predicates via iterative lambda getters
-        titleMatches = (titleSearchCriteria == null || titleSearchCriteria.isEmpty())?truePredicate
-                :(c) -> c.getTitle().equalsIgnoreCase(titleSearchCriteria);
-        
-        ratingMatches = (ratingSearchCriteria == null || ratingSearchCriteria.isEmpty())?truePredicate
-                :(c) -> c.getMpaaRating().equalsIgnoreCase(ratingSearchCriteria);
-        
+        titleMatches = (titleSearchCriteria == null || titleSearchCriteria.isEmpty()) ? truePredicate
+                : (c) -> c.getTitle().equalsIgnoreCase(titleSearchCriteria);
+
+        ratingMatches = (ratingSearchCriteria == null || ratingSearchCriteria.isEmpty()) ? truePredicate
+                : (c) -> c.getMpaaRating().equalsIgnoreCase(ratingSearchCriteria);
+
 //        releaseMatches = (releaseSearchCriteria == null || releaseSearchCriteria.isEmpty())?truePredicate
 //                :(c) -> c.getReleaseDate() == releaseSearchCriteria;
-        
-        directorMatches = (directorSearchCriteria == null || directorSearchCriteria.isEmpty())?truePredicate
-                :(c) -> c.getDirector().equalsIgnoreCase(directorSearchCriteria);
-        
-        studioMatches = (studioSearchCriteria == null || studioSearchCriteria.isEmpty())?truePredicate
-                :(c) -> c.getStudio().equalsIgnoreCase(studioSearchCriteria);
-        
+        directorMatches = (directorSearchCriteria == null || directorSearchCriteria.isEmpty()) ? truePredicate
+                : (c) -> c.getDirector().equalsIgnoreCase(directorSearchCriteria);
+
+        studioMatches = (studioSearchCriteria == null || studioSearchCriteria.isEmpty()) ? truePredicate
+                : (c) -> c.getStudio().equalsIgnoreCase(studioSearchCriteria);
+
         //filter to return matches that meet all the input criteria
         return dvdCollection.values().stream()
                 .filter(titleMatches.and(ratingMatches).and(directorMatches).and(studioMatches))
                 .collect(Collectors.toList());
-                
+
     }
 /// these are our old search methods, without the enum, ony one field at a time
     //these methods are deprected ;)
+
     @Override
     public List<Dvd> getByTitle(String title) {
         List<Dvd> titleMatchList = dvdCollection.values().stream()
@@ -161,5 +165,4 @@ public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one
 //    public List<Dvd> getByStudio(String string) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
-
 }//end class

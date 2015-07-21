@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping({"/"})
 public class DvdHomeController {
     
     DvdLibraryDao dao;
@@ -27,7 +26,7 @@ public class DvdHomeController {
         this.dao = dao;
     }
     
-    @RequestMapping(value={"/","/home"}, method=RequestMethod.GET)
+    @RequestMapping(value="/home", method=RequestMethod.GET)
     public String homeDisplay() {
         return "home";
     }
@@ -55,7 +54,7 @@ public class DvdHomeController {
         dvd.setTitle(movieTitle);
         dvd.setMpaaRating(movieRating);
         
-        dvd.setReleaseDate(dtRelease);
+        //dvd.setReleaseDate(dtRelease);
    
         dvd.setDirector(movieDirector);
         dvd.setStudio(movieStudio);
