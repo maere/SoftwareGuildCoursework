@@ -6,3 +6,5 @@
 9::Fray::Schilling::497 Bikeway Lane::Davis::CA::95600
 10::Silly ::Sally::123 Elm::Rocky River::OH::44116
 11::Joe::Smith::4500 45th Ave. ::Oakland::CA::94619
+13::Sally::Strem::123 RElm::Lakewood::OH::44112
+15::Bob::boyyd::34 wheeler::Berkleey::CA::94702

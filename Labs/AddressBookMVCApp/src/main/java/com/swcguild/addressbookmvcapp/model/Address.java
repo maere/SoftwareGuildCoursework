@@ -18,6 +18,7 @@ public class Address {
     private String state;
     
     private int zipCode;
+    //private String zipCode;
     private int idNumber;
    
     //constructor
@@ -83,5 +84,13 @@ public class Address {
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
+
+//    public String getZipCode() {
+//        return zipCode;
+//    }
+//
+//    public void setZipCode(String zipCode) {
+//        this.zipCode = zipCode;
+//    }
     
 }//end class

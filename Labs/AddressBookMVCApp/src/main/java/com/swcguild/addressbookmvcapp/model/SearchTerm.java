@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.swcguild.dvdlibrarymvcwebapp.model;
+package com.swcguild.addressbookmvcapp.model;
 
 /**
  *
  * @author apprentice
  */
-public enum SearchTerms {
-    
-      TITLE, RELEASE_DATE, RATING, DIRECTOR, STUDIO 
-    
+public enum SearchTerm {
+    LAST_NAME, CITY, ZIP_CODE;
 }

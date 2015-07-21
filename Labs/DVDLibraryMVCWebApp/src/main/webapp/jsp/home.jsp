@@ -34,7 +34,7 @@
                                                                     <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/addDvdForm">Add Title</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdTitles">List</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>
+                     <!--<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/searchDvdCollection">Search</a></li>
 
                 </ul>    

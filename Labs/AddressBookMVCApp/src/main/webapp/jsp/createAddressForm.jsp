@@ -24,9 +24,8 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/createAddressForm">Add</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchAddresForm">Search</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchAddressForm">Search</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayAllAddresses">List</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/editAddressForm">Edit</a></li>
                 </ul>    
             </div>
 
@@ -49,16 +48,16 @@
                                 <div class="col-md-10"><input type="text" class="form-control" id="add-last-name" name="lastName" placeholder="Last Name" /></div></div>
 
                             <div class="form-group" >
-                                <div class="col-md-10"><input type="text" class="form-control" id="add-company" name="street" placeholder="Street Name" /></div></div>
+                                <div class="col-md-10"><input type="text" class="form-control" id="add-street" name="street" placeholder="Street Name" /></div></div>
 
                             <div class="form-group" >
-                                <div class="col-md-10"><input type="text" class="form-control" id="add-email" name="city" placeholder="City" /></div></div>
+                                <div class="col-md-10"><input type="text" class="form-control" id="add-city" name="city" placeholder="City" /></div></div>
 
                             <div class="form-group" >
-                                <div class="col-md-10"><input type="text" class="form-control" id="add-phone" name="state" placeholder="State" /></div></div>
+                                <div class="col-md-10"><input type="text" class="form-control" id="add-state" name="state" placeholder="State" /></div></div>
 
                             <div class="form-group" >
-                                <div class="col-md-10"><input type="text" class="form-control" id="add-phone" name="zipCode" placeholder="Zipcode" /></div></div>
+                                <div class="col-md-10"><input type="text" class="form-control" id="add-zipCode" name="zipCode" placeholder="Zipcode" /></div></div>
 
 
                             <div class="form-group">

@@ -7,9 +7,11 @@ package com.swcguild.dvdlibraryv3;
 
 import com.swcguild.dvdlibrary.dao.DvdLibraryDao;
 import com.swcguild.dvdlibrary.dto.Dvd;
+import com.swcguild.dvdlibrary.dto.SearchTerms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -86,6 +88,17 @@ public class DvdLibraryDaoDKImpl implements DvdLibraryDao {
                 .stream()
                 .filter(s -> s.getStudio().equalsIgnoreCase(studio))
                 .collect(Collectors.toList());
+    }
+    
+        //
+    @Override
+    public void update(Dvd dvd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Dvd> searchDvds(Map<SearchTerms, String> criteria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

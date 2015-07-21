@@ -95,6 +95,7 @@ public class AddressBookController {
         String city = con.readString("Please type in the city.");
         String state = con.readString("Please enter the state.");
         int zipCode = con.readInt("Please enter the zip code.");
+       //String zipCode = con.readString("Please enter the zip code.");
 
         //create an address object
         Address currentAddress = new Address(); //here's our abstraction of the instantiation on the fly
@@ -106,6 +107,7 @@ public class AddressBookController {
         currentAddress.setCity(city);
         currentAddress.setState(state);
         currentAddress.setZipCode(zipCode);
+        //currentAddress.setZipCode(zipCode);
 
         //enter info into hashmap
         myAddressBook.addAddressToBook(currentAddress); //in this method we ask the roster object/class
@@ -254,7 +256,8 @@ public class AddressBookController {
 
     private void searchByZip() {
         int zip = con.readInt("Enter the zip code you would like to search: "); //will eventually need to pass into DAOImpl function call (refactor)
-
+        //String zip = con.readString("Placeholder for change from int to string");
+        
         //lambda to get all addresses by city
         List<Address> allInZip = myAddressBook.zipSearch(zip);
 
@@ -266,7 +269,7 @@ public class AddressBookController {
         for (Address a : allXinList) {
             System.out.println("\n" + Integer.toString(a.getIdNumber()) + "|" + a.getFirstName() + " " + a.getLastName() + "\n"
                     + a.getStreet() + "\n"
-                    + a.getCity() + " " + a.getState() + " " + Integer.toString(a.getZipCode()));
+                    + a.getCity() + " " + a.getState() + " " + a.getZipCode());//Integer.toString(a.getZipCode()));
         }
 
     }//end formatter

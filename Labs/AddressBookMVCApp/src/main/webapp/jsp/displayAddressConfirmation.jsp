@@ -29,9 +29,8 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/createAddressForm">Add</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchAddresForm">Search</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchAddressForm">Search</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayAllAddresses">List</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/editAddressForm">Edit</a></li>
                 </ul>    
             </div>
 

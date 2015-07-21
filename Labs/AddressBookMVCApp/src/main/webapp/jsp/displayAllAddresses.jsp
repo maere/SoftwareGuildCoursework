@@ -30,9 +30,8 @@
                 <ul class="nav nav-tabs">
                     <li role="presentation"><a href="${pageContext.request.contextPath}/home">Home</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/createAddressForm">Add</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchAddresForm">Search</a></li>
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/searchAddressForm">Search</a></li>
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/displayAllAddresses">List</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/editAddressForm">Edit</a></li>
                 </ul>    
             </div>
 
@@ -42,13 +41,31 @@
             <div class="row row-eq-height">
                 <div class="col-md-6">
                     <div class="col-md-10">
-                        <c:forEach var="address" items ="addressList">                         
-                            <c:out value="${address.firstName}"></c:out>
-                            <c:out value="${address.lastName}"></c:out>
-                            <c:out value="${address.street}"></c:out> <br/>
-                             <c:out value="${address.city}"></c:out>
-                              <c:out value="${address.state}"></c:out>
-                               <c:out value="${address.zipCode}"> </c:out>            
+
+                        <c:forEach var="address" items ="${addressList}">  
+
+                            <!-- bc we don't have JS, important to map the route and create a handshake here and then pass the param to our URL-->
+                            <s:url value="deleteAddress" var="deleteAddress_url"><!--fomatted here -->
+                                <s:param name="idNumber" value="${address.idNumber}" /><!--passed here --><!--  beer.com?param=beer&value=malt -->
+                            </s:url>
+
+                            <s:url value="editAddressForm" var="editAddress_url">
+                                <s:param name="idNumber" value="${address.idNumber}" />
+                            </s:url>
+
+                          
+                            ${address.firstName} ${address.lastName}  |
+                            <!--our URL did not carry the ID necessary for tje request bc we never formatted the URL to carry the id parameter --->
+                            <!--so when we tried to get the int param in our controller function, it didn't know what to give so it made it null, and the compiler threw the error -->
+                            <a href="${deleteAddress_url}">Delete</a> |  
+                            <a href="${editAddress_url}">Edit</a><br/>
+                            ${address.street}<br/>
+                            ${address.city}, ${address.state}<br/>
+                            ${address.zipCode}<br/>
+                            <hr>
+
+
+
                         </c:forEach>
 
                     </div>

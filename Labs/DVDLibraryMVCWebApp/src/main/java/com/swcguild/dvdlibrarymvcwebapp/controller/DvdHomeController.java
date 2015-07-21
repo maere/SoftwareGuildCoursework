@@ -47,7 +47,7 @@ public class DvdHomeController {
                 
         String movieDirector = req.getParameter("director");
         String movieStudio = req.getParameter("studio");
-        String movieNotes = req.getParameter("userReview");
+        String movieNotes = req.getParameter("note");
         
         //create dvd object
         Dvd dvd = new Dvd();

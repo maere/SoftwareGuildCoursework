@@ -34,7 +34,7 @@
                     <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/addDvdForm">Add Title</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdTitles">List</a></li>
-                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>
+                    <!--<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/searchDvdCollection">Search</a></li>
 
                 </ul>    
@@ -103,10 +103,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="add-user-review" class="col-md-4 control-label">User Review:</label>
+                        <label for="add-note" class="col-md-4 control-label">User Notes:</label>
                         <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
-                        <sf:input type="text" class="form-control" id="add-userReview" path="userReview" placeholder="User Review"></sf:input>
-                        <sf:errors path="userReview" cssclass="error"></sf:errors>
+                        <sf:input type="text" class="form-control" id="add-note" path="note" placeholder="User Review"></sf:input>
+                        <sf:errors path="note" cssclass="error"></sf:errors>
 
                         </div>
                     </div>

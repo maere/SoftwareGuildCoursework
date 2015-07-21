@@ -34,7 +34,7 @@
                     <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
                     <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/addDvdForm">Add Ttile</a></li>
                     <li role="presentation"><a href="${pageContext.request.contextPath}/displayDvdTitles">List</a></li>
-                    <li role="presentation"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>
+                     <!--<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/editDvdTitle">Edit</a></li>-->
                     <li role="presentation"><a href="${pageContext.request.contextPath}/searchDvdCollection">Search</a></li>
 
                 </ul>    
@@ -97,9 +97,9 @@
                                     </div> 
 
                                     <div class="form-group">
-                                        <label for="add-user-review" class="col-md-4 control-label">User Review</label>
+                                        <label for="add-note" class="col-md-4 control-label">User Review</label>
                                         <div class="col-md-8"><!--this div is just to create spacing in the grid -->   <!--this placeholder is just in case we don't have a value already  -->                       
-                                        <input type="text" class="form-control" name="userReview" id="add-user-review" path="userReview" placeholder="User Notes/Review"></input>
+                                        <input type="text" class="form-control" name="note" id="add-note" path="note" placeholder="User Notes"></input>
                                            
                                         <!--now we will put in all of our errors in the view, and we will need indicate all of the "paths" - why is the param called a path?-->   
                                         <!---->

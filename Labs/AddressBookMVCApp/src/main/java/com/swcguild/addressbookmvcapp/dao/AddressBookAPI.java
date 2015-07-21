@@ -6,6 +6,7 @@
 package com.swcguild.addressbookmvcapp.dao;
 
 import com.swcguild.addressbookmvcapp.model.Address;
+import com.swcguild.addressbookmvcapp.model.SearchTerm;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -44,13 +45,14 @@ public interface AddressBookAPI {
     
     public List<Address> citySearch(String city);
     
-    public List<Address> zipSearch(int zipCode);
+   public List<Address> zipSearch(int zipCode);
+    //public List<Address> zipSearch(String zipCode);
     
     public Map<String, List<Address>> stateSearch(String state);
     
     public List<Address> nameSearch(String lastName);
 
-    
+    public List<Address> searchContacts (Map<SearchTerm, String> criteria);
     
     
 }

@@ -6,6 +6,7 @@
 package com.swcguild.addressbookmvcapp.dao;
 
 import com.swcguild.addressbookmvcapp.model.Address;
+import com.swcguild.addressbookmvcapp.model.SearchTerm;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -154,6 +156,7 @@ public class AddressBookImpl implements AddressBookAPI{
     
     
     @Override
+   // public List<Address> zipSearch(String zipCode){
     public List<Address> zipSearch(int zipCode){
         
          List<Address> all = getAllAddresses();
@@ -183,5 +186,42 @@ public class AddressBookImpl implements AddressBookAPI{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+      
+
+    @Override
+    public List<Address> searchContacts(Map<SearchTerm, String> criteria) {
+        
+        String lastNameCriteria = criteria.get(SearchTerm.LAST_NAME);
+        String zipCodeCriteria = criteria.get(SearchTerm.ZIP_CODE);
+        
+        String cityCriteria = criteria.get(SearchTerm.CITY);
+        
+        
+        Predicate<Address> lastNameMatches;
+        Predicate<Address> zipCodeMatches;
+        Predicate<Address> cityMatches;
+        
+       Predicate<Address> truePredicate = (c) -> {return true;};
+       
+       lastNameMatches = (lastNameCriteria == null || lastNameCriteria.isEmpty())?
+                            truePredicate
+                : (c) -> c.getLastName().equalsIgnoreCase(lastNameCriteria);
+       
+       cityMatches = (cityCriteria == null || cityCriteria.isEmpty())?
+                            truePredicate
+               : (c) -> c.getCity().equalsIgnoreCase(cityCriteria);
+       //needs to be an if and not a ternary operator bc we need to first pass it in
+       
+       zipCodeMatches = (zipCodeCriteria == "")?
+                            truePredicate
+               : (c) -> c.getZipCode() == Integer.parseInt(zipCodeCriteria);
+       
+//        zipCodeMatches = (zipCodeCriteria == null || zipCodeCriteria.isEmpty())?
+//                            truePredicate
+//               : (c) -> c.getZipCode().equalsIgnoreCase(zipCodeCriteria);
+//       
+       return addressMap.values().stream().filter(lastNameMatches.and(cityMatches).and(zipCodeMatches)).collect(Collectors.toList());
+    }
     
+        
 }//end class

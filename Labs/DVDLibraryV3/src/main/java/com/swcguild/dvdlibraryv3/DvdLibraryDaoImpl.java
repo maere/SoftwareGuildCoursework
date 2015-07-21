@@ -7,9 +7,11 @@ package com.swcguild.dvdlibraryv3;
 
 import com.swcguild.dvdlibrary.dao.DvdLibraryDao;
 import com.swcguild.dvdlibrary.dto.Dvd;
+import com.swcguild.dvdlibrary.dto.SearchTerms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -81,5 +83,18 @@ public class DvdLibraryDaoImpl implements DvdLibraryDao { //couuld call this one
         return titlesByStudio;
 
     }//end studio method
+
+    
+    //these were methods thtat were added post-project, becaause the DAO was changed to accomodate MVC app features
+    //
+    @Override
+    public void update(Dvd dvd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Dvd> searchDvds(Map<SearchTerms, String> criteria) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }//end class

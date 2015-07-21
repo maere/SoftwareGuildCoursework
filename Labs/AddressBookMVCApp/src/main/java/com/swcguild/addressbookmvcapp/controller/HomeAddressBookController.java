@@ -3,10 +3,14 @@ package com.swcguild.addressbookmvcapp.controller;
 import com.swcguild.addressbookmvcapp.dao.AddressBookAPI;
 import com.swcguild.addressbookmvcapp.dao.AddressBookImpl;
 import com.swcguild.addressbookmvcapp.model.Address;
+import com.swcguild.addressbookmvcapp.model.SearchTerm;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -46,15 +50,65 @@ public class HomeAddressBookController {
 //    public String displayListOfAddresses() {
 //        return "displayAllAddresses";
 //    }
-
     @RequestMapping(value = "/editAddressForm", method = RequestMethod.GET)
-    public String displayEditAddressForm() {
+    public String displayEditAddressForm(HttpServletRequest req, Model model) throws FileNotFoundException {
+        //get contactId from our request
+        int addressId = Integer.parseInt(req.getParameter("idNumber"));
+        Address address = dao.getAddress(addressId);
+        model.addAttribute("address", address);//this is how we are attaching our id to the model 
+
         return "editAddressForm";
     }
 
+    //So our page, even a non-JS one, wants a model and a list in order to consult it to get the info it needs for the search
     @RequestMapping(value = "/searchAddressForm", method = RequestMethod.GET)
-    public String searchAddressForm() {
+    public String searchAddressForm(HttpServletRequest req, Model model) {
+        Address newAddress = new Address();
+        model.addAttribute("address", newAddress);
         return "searchAddressForm";
+    }
+
+    @RequestMapping(value = "/searchAddressForm", method = RequestMethod.POST)
+    public String getSearchMap(HttpServletRequest req, Model model) {
+        
+        
+        
+        Map<String, String[]> criteriaMap = req.getParameterMap();
+
+        Map<SearchTerm, String> cp = new HashMap<>();
+
+        //cp = criteriaMap.values().stream().collect(Collectors.toMap();
+        for (String str : criteriaMap.keySet()) {
+            
+            String[] val = criteriaMap.get(str);
+            
+            switch (str) {
+                case "lastName":
+                    if (val.length > 0 && val[0] != "") {
+                        cp.put(SearchTerm.LAST_NAME, criteriaMap.get(str)[0]);
+                    }
+                    break;
+                case "city":
+                    if (val.length > 0 && val[0] != "") {
+                        cp.put(SearchTerm.CITY, criteriaMap.get(str)[0]);
+                    }
+                    break;
+                case "zipCode":
+                    if (val.length > 0 && val[0] != "") {
+                        cp.put(SearchTerm.ZIP_CODE, criteriaMap.get(str)[0]);
+                    }
+                    break;
+                default:
+                    //throw new AssertionError();
+                    break;
+            }
+        }
+
+        List<Address> results = dao.searchContacts(cp);
+
+        model.addAttribute("addressList", results);
+
+        return "displayAllAddresses";
     }
 
     @RequestMapping(value = "/addNewAddressToModel", method = RequestMethod.POST)
@@ -71,7 +125,6 @@ public class HomeAddressBookController {
 //        String idNumber = req.getParameter("idNumber");
 //        int id = Integer.parseInt(idNumber);
 
-
         Address address = new Address();
 
         //now we need to set the params that we got and set them to the object before we push 
@@ -81,11 +134,10 @@ public class HomeAddressBookController {
         address.setCity(city);
         address.setState(state);
         address.setZipCode(zip);
-        
+
 //        contact.setCompany(company);
 //        contact.setEmail(email);
 //        contact.setPhone(phone);
-
         dao.addAddressToBook(address);
 
         //new approach - the string we are returning is a redirect
@@ -94,16 +146,16 @@ public class HomeAddressBookController {
         //bc when we have addd a contact, the workflow is to go back ot the list
 
     }
-    
+
     @RequestMapping(value = "/displayAllAddresses", method = RequestMethod.GET)
     public String listAllAddresses(Model model) throws IOException { //the model is the middleman-woman -- it's not the user asking for this, it's our own program. which is why we pass in the model not the request.
-        
+
         List<Address> addressList = dao.getAllAddresses();
-        
+
         model.addAttribute("addressList", addressList);
-        
+
         return "displayAllAddresses";
-        
+
 //        <s:url value="deleteAddress" var="deleteAddress_url"><!--won't be produced on the screen, but used by other elements -->
 //                                <s:param name="idNumber" value="${address.idNumber}"></s:param><!-- -->
 //                            </s:url>  
@@ -112,8 +164,7 @@ public class HomeAddressBookController {
 //                                <s:param name="idNumber" value="${addy.idNumber}"></s:param>
 //                            </s:url>
     }
-    
+
 //   @RequestMapping(value="/deleteAddress", method=RequestMethod.POST)
 //   public String deleteFromList()
-
 }

@@ -39,11 +39,11 @@ public class Dvd {
     
     @NotEmpty(message="You must supply a value for your personal notes about the film")    
     @Length(max=100, message="First name must be no more than 50 characters in length")
-    String userReview; //later we will make into an ArrayList<String> 
+    String note; //later we will make into an ArrayList<String> 
     
 //the annotation goes with the field we want to validate--we must have a name
     
-    static int counter = 0; //we want this to be available to DVDLibrary class
+    //static int counter = 0; //we want this to be available to DVDLibrary class
     
    
     //constructor
@@ -85,7 +85,7 @@ public class Dvd {
         if (!Objects.equals(this.studio, other.studio)) {
             return false;
         }
-        if (!Objects.equals(this.userReview, other.userReview)) {
+        if (!Objects.equals(this.note, other.note)) {
             return false;
         }
         return true;
@@ -145,12 +145,12 @@ public class Dvd {
         this.studio = studio;
     }
 
-    public String getUserReview() {
-        return userReview;
+    public String getNote() {
+        return note;
     }
 
-    public void setUserReview(String userReview) {
-        this.userReview = userReview;
+    public void setNote(String note) {
+        this.note = note;
     }
     
     
