@@ -111,7 +111,7 @@
             <h4 class="modal-title" id="detailsModalLabel">Movie Stats</h4>
          </div>
          <div class="modal-body">
-            <h3 id="id"></h3>
+<!---->            <h3 id="dvd-id"></h3><!--is this kosher, or should it just be "id" -->
             <table class="table table-bordered">
                <tr>
                   <th>Title</th>
@@ -160,7 +160,7 @@
             <h4 class="modal-title" id="detailsModalLabel">Edit DVD</h4>
          </div>
          <div class="modal-body">
-            <h3 id="id"></h3>
+            <h3 id="dvd-id"></h3>
             <form class="form-horizontal" role="form">
                <div class="form-group">
                   <label for="edit-title" class="col-md-4 control-label">Title</label>
