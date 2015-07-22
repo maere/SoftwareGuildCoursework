@@ -45,9 +45,9 @@ public class DvdAjaxController {
    
     //Retrieve one
     @RequestMapping(value="/dvd/{id}", method=RequestMethod.GET)
-    public Dvd getDvd(@PathVariable("id") int id){ //REST methods will require a path variable annotation, note object we are expecting is an int and has to be declared
+    @ResponseBody public Dvd getDvd(@PathVariable("id") int id){ //REST methods will require a path variable annotation, note object we are expecting is an int and has to be declared
         return dao.getById(id);                         //return type must match the object we want to return
-    }
+    }//ResponseBody acknowledges that I am returning a model, otherwise, it tries to generate a view (resolves to .jsp, and can't find one bc doesn't exist)
    
     //Create one
     

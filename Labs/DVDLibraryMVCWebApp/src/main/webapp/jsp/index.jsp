@@ -160,7 +160,7 @@
             <h4 class="modal-title" id="detailsModalLabel">Edit DVD</h4>
          </div>
          <div class="modal-body">
-            <h3 id="dvd-id"></h3>
+            <h3 id="dvd-id"></h3><!--this doesn't do anything except display the id # on the modal view -->
             <form class="form-horizontal" role="form">
                <div class="form-group">
                   <label for="edit-title" class="col-md-4 control-label">Title</label>
@@ -199,10 +199,10 @@
                   </div>
                </div>
                <div class="form-group">
-                  <div class="col-md-offset-4 col-md-8">
+                  <div class="col-md-offset-4 col-md-8"> <!--why does it need an id for both? one for hte button, one for the form? or edit-dvd-method? -->
                      <button type="submit" id="edit-button" class="btn btn-default" data-dismiss="modal">Edit DVD Data</button>
                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                     <input type="hidden" id="edit-id" />
+                     <input type="hidden" id="edit-dvd-id" /><!--this hidden button is what allows us to send this info to the server and allows us to grab the object to edit -->
                   </div>
                </div>
             </form>
