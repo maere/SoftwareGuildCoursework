@@ -194,7 +194,7 @@ $('#edit-button').click(function (event) {
 
     $.ajax({
         type: 'PUT', //because this is getting put back to the model, when we serialize we *must* match Java values
-        url: 'contact/' + $('#edit-dvd-id').val(), //this takes the value of edit-dvd-id attribute and passes as the URL
+        url: 'dvd/' + $('#edit-dvd-id').val(), //this takes the value of edit-dvd-id attribute and passes as the URL
         data: JSON.stringify({ //the above id is from the button edit
             id: $('#edit-id').val(), //this method takes the values of the #attribute and pairs it with the property in our Java DTO object
             title: $('#edit-title').val(),
@@ -202,7 +202,7 @@ $('#edit-button').click(function (event) {
             mpaaRating: $('#edit-rating').val(),
             director: $('#edit-director').val(),
             studio: $('#edit-studio').val(),
-            note: $('#edit-note').val(),
+            note: $('#edit-note').val()
         }),
         headers: {
             'Accept': 'application/json',

@@ -69,7 +69,7 @@ public class DvdAjaxController {
     //Update one
     @RequestMapping(value="/dvd/{id}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @ResponseBody public void putDvdToCollection(@PathVariable("id") int id, @RequestBody Dvd dvd){
+    public void putDvdToCollection(@PathVariable("id") int id, @RequestBody Dvd dvd){
         dvd.setId(id);
         dao.update(dvd);
     }
