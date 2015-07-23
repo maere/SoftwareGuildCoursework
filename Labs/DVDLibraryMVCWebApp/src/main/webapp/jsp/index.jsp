@@ -25,7 +25,17 @@
       <p> Welcome to the DVD Library. This app allows you to catalog your personal DVD collection.</p>
    </div>
 
-<!-- tabbed nav links --><!-- removed tab links for ajax version-->
+<!-- tabbed nav links -->
+<div class="navbar">
+                <ul class="nav nav-tabs">   
+                    <li role="presentation" class="active"><a href="${pageContext.request.contextPath}/index">Index</a></li><!--so now the home path will resolve to an endpoint in our controller -->
+                  <!--so now, will resolve to home route, could also have it resolve to homecontroller but we didn't specify that in our annotation-->
+                    <li role="presentation"><a href="${pageContext.request.contextPath}/search">Search</a></li>
+                </ul>    
+</div>
+
+
+<!-- removed tab links for ajax version-->
 <div class="row">
    <div class="col-md-6">
       <h4>My DVDs</h4>
@@ -94,6 +104,10 @@
    </div>
    </div>
    </form>
+      
+   <div id="validationErrors" style="color: red"/>   
+      
+      
 </div>
 </div>
 <!-- end main part of page -->

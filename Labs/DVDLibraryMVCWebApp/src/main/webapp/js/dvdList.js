@@ -42,13 +42,24 @@ $(document).ready(function () {
             $('#add-note').val('');
 
             //clear out any validation error messages and empty (not yet added)
-
+            $('#validationErrors').empty();
+        
             loadDvds();
             //do .error method fo validation           
 
-        }); //end success
-
-        //errors validation goes after success
+        }) //end success & start .error validation
+                .error(function(data, status){
+                    
+                    var errors = data.responseJSON.fieldErrors;
+                    
+                    $.each(errors, function(index, validationError){
+                        //this is how we find the div we added, we also clear on each pass
+                        var errorDiv = $('#validationErrors'); 
+                        errorDiv.append(validationError.message).append('<br>');
+                        
+                    });
+                    
+                });//end error
 
     }); //end on click
 
