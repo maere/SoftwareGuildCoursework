@@ -25,23 +25,23 @@ import java.util.Set;
  */
 public interface AddressBookAPI {
     
-    public void loadAddresses() throws FileNotFoundException;
+    public void loadAddresses();// throws FileNotFoundException;
 
     //getters and setters
-    public Address getAddress(int idNumber) throws FileNotFoundException;
+    public Address getAddress(int idNumber);// throws FileNotFoundException;
     
 //methods
 
     //adds to HASH
-    public void addAddressToBook(Address addressObject) throws IOException;
+    public void addAddressToBook(Address addressObject);// throws IOException;
 
     //removes from Hash
-    public void removeAddress(int idNumber) throws FileNotFoundException;
+    public void removeAddress(int idNumber);// throws FileNotFoundException;
 
     //get all addresses from hash
     ArrayList<Address> getAllAddresses();
     
-    public void writeToAddresses() throws IOException;
+    public void writeToAddresses();// throws IOException;
     
     public List<Address> citySearch(String city);
     
@@ -52,7 +52,9 @@ public interface AddressBookAPI {
     
     public List<Address> nameSearch(String lastName);
 
-    public List<Address> searchContacts (Map<SearchTerm, String> criteria);
+    public List<Address> searchAddresses (Map<SearchTerm, String> criteria);
     
+     //we're adding to the inteface bc we need it in controller for PUTs
+    public void update(Address address);
     
 }

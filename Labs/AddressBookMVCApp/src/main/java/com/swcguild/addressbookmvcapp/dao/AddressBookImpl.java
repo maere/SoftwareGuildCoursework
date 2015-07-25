@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
  *
  * @author apprentice
  */
-public class AddressBookImpl implements AddressBookAPI{
+public class AddressBookImpl implements AddressBookAPI {
  //8. AddressBookImpl class that implements the AddressBook interface -
 //you must use Lambdas, Streams, and Aggregates in your implementation.
-    
+
     //to store our addresses
     public static final String ADDRESSES_FILE = "addresses.txt";
     public static final String DELIMITER = "::";
@@ -72,31 +72,30 @@ public class AddressBookImpl implements AddressBookAPI{
 //        
 //        sc.close();
 //    }
-
     @Override
-    public Address getAddress(int idNumber) throws FileNotFoundException {
-        
+    public Address getAddress(int idNumber) { //throws FileNotFoundException - need to replace with try catch if it 
+
         return addressMap.get(idNumber);
         //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void addAddressToBook(Address addressObject) throws IOException {
-    idNumber++;
-    addressObject.setIdNumber(idNumber);
-        
-    addressMap.put (idNumber, addressObject); //Object is in the HashMap, but has not yet been written to the file
-   
+    public void addAddressToBook(Address addressObject) { //if asks for one, add try catch  vs. throws IOException 
+        idNumber++;
+        addressObject.setIdNumber(idNumber);
+
+        addressMap.put(idNumber, addressObject); //Object is in the HashMap, but has not yet been written to the file
+
     }
 
     @Override
-    public void removeAddress(int idNumber) throws FileNotFoundException{
-         addressMap.remove(idNumber); //from the hash
+    public void removeAddress(int idNumber) { // throws FileNotFoundException
+        addressMap.remove(idNumber); //from the hash
     }
 
     @Override
     public ArrayList<Address> getAllAddresses() {
-          Set<Integer> keys = addressMap.keySet();
+        Set<Integer> keys = addressMap.keySet();
 
         ArrayList addressArray = new ArrayList<>();
 
@@ -133,95 +132,114 @@ public class AddressBookImpl implements AddressBookAPI{
 //        out.close();
 //
 //    }//end write method
-    
+
     @Override
-    public List<Address> nameSearch(String lastName){
-        
+    public List<Address> nameSearch(String lastName) {
+
         List<Address> all = getAllAddresses();
         return all
                 .stream().filter(a -> a.getLastName().equalsIgnoreCase(lastName))
                 .collect(Collectors.toList());
 
     }
-    
-    
+
     @Override//added after interface--should I include in interface?
-    public List<Address> citySearch(String city){
-        
-          List<Address> all = getAllAddresses();
-          return all
+    public List<Address> citySearch(String city) {
+
+        List<Address> all = getAllAddresses();
+        return all
                 .stream().filter(s -> s.getCity().equalsIgnoreCase(city))
                 .collect(Collectors.toList()); //this DOA method will return a list to this method in the controller
-}
-    
-    
+    }
+
     @Override
-   // public List<Address> zipSearch(String zipCode){
-    public List<Address> zipSearch(int zipCode){
-        
-         List<Address> all = getAllAddresses();
+    // public List<Address> zipSearch(String zipCode){
+    public List<Address> zipSearch(int zipCode) {
+
+        List<Address> all = getAllAddresses();
         return all
                 .stream().filter(z -> z.getZipCode() == zipCode)
                 .collect(Collectors.toList()); //could also get a range of zips --e.g. plus 10 in either direction to capture surrounding areas
-}
-    
+    }
+
     @Override
-    public Map<String, List<Address>> stateSearch(String state){
-        
+    public Map<String, List<Address>> stateSearch(String state) {
+
         Map<String, List<Address>> citiesInState;
-        citiesInState= 
-                addressMap.values().stream().filter(s ->s.getState().equalsIgnoreCase(state))
+        citiesInState
+                = addressMap.values().stream().filter(s -> s.getState().equalsIgnoreCase(state))
                 .collect(Collectors.groupingBy(Address::getCity)); //groupingBy returns a hashmap
- 
+
         return citiesInState;
-}
+    }
 
     @Override
-    public void loadAddresses() throws FileNotFoundException {
+    public void loadAddresses() { //throws FileNotFoundException
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void writeToAddresses() throws IOException {
+    public void writeToAddresses() { //throws IOException
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-      
-
     @Override
-    public List<Address> searchContacts(Map<SearchTerm, String> criteria) {
-        
+    public void update(Address address) {
+        addressMap.put(address.getIdNumber(), address);
+
+    }
+
+    @Override //original search - originally had fewer enums
+    public List<Address> searchAddresses(Map<SearchTerm, String> criteria) {
+
+        String firstNameCriteria = criteria.get(SearchTerm.FIRST_NAME);
         String lastNameCriteria = criteria.get(SearchTerm.LAST_NAME);
-        String zipCodeCriteria = criteria.get(SearchTerm.ZIP_CODE);
-        
+        String streetCriteria = criteria.get(SearchTerm.STREET);
+        String stateCriteria = criteria.get(SearchTerm.STATE);
         String cityCriteria = criteria.get(SearchTerm.CITY);
-        
-        
+        String zipCodeCriteria = criteria.get(SearchTerm.ZIP_CODE);
+
+        Predicate<Address> firstNameMatches;
         Predicate<Address> lastNameMatches;
-        Predicate<Address> zipCodeMatches;
+        Predicate<Address> streetMatches;
         Predicate<Address> cityMatches;
+        Predicate<Address> stateMatches;
+        Predicate<Address> zipCodeMatches;
+        Predicate<Address> truePredicate = (c) -> {
+            return true;
+        };
+
         
-       Predicate<Address> truePredicate = (c) -> {return true;};
-       
-       lastNameMatches = (lastNameCriteria == null || lastNameCriteria.isEmpty())?
-                            truePredicate
+        firstNameMatches = (firstNameCriteria == null || firstNameCriteria.isEmpty())
+                ? truePredicate
+                : (c) -> c.getFirstName().equalsIgnoreCase(firstNameCriteria); 
+        
+        lastNameMatches = (lastNameCriteria == null || lastNameCriteria.isEmpty())
+                ? truePredicate
                 : (c) -> c.getLastName().equalsIgnoreCase(lastNameCriteria);
-       
-       cityMatches = (cityCriteria == null || cityCriteria.isEmpty())?
-                            truePredicate
-               : (c) -> c.getCity().equalsIgnoreCase(cityCriteria);
+
+        streetMatches = (lastNameCriteria == null || lastNameCriteria.isEmpty())
+                ? truePredicate
+                : (c) -> c.getStreet().equalsIgnoreCase(streetCriteria);
+        
+        cityMatches = (cityCriteria == null || cityCriteria.isEmpty())
+                ? truePredicate
+                : (c) -> c.getCity().equalsIgnoreCase(cityCriteria);
        //needs to be an if and not a ternary operator bc we need to first pass it in
-       
-       zipCodeMatches = (zipCodeCriteria == "")?
-                            truePredicate
-               : (c) -> c.getZipCode() == Integer.parseInt(zipCodeCriteria);
-       
+        
+        stateMatches = (stateCriteria == null || stateCriteria.isEmpty())
+                ?truePredicate
+                :(c) -> c.getState().equalsIgnoreCase(stateCriteria);
+        
+        zipCodeMatches = (zipCodeCriteria == null || zipCodeCriteria.isEmpty()) ? //if we even zipCodeCriteria == "" ||
+                truePredicate //cannot do empty first, bc if is null will trhow null pointer, alwasy check for null first
+                : (c) -> c.getZipCode() == Integer.parseInt(zipCodeCriteria);
+
 //        zipCodeMatches = (zipCodeCriteria == null || zipCodeCriteria.isEmpty())?
 //                            truePredicate
 //               : (c) -> c.getZipCode().equalsIgnoreCase(zipCodeCriteria);
 //       
-       return addressMap.values().stream().filter(lastNameMatches.and(cityMatches).and(zipCodeMatches)).collect(Collectors.toList());
+        return addressMap.values().stream().filter(firstNameMatches.and(lastNameMatches).and(streetMatches).and(cityMatches).and(stateMatches).and(zipCodeMatches)).collect(Collectors.toList());
     }
-    
-        
+
 }//end class

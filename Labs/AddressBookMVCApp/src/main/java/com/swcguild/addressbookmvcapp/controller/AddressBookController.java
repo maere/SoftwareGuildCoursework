@@ -27,53 +27,53 @@ public class AddressBookController {
 
     //constructor -- default
     //methods
-    public void run() throws IOException, Exception {
-        boolean keepGoing = true;
-        int choice = 0;
-
-        try {
-            myAddressBook.loadAddresses(); //single source of truth, so we need to find out where it's at when we begin
-        } catch (FileNotFoundException e) {
-            System.out.println("This book has not yet been created. Would you like to create a book?");
-            //change to ConsoleIO y/n and create addresses.txt file...
-        }
-
-        while (keepGoing) {
-            mainMenu();
-
-            choice = con.readInt("Which would you like to do?");
-
-            switch (choice) {
-                case 1:
-                    createAddress();
-                    break;
-                case 2:
-                    removeAddress();
-                    break;
-                case 3:
-                    searchAddresses();
-                    break;
-                case 4:
-                    countAddresses();
-                    break;
-                case 5:
-                    listAddresses();
-                    break;
-
-                case 6:
-                    System.out.println("Exiting the system");
-                    keepGoing = false;
-                    break;
-                default:
-                    con.print("That is an invalid entry.");//this was a bad idea: assertion error or even throw new Exception() would be better....
-            }
-        //    myAddressBook.writeToAddresses();
-
-        }
-        con.print("Thanks for using this app!");
-
-        //try catch loop
-    }
+//    public void run() throws IOException, Exception {
+//        boolean keepGoing = true;
+//        int choice = 0;
+//
+//        try {
+//            myAddressBook.loadAddresses(); //single source of truth, so we need to find out where it's at when we begin
+//        } catch (FileNotFoundException e) {
+//            System.out.println("This book has not yet been created. Would you like to create a book?");
+//            //change to ConsoleIO y/n and create addresses.txt file...
+//        }
+//
+//        while (keepGoing) {
+//            mainMenu();
+//
+//            choice = con.readInt("Which would you like to do?");
+//
+//            switch (choice) {
+//                case 1:
+//                    createAddress();
+//                    break;
+//                case 2:
+//                    removeAddress();
+//                    break;
+//                case 3:
+//                    searchAddresses();
+//                    break;
+//                case 4:
+//                    countAddresses();
+//                    break;
+//                case 5:
+//                    listAddresses();
+//                    break;
+//
+//                case 6:
+//                    System.out.println("Exiting the system");
+//                    keepGoing = false;
+//                    break;
+//                default:
+//                    con.print("That is an invalid entry.");//this was a bad idea: assertion error or even throw new Exception() would be better....
+//            }
+//        //    myAddressBook.writeToAddresses();
+//
+//        }
+//        con.print("Thanks for using this app!");
+//
+//        //try catch loop
+//    }
 
     private void mainMenu() {
         con.print("Main Menu");
@@ -87,69 +87,69 @@ public class AddressBookController {
 
     }
 
-    public void createAddress() throws IOException {
-
-        String firstName = con.readString("Please type in the first name of the person you want to add.");
-        String lastName = con.readString("Please type in the last name of the person you want to add.");
-        String street = con.readString("Please type in their street address (e.g. 123 Elm St.)");
-        String city = con.readString("Please type in the city.");
-        String state = con.readString("Please enter the state.");
-        int zipCode = con.readInt("Please enter the zip code.");
-       //String zipCode = con.readString("Please enter the zip code.");
-
-        //create an address object
-        Address currentAddress = new Address(); //here's our abstraction of the instantiation on the fly
-
-        //currentAddress.setIdNumber(); -- moved to DAO
-        currentAddress.setFirstName(firstName);
-        currentAddress.setLastName(lastName);
-        currentAddress.setStreet(street);
-        currentAddress.setCity(city);
-        currentAddress.setState(state);
-        currentAddress.setZipCode(zipCode);
-        //currentAddress.setZipCode(zipCode);
-
-        //enter info into hashmap
-        myAddressBook.addAddressToBook(currentAddress); //in this method we ask the roster object/class
-
-        con.readString("Address successfully created. Please hit enter to continue.");
-
-    }
-
-    public void removeAddress() throws FileNotFoundException {
-        Address requestedId = null;
-        int idNumber = con.readInt("Please enter the ID of the person you would like to remove.");
-//NOTE: this method needs to catch exceptions -- because it throws a Null pointer exception if you enter an ID (et al) and it cannot find that item.
-
-        try {
-
-            //if you're using a reference via a method chain as below, just do it once, and store it as a variable, otherwise you're querying the database multiple times needlessly
-            requestedId = myAddressBook.getAddress(idNumber);
-
-        } catch (FileNotFoundException e) {
-    
-            System.out.println("The addresss book was not found.");
-
-        }
-        
-        if(requestedId==null){
-           System.out.println("An address with that ID was not found.  Go back to main menu to display, or search by another method.");
-           return;  //for a method, if return type is void, you can exit a method from anywhere, with "return"
-        }
-       
-        int response = con.readInt("Are you sure you want to remove " + requestedId.getFirstName() + " " + requestedId.getLastName() + "? \n"
-                + "Enter 1 for yes, 2 for No.");                        //later: use the method chaining above to pass these values in to allow user to remove an address by lastname or another getter/setteer parameter
-        if (response == 1) {
-            myAddressBook.removeAddress(requestedId.getIdNumber());
-            con.print("Address successfully removed.");
-        } else {
-            System.out.println("Okay, fine then.");
-        }
-        
-        
-        
-
-    } //FIX try catch and File IO/FileNot found stuff
+//    public void createAddress() throws IOException {
+//
+//        String firstName = con.readString("Please type in the first name of the person you want to add.");
+//        String lastName = con.readString("Please type in the last name of the person you want to add.");
+//        String street = con.readString("Please type in their street address (e.g. 123 Elm St.)");
+//        String city = con.readString("Please type in the city.");
+//        String state = con.readString("Please enter the state.");
+//        int zipCode = con.readInt("Please enter the zip code.");
+//       //String zipCode = con.readString("Please enter the zip code.");
+//
+//        //create an address object
+//        Address currentAddress = new Address(); //here's our abstraction of the instantiation on the fly
+//
+//        //currentAddress.setIdNumber(); -- moved to DAO
+//        currentAddress.setFirstName(firstName);
+//        currentAddress.setLastName(lastName);
+//        currentAddress.setStreet(street);
+//        currentAddress.setCity(city);
+//        currentAddress.setState(state);
+//        currentAddress.setZipCode(zipCode);
+//        //currentAddress.setZipCode(zipCode);
+//
+//        //enter info into hashmap
+//        myAddressBook.addAddressToBook(currentAddress); //in this method we ask the roster object/class
+//
+//        con.readString("Address successfully created. Please hit enter to continue.");
+//
+//    }
+//
+//    public void removeAddress() throws FileNotFoundException {
+//        Address requestedId = null;
+//        int idNumber = con.readInt("Please enter the ID of the person you would like to remove.");
+////NOTE: this method needs to catch exceptions -- because it throws a Null pointer exception if you enter an ID (et al) and it cannot find that item.
+//
+//        try {
+//
+//            //if you're using a reference via a method chain as below, just do it once, and store it as a variable, otherwise you're querying the database multiple times needlessly
+//            requestedId = myAddressBook.getAddress(idNumber);
+//
+//        } catch (FileNotFoundException e) {
+//    
+//            System.out.println("The addresss book was not found.");
+//
+//        }
+//        
+//        if(requestedId==null){
+//           System.out.println("An address with that ID was not found.  Go back to main menu to display, or search by another method.");
+//           return;  //for a method, if return type is void, you can exit a method from anywhere, with "return"
+//        }
+//       
+//        int response = con.readInt("Are you sure you want to remove " + requestedId.getFirstName() + " " + requestedId.getLastName() + "? \n"
+//                + "Enter 1 for yes, 2 for No.");                        //later: use the method chaining above to pass these values in to allow user to remove an address by lastname or another getter/setteer parameter
+//        if (response == 1) {
+//            myAddressBook.removeAddress(requestedId.getIdNumber());
+//            con.print("Address successfully removed.");
+//        } else {
+//            System.out.println("Okay, fine then.");
+//        }
+//        
+//        
+//        
+//
+//    } //FIX try catch and File IO/FileNot found stuff
 
     public void searchMenu() {
         con.print("Search Menu");

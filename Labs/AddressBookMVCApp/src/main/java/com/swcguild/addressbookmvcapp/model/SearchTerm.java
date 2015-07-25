@@ -10,5 +10,6 @@ package com.swcguild.addressbookmvcapp.model;
  * @author apprentice
  */
 public enum SearchTerm {
-    LAST_NAME, CITY, ZIP_CODE;
+    //LAST_NAME, CITY, ZIP_CODE; //orginale num for nonAjax app
+    FIRST_NAME, LAST_NAME, STREET, CITY, STATE, ZIP_CODE
 }

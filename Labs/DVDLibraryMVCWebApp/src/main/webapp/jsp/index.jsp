@@ -224,6 +224,7 @@
       </div>
    </div>
 </div>
+</div>
 <!-- end edit modal -->
 <!-- validation goes here-->    
 <!--end validation-->    

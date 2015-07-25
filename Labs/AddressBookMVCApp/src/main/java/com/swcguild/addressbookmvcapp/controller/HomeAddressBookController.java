@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller //the rule is: different model, different controller (same model, same controller)
-@RequestMapping(value = "/")// this is the absolute path
+//@RequestMapping(value = "/")// this is the absolute path - TOGGLE OFF/ON DEPENDING ON WHICH CONTROLLER YOU WANT TO USE
 public class HomeAddressBookController {
 
     private AddressBookAPI dao;
@@ -31,7 +31,7 @@ public class HomeAddressBookController {
 
     }
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    //@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String displayHome() {
         return "home";
     }
@@ -104,7 +104,7 @@ public class HomeAddressBookController {
             }
         }
 
-        List<Address> results = dao.searchContacts(cp);
+        List<Address> results = dao.searchAddresses(cp);
 
         model.addAttribute("addressList", results);
 
