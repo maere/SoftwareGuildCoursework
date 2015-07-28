@@ -123,7 +123,7 @@
                                             State
                                         </label>
                                         <div class="col-md-8">
-                                            <input type="text" class="form-control" id="add-state" placeholder="state" />
+                                            <input type="text" class="form-control" id="add-state" placeholder="State" />
                                         </div>
                                     </div>
                                     <div class="form-group">

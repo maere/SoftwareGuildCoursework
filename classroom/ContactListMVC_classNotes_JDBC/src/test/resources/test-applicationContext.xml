@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+              xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
+
+    <!-- Bean definitions go here -->
+    
+   <!--we are telling spring that our transactions are annotation driven -->
+    <tx:annotation-driven />
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <!--define properties for our bean -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" /><!--tbis supplied by a jar, which we may ormay not need to add to our POM file -->
+        <property name="url" value="jdbc:mysql://localhost:3306/contacts_test"/> <!--mysql is usually on port 3306, and localhost replaces the IP addresss -->
+        <property name="username" value="root"/>
+        <property name="password" value="apprentice" />
+        <!--Spring manages a pool of connections to mySql, will pick a connection from the bag, use it, and put it back in the bag...so we define # of connection -->
+        <property name="initialSize" value="5" /><!--due to hardware constraints, if the server runs out of memory it's a problem, depends on RAM -->
+        <property name="maxActive" value="10" /><!--we will allow it to grow to 10 if needed, but want it low bc absorbs resources, esp memory -->
+    </bean>
+    
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!--need a bean for our jdbc template, which we will inject -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+         <property name="dataSource" ref="dataSource" /><!--we are referring (ref) to the data source bean above -->
+    </bean>
+    
+    
+     <!-- OLD IMPL: <bean id="contactListDao" class="com.swcguild.contactlistmvc.dao.ContactListDaoInMemImpl">-->
+  <!--new bean that implements our dao dbImple -->
+    <bean id="contactListDao" class="com.swcguild.contactlistmvc.dao.ContactListDaoDbImpl">
+         <!--last thing we need to do is to inject our setter using property injection, instead of constructor injection -->
+         <property name="jdbcTemplate" ref="jdbcTemplate" /><!--will call the "setJdbcTemplate method" we wrote, after it constructs the impl -->
+
+    </bean>
+    
+</beans>

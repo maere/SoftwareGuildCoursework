@@ -54,7 +54,7 @@ public class AjaxAddressBookController {
    @RequestMapping(value="/address", method=RequestMethod.POST)
    @ResponseStatus(HttpStatus.CREATED)
    @ResponseBody                                        //replace with @Valid
-   public Address createAddress(@RequestBody Address address) throws IOException{
+   public Address createAddress(@Valid @RequestBody Address address) throws IOException{
        //is this were I parse the zip and the id?
        
        dao.addAddressToBook(address);

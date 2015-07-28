@@ -68,13 +68,19 @@ $(document).ready(function () {
             $('#add-city').val('');
             $('#add-state').val('');
             $('#add-zip').val('');
+            
+            //clear out any validation error messages
+            $('#validationErrors').empty(); //otherwise our div just hangs out with the error code in HTML
 
                     loadAddresses();
 
         }).error(function (data, status) {
             $.each(data.responseJSON.fieldErrors, function (index, validationError) {
-                var errorDiv = $('#validationErrors');
-                errorDiv.append(validationError.message).append('<br>');
+                
+                var errorDiv = $('#validationErrors').empty(); //this is how we find the div we added, we also clear on each pass
+                
+                errorDiv.append(validationError.message)
+                        .append('<br>');
             });
 
 
