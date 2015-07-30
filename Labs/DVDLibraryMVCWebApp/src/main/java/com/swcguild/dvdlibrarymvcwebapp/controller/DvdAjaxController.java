@@ -40,7 +40,6 @@ public class DvdAjaxController {
     }
 
     //wire home mapping -- changed to index for the dynamic version
-
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String displayIndexPage() {
         return "index";
@@ -88,38 +87,4 @@ public class DvdAjaxController {
         return testReturnList;
     }
 
-    //route to get to the search function
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String displaySearch() {
-        return "search";
-    }
-
-    //post method for our search function
-    @RequestMapping(value ="search/dvds", method = RequestMethod.POST)
-    @ResponseBody public List<Dvd> searchDvd(@RequestBody Dvd dvd) //will pass a hypothetical DVD object, constructed from our search terms
-    {
-        //build up a map, so we can pass this a parameter to our search function in the Dao
-        Map<SearchTerms, String> searchCriteria = new HashMap<>();
-        
-        //call every field, if not null(DAO method handles this logic), put an entry in my map with the search term and the string that it is 
-        String titleSearch = dvd.getTitle();
-        String releaseSearch = dvd.getReleaseDate(); //release date is in the enum as a string
-        String ratingSearch = dvd.getMpaaRating(); 
-        String directorSearch = dvd.getDirector();
-        String studioSearch = dvd.getStudio();
-        //String noteSearch = dvd.getNote(); //this item is not in the enum, could add later and refactor
-        
-        //the enum is the key in my map//SearchTerms.DIRECTOR //this is how we refer to an enum value, always two parts
-        searchCriteria.put(SearchTerms.TITLE, titleSearch);
-        searchCriteria.put(SearchTerms.RELEASE_DATE, releaseSearch);
-        searchCriteria.put(SearchTerms.RATING, ratingSearch);
-        searchCriteria.put(SearchTerms.DIRECTOR, directorSearch);
-        searchCriteria.put(SearchTerms.STUDIO, studioSearch);
-        
-        List<Dvd> resultsList = dao.searchDvds(searchCriteria);
-        
-        return resultsList;
-    }
-
 }
-//enums are often used to make dropdown list (e.g. all 50 states)

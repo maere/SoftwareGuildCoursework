@@ -39,7 +39,7 @@ public interface AddressBookAPI {
     public void removeAddress(int idNumber);// throws FileNotFoundException;
 
     //get all addresses from hash
-    ArrayList<Address> getAllAddresses();
+    List<Address> getAllAddresses();
     
     public void writeToAddresses();// throws IOException;
     

@@ -59,18 +59,20 @@ public class ContactListDaoDbImpl implements ContactListDao {
         contact.setContactId(jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Integer.class)); //if we have a busy system, this could potentially give us the wrong info, 
                         //so we need to be specific in this method this needs to happen within the scope of a single transaction
                         //set an annotation for this above the method
+        
         return contact;
     }
 
     @Override
+    
     public void removeContact(int contactId) {
          jdbcTemplate.update(SQL_DELETE_CONTACT, contactId);//
     }
 
     @Override
-    public void updateContact(Contact contact) {
+    public void updateContact(Contact contact) { 
         jdbcTemplate.update(SQL_UPDATE_CONTACT, 
-                contact.getFirstName(), 
+                contact.getFirstName(), //why are these gets, and not sets?
                 contact.getLastName(), 
                 contact.getCompany(), 
                 contact.getPhone(), 
@@ -108,6 +110,8 @@ public class ContactListDaoDbImpl implements ContactListDao {
         
         //new string builder object -- way to build strings in a way that is memory efficient
         StringBuilder query = new StringBuilder("SELECT * FROM contacts WHERE "); //this is the beginging of our criteria, and depending will add clauses to this
+        //note: this is a STringBuilder OBJECT, NOT a string!!
+        //StringBuilder gives us a way to not keep apprending objects and making multiple string
         
         int numParams = criteria.size(); //will keep track of how many we have
         
@@ -124,20 +128,21 @@ public class ContactListDaoDbImpl implements ContactListDao {
             
              if (paramPosition >0){ //ie if it's not the first time we've been in this loop...
                 //we will append an and
-                query.append(" and ");
+                query.append(" and "); //still a StringBuilder, can add an infinite number of params without creating additl objects
             }
-                                                                                            //Table name is case sensitive, column name is not
+                        //append expects a string, will automatically run .toString()                                                                      //Table name is case sensitive, column name is not
             query.append(currentKey); //we are appending the name of the column -- our enums match our colums (SQL is not very sensitive, except for aliases)
             
             query.append(" =?"); //we are appending the params
             
             //array to keep track of the params, and the param order
-            paramVals[paramPosition] = currentValue; //so e.g. for 1, push in this value
+            paramVals[paramPosition] = currentValue; //so e.g. for 1, the first param?, push in this value
             
             paramPosition++; //bc we are doing this multiple times we need to increment 
         }
         
-           return jdbcTemplate.query(query.toString(), new ContactMapper(), paramVals);
+           return jdbcTemplate.query(query.toString(), new ContactMapper(), paramVals); //need to turn our STringBuilder object back to a String, 
+           //query always returns a list (query to object only returns an object)
         
     }        
         //with lambdas, if you access a value inside a lambda needs to be declared final outside, cannot change the value of a variable inside of a lambda --so no looping?

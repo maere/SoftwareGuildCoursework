@@ -228,7 +228,7 @@ $('#edit-button').click(function (event) {
 
 });//end edit button handler
 
-//search button event handler--th haven't written the search part yet
+//search button event handler
 
 $('#search-button').click(function (event) {
 
