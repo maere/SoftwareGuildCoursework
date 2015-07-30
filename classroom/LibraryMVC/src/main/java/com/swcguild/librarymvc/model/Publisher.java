@@ -5,17 +5,42 @@
  */
 package com.swcguild.librarymvc.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author apprentice
  */
+@Entity
+@Table(name="publishers")
 public class Publisher {
+    
+    
+    @Id
+    @GeneratedValue
+    @Column(name="publisher_id")
     private int publisherId;
+    
+    @Column(name="state")
     private String name;
+    
+    @Column(name="street")
     private String street;
+    
+    @Column(name="city")
     private String city; 
+    
+    @Column(name="state")
     private String state;
+    
+    @Column(name="zip")
     private String zip;
+    
+    @Column(name="phone")
     private String phone;
 
     public int getPublisherId() {

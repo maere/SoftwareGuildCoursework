@@ -10,7 +10,8 @@
                             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- Uncomment this to move to annotation driven configuration -->
     <mvc:annotation-driven />
-    <context:component-scan base-package="com.swcguild.librarymvc" />        
+    <context:component-scan base-package="com.swcguild.librarymvc" />     
+    <!-- this context is specific to dispatchers, and controllers, the other one in the persistance file is for DB-->   
     <bean
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
