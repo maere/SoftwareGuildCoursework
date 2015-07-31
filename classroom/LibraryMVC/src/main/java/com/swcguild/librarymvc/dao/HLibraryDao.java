@@ -6,6 +6,11 @@
 package com.swcguild.librarymvc.dao;
 
 import com.swcguild.librarymvc.model.*;
+
+
+import com.swcguild.librarymvc.model.Author;
+import com.swcguild.librarymvc.model.HBook;
+import com.swcguild.librarymvc.model.Publisher;
 import java.util.List;
 
 /**

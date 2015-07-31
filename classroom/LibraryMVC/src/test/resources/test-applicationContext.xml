@@ -15,5 +15,62 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
 
     <!-- Bean definitions go here -->
+    <tx:annotation-driven />
+    
+    <!-- new here, for DB, although we use in WEB-INF for controllers, etc. here it's for DB-->
+    <context:component-scan base-package="com.swcguild.librarymvc.dao"/>
+    <!--<context:component-scan base-package="com.swcguild.librarymvc.model"/>-->
+    
+    <!--dataSource bean-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/LibraryDB" />
+        <property name="username" value="root" />
+        <property name="password" value="apprentice" />
+        <property name="initialSize" value="5" />
+        <property name="maxActive" value="10" />
+    </bean>    
+    
+    <!--transactionManager for Spring only, test is different see change below-->
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+    
+    <!-- jdbc -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <!-- DAO imple and jdbc injection via property --> <!--it's okay to keep this around when we change to Hibernate bc it's a different interface -->
+    <!--<bean id="libraryDao" class="com.swcguild.librarymvc.dao.LibraryDaoDbImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>-->
+    
+    <!--when changing to Hibernate, we need to add a bean for that, but all the above can remain the same -->
+     <bean id="hibernateLibraryDao" class="com.swcguild.librarymvc.dao.LibraryDaoHibernateImpl"><!--NOTE THAT THIS WASW NOT SWHOING UP IN MY .LIST!! -->
+        <constructor-arg ref="sessionFactory" />
+    </bean>
+    
+    
+      <!-- Hibernate specfifics-->                      <!--hibernate3.annotation.AnnotationSessionFactoryBean"  -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/><!--injecting the driver so it can referene mySQL -->
+        <property name="packagesToScan" value="com.swcguild.librarymvc.model" /> <!--we are adding our models to the packages to scan property -->
+        <property name="hibernateProperties">                      <!--(cont.) the tables we want to reference in the library are the tables in that package -->
+            <props>
+                <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop><!--subtle changes in mySQL depending on db, oracle, mySQL, microsftSQL etc -->
+            </props>
+        </property>
+    </bean>
+    
+       <!--transactionManager for TEST CLASS-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    
+    
+  
+    
     
 </beans>

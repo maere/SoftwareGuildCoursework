@@ -6,6 +6,9 @@
 package com.swcguild.librarymvc.dao;
 
 import com.swcguild.librarymvc.model.*;
+import com.swcguild.librarymvc.model.Author;
+import com.swcguild.librarymvc.model.HBook;
+import com.swcguild.librarymvc.model.Publisher;
 import java.util.List;
 import javax.inject.Inject;
 import org.hibernate.Session;
@@ -26,13 +29,24 @@ public class LibraryDaoHibernateImpl implements HLibraryDao {
     //each request is scoped as it's own hibernate session (i.e. each put, each update,post)
 
     @Inject
-    public LibraryDaoHibernateImpl(SessionFactory session) {
-        this.sessionFactory = sessionFactory;
+    public LibraryDaoHibernateImpl(SessionFactory session) { //even though we are passing in a session variable, when constructing, 
+        this.sessionFactory = session;                      //we need ot make the sessionFactory = to the session (not session=session , or factory=factory)
     }
 
     //this will pull the session out of the session factory, this is a getter method, custom
+    //we dont' have controller, dont have sprng mvc to manage sessions
     private Session currentSession() {
-        return this.sessionFactory.getCurrentSession();
+        Session session = null;
+
+        try {
+            session = this.sessionFactory.getCurrentSession();
+        } catch (Exception e) {
+
+        }
+        if (session == null) {
+            session = this.sessionFactory.openSession();
+        }
+        return session;// getCurrentSession();
     }
 
     //our methods
@@ -45,7 +59,9 @@ public class LibraryDaoHibernateImpl implements HLibraryDao {
 
     @Override
     public void deleteAuthor(Author author) {
+        //Session session = currentSession();
         currentSession().delete(author);
+        //session.flush();
     }
 
     @Override
@@ -72,7 +88,9 @@ public class LibraryDaoHibernateImpl implements HLibraryDao {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deleteBook(HBook book) {
+        //Session session = currentSession();
         currentSession().delete(book);//
+       // session.flush();
     }
 
     @Override
@@ -102,25 +120,30 @@ public class LibraryDaoHibernateImpl implements HLibraryDao {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void deletePublisher(Publisher publisher) {
+        
         currentSession().delete(publisher);
+      
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void updatePublisher(Publisher publisher) {
+       //each time we have a choice between using the currentone, or opening a new one  
         currentSession().update(publisher);
+       
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public Publisher getPublisherById(int publisherId) {
-       return (Publisher) currentSession().get(Publisher.class, publisherId);
+        return (Publisher) currentSession().get(Publisher.class, publisherId);
     }
-                //get methods in Hibernate will work with the @Id annotation to figure out what types things are 
+
+    //get methods in Hibernate will work with the @Id annotation to figure out what types things are 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public List<Publisher> getAllPublishers() {
-       return (List<Publisher>) currentSession().createCriteria(Publisher.class).list();
+        return (List<Publisher>) currentSession().createCriteria(Publisher.class).list();
     }
 
 }

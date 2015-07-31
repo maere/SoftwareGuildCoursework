@@ -18,12 +18,13 @@
     <tx:annotation-driven />
     
     <!-- new here, for DB, although we use in WEB-INF for controllers, etc. here it's for DB-->
-    <context:component-scan base-package="com.swcguild.librarymvc"/>
+    <context:component-scan base-package="com.swcguild.librarymvc.dao"/>
+    <!--<context:component-scan base-package="com.swcguild.librarymvc.model"/>-->
     
     <!--dataSource bean-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc::mysql://localhost:3306/LibraryDB" />
+        <property name="url" value="jdbc:mysql://localhost:3306/LibraryDB" />
         <property name="username" value="root" />
         <property name="password" value="apprentice" />
         <property name="initialSize" value="5" />
@@ -41,28 +42,30 @@
     </bean>
     
     <!-- DAO imple and jdbc injection via property --> <!--it's okay to keep this around when we change to Hibernate bc it's a different interface -->
-    <bean id="libraryDao" class="com.swcguild.librarymvc.dao.LibraryDaoDbImpl">
+    <!--<bean id="libraryDao" class="com.swcguild.librarymvc.dao.LibraryDaoDbImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
-    </bean>
+    </bean>-->
     
-    
-    <!--when changing to Hibernate, we need to add a bean for that, but all the above can remain the same -->
-     <bean id="hLibraryDao" class="com.swcguild.librarymvc.dao.LibraryDaoHibernateImpl"><!--NOTE THAT THIS WASW NOT SWHOING UP IN MY .LIST!! -->
+      <!--when changing to Hibernate, we need to add a bean for that, but all the above can remain the same -->
+     <bean id="hibernateLibraryDao" class="com.swcguild.librarymvc.dao.LibraryDaoHibernateImpl"><!--NOTE THAT THIS WASW NOT SWHOING UP IN MY .LIST!! -->
         <constructor-arg ref="sessionFactory" />
     </bean>
     
-    <!-- Hibernate specfifics-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+      <!-- Hibernate specfifics-->                      <!--hibernate3.annotation.AnnotationSessionFactoryBean"  -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/><!--injecting the driver so it can referene mySQL -->
-        <property name="packagesToScan" ref="com.swcguild.librarymvc.model"/> <!--we are adding our models to the packages to scan property -->
+        <property name="packagesToScan" value="com.swcguild.librarymvc.model" /> <!--we are adding our models to the packages to scan property -->
         <property name="hibernateProperties">                      <!--(cont.) the tables we want to reference in the library are the tables in that package -->
             <props>
-                <prop key="dialect">org.hibernate.dialect.MySQL
-                    
-                    Dialect</prop><!--subtle changes in mySQL depending on db, oracle, mySQL, microsftSQL etc -->
+                <prop key="dialect">org.hibernate.dialect.MySQLDialect</prop><!--subtle changes in mySQL depending on db, oracle, mySQL, microsftSQL etc -->
             </props>
+        </property>
     </bean>
     
+    
+  
+    
+  
     
     
 </beans>

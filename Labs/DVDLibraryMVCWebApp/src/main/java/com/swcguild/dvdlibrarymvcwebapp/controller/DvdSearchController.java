@@ -41,8 +41,8 @@ public class DvdSearchController {
     }
 
     //post method for our search function
-    @RequestMapping(value ="/search/dvds", method = RequestMethod.POST)
-    @ResponseBody public List<Dvd> searchDvd(@RequestBody Dvd dvd) //will pass a hypothetical DVD object, constructed from our search terms
+    @RequestMapping(value ="/search/dvds", method = RequestMethod.POST)  //NOTE: changed this method to return the HashMap that the Controller serach method needs, vs the old return: List<Dvd>
+    @ResponseBody public List<Dvd> searchDvd(@RequestBody Dvd dvd) //will pass a hypothetical DVD object, constructed from our search terms //
     {
         //build up a map, so we can pass this a parameter to our search function in the Dao
         Map<SearchTerms, String> searchCriteria = new HashMap<>();
@@ -56,14 +56,28 @@ public class DvdSearchController {
         //String noteSearch = dvd.getNote(); //this item is not in the enum, could add later and refactor
         
         //the enum is the key in my map//SearchTerms.DIRECTOR //this is how we refer to an enum value, always two parts
-        searchCriteria.put(SearchTerms.TITLE, titleSearch);
-        searchCriteria.put(SearchTerms.RELEASE_DATE, releaseSearch);
-        searchCriteria.put(SearchTerms.RATING, ratingSearch);
-        searchCriteria.put(SearchTerms.DIRECTOR, directorSearch);
-        searchCriteria.put(SearchTerms.STUDIO, studioSearch);
+        if(titleSearch!=null&&!titleSearch.isEmpty()){
+             searchCriteria.put(SearchTerms.TITLE, titleSearch); //check to see if it's not != empty and if so pass it in...
+        }
         
+        if(releaseSearch!=null&&!releaseSearch.isEmpty()){
+             searchCriteria.put(SearchTerms.RELEASE_DATE, releaseSearch);
+        }
+        
+        if(ratingSearch!=null&&!releaseSearch.isEmpty()){
+             searchCriteria.put(SearchTerms.RATING, ratingSearch);
+        }
+        
+       if(directorSearch!=null&&!directorSearch.isEmpty()){
+             searchCriteria.put(SearchTerms.DIRECTOR, directorSearch);
+       }
+       
+       if(studioSearch!=null&&!studioSearch.isEmpty()){
+             searchCriteria.put(SearchTerms.STUDIO, studioSearch);
+       }
+       
+       //return searchCriteria; //old return is below and was for returning a list
         List<Dvd> resultsList = dao.searchDvds(searchCriteria);
-        
         return resultsList;
     }
     //enums are often used to make dropdown list (e.g. all 50 states)
