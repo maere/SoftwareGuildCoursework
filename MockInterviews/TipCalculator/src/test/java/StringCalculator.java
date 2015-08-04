@@ -8,15 +8,17 @@
  *
  * @author apprentice
  */
-public class Calculator {
+public class StringCalculator {
 
     public int add(String strArgs) throws Exception {
 
         return sum(strArgs.split(","));
     }
 
-    int add(String strArgs, String delminator) throws Exception {
-        return sum(strArgs.split(delminator));
+    int add(String strArgs, String delimiter
+            
+    ) throws Exception {
+        return sum(strArgs.split(delimiter));
     }
 
     //"1,-4,-2"
@@ -36,8 +38,8 @@ public class Calculator {
 
         }
 
-        if (exMessage != "Negatives Not Allowed: ") {
-            String finalExMessage = exMessage.substring(0, exMessage.length()-1);//will need to remove the last common from the string using a substring methodZ
+        if (!"Negatives Not Allowed: ".equals(exMessage)) {
+            String finalExMessage = exMessage.substring(0, exMessage.length()-1);//will need to remove the last comma from the string using a substring methodZ
             
             throw new Exception(finalExMessage);
         }

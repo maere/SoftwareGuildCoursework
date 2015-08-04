@@ -14,15 +14,15 @@ import static org.junit.Assert.*;
  *
  * @author apprentice
  */
-public class TipCalcTest {
+public class StringCalculatorTest {
     
-    private Calculator target;
-    public TipCalcTest() {
+    private StringCalculator target;
+    public StringCalculatorTest() {
     }
 
     @Before
     public void setUp() {
-        target = new Calculator();
+        target = new StringCalculator();
     }
 
     @After
