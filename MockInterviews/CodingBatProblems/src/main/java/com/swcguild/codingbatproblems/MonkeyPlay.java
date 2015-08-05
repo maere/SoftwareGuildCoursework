@@ -10,5 +10,13 @@ package com.swcguild.codingbatproblems;
  * @author apprentice
  */
 public class MonkeyPlay {
-    
+
+    public boolean monkeyTrouble(boolean aSmile, boolean bSmile) {
+
+        if (aSmile ^ bSmile) {
+            return false;
+        }
+        return true;
+    }
+
 }

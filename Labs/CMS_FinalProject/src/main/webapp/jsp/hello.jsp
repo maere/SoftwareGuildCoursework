@@ -76,48 +76,50 @@
 
                                 <textarea id="mytextarea"></textarea>   
 
+                                
+
+                                <div class="row">
+                                    <!--<div class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2">-->
+
+                                    <!-- might need to do nested row, w. 3 columns for grid at 1, 3, 2-->
+                                    <div class="col-md-2">
+                                        <label for="tag-1"></label>
+                                        <input type="text" class="form-control" name="tag-1" placeholder="Tag #1"/><br /><!--the text value of myNotes is what will be sent -->
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label for="tag-2"></label>
+                                        <input type="text" class="form-control" name="tag-2" placeholder="Tag #2" /><br />
+                                    </div>
+
+                                    <div class="col-md-2">      
+                                        <label for="tag-3"></label>
+                                        <input type="text" class="form-control" name="tag-3" placeholder="Tag #3"/><br />
+                                    </div>
+
+                                    <div class="col-md-2" >
+                                        <label for="tag-4"></label>
+                                        <input type="text" class="form-control" name="tag-4" placeholder="Tag #4"><br />
+                                    </div>
+
+                                    <div class="col-md-2" >
+                                        <label for="tag-5"></label>
+                                        <input type="text" class="form-control" name="tag-5" placeholder="Tag #5"><br />     
+                                    </div>
+                                    <br>
+                                    <div class="col-md-2">   
+                                        <button type="submit" class="btn btn-primary btn-sm ">Submit</button>
+                                        <!--<input type="submit" value="Register" /> - this is what the submit button says on it -->
+                                    </div>
+                                </div><!-- end row-->
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Row end -->
-            <div class="row">
-            <!--<div class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2">-->
-                    <div class="form-group">
-                        <div class="inline">
-                            <!-- might need to do nested row, w. 3 columns for grid at 1, 3, 2-->
-                            <div class="form-group" class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2>
-                                <label for="tag-1">Tag #1</label>
-                                <input type="text" class="form-control" name="tag-1" /><br /><!--the text value of myNotes is what will be sent -->
-                            </div>
 
-                            <div class="form-group" class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2>
-                                <label for="tag-2">Tag #2</label>
-                                <input type="text" class="form-control" name="tag-2" /><br />
-                            </div>
-
-                            <div class="form-group" class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2>      
-                                <label for="tag-3">Last Name</label>
-                                <input type="text" class="form-control" name="tag-3" /><br />
-                            </div>
-
-                            <div class="form-group" class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2>
-                                <label for="tag-4">Password</label>
-                                <input type="text" class="form-control" name="tag-4"><br />
-                            </div>
-
-                            <div class="form-group" class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2>
-                                <label for="tag-5">Confirm Password</label>
-                                <input type="text" class="form-control" name="tag-5"><br />     
-                            </div>
-                        </div>
-                    </div>
-                    <!-- need to change submit button to a pill style-->
-                    <div class="col-md-2 col-xs-2 col-sm-2 and.col-lg-2">   
-                        <button type="submit" class="btn btn-primary ">Submit</button>
-                        <!--<input type="submit" value="Register" /> - this is what the submit button says on it -->
-                    </div>
             <!--</div>->
             </div>
 
@@ -125,9 +127,9 @@
 
 
         </div>
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="${pageContext.request.contextPath}/js/jquery-1.11.1.min.js"></script>
+            <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
     </body>
